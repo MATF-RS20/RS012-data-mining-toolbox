@@ -8,4 +8,5 @@
 - Kratak opis projekta:
   - Naparaviti program za istraživanje podataka nalik SPSS-u, koji bi sadržao interfejs sa čvorovima za obradu podataka (unos, preprocesiranje, neki algoritmi klasifikacije i klasterovanja itd.)
 - Biblioteke koje se koriste: 
+  - Qt
   - Biće navedene naknadno
