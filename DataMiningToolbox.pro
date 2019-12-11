@@ -17,14 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     DataTable.cpp \
+    LinearRegressionNode.cpp \
     Node.cpp \
-    main.cpp \
+    main.cpp \    
 
 HEADERS += \
     DataTable.hpp \
+    LinearRegressionNode.hpp \
     Node.hpp \
     SourceNode.hpp \
     Stream.hpp \
+
+LIBS += -lmlpack
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
