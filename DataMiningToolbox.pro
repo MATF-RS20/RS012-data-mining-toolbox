@@ -18,13 +18,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     DataTable.cpp \
     Node.cpp \
+    SourceNode.cpp \
+    csvreader.cpp \
     main.cpp \
 
 HEADERS += \
     DataTable.hpp \
     Node.hpp \
     SourceNode.hpp \
-    Stream.hpp \
+    Stream.hpp \ \
+    csvreader.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

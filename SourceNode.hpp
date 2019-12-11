@@ -10,8 +10,12 @@ class SourceNode : public Node{
 public:
 
     SourceNode(std::string name);
+    void setFilename(std::string fName);
 
     void run() override;
+
+private:
+    std::string filename;
 };
 
 #endif // SOURCENODE_HPP
