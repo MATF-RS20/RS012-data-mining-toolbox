@@ -19,14 +19,21 @@ SOURCES += \
     DataTable.cpp \
     LinearRegressionNode.cpp \
     Node.cpp \
+<<<<<<< HEAD
     main.cpp \    
+=======
+    SourceNode.cpp \
+    csvreader.cpp \
+    main.cpp \
+>>>>>>> 6116bbebaf44a8e2eb6ba9f37ed0ebd10d6f6e82
 
 HEADERS += \
     DataTable.hpp \
     LinearRegressionNode.hpp \
     Node.hpp \
     SourceNode.hpp \
-    Stream.hpp \
+    Stream.hpp \ \
+    csvreader.hpp
 
 LIBS += -lmlpack
 

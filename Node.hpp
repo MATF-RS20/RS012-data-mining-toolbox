@@ -15,6 +15,10 @@ public:
 
     DataTable OutputDataTable() const;
 
+    void setInputDataTable(DataTable* inDataTable);
+
+    void setOutDataTable(DataTable outDataTable);
+
     // run is an action that a Node can do (preform clustering/classification, normalize, standardize...)
     virtual void run() = 0;
 
