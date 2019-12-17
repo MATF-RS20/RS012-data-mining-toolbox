@@ -15,6 +15,8 @@ public:
 
     DataTable OutputDataTable() const;
 
+    DataTable * RefOutputDataTable();
+
     void setInputDataTable(DataTable* inDataTable);
 
     void setOutDataTable(DataTable outDataTable);

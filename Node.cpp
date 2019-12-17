@@ -12,6 +12,10 @@ DataTable Node::OutputDataTable() const {
     return outputDataTable;
 }
 
+DataTable * Node::RefOutputDataTable(){
+    return &outputDataTable;
+}
+
 void Node::setInputDataTable(DataTable* inDataTable)
 {
     inputDataTable = inDataTable;

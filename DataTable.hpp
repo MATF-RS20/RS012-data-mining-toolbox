@@ -18,6 +18,10 @@ public:
     ~DataTable();
 
     std::map<std::string, std::vector<double>> DoubleColumns() const;
+    std::vector<std::string> ColumnNames() const;
+    unsigned long NumberOfRows() const;
+
+
     void addKey(const std::string& keyName);
 
     // sets field where column is columnName and row is index
@@ -28,6 +32,8 @@ private:
     //map that stores all columns of data
     //TODO: generic ?
     std::map<std::string, std::vector<double>> doubleColumns;
+
+    std::vector<std::string> columnNames;
 
     unsigned long numberOfRows;
 };

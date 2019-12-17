@@ -10,34 +10,30 @@ LinearRegressionNode::LinearRegressionNode(std::string name)
 LinearRegressionNode::~LinearRegressionNode(){}
 
 void LinearRegressionNode::run(){
-    arma::mat dataMatrix = arma::mat(3, 3, arma::fill::zeros);
 
-    double k = 1.0;
-    for(unsigned long long i = 0; i < dataMatrix.n_rows; i++){
-        for (unsigned long long j = 0; j < dataMatrix.n_cols; j++){
-            dataMatrix(i, j) = k;
-            k += 1.0;
+    // parsing DataTable object into arma matrix
+    // TODO: implement parsing as a member function of class Node
+    arma::mat data(InputDataTable()->NumberOfRows(), InputDataTable()->ColumnNames().size());
+    unsigned long j;
+    for (unsigned long i = 0; i < InputDataTable()->NumberOfRows(); i++){
+        j = 0;
+        for (auto column : InputDataTable()->ColumnNames()){
+             data(i, j) = InputDataTable()->DoubleColumns()[column][i];
+             j++;
         }
     }
 
-    for(unsigned long long i = 0; i < dataMatrix.n_rows; i++){
-        for (unsigned long long j = 0; j < dataMatrix.n_cols; j++){
-            std::cout << dataMatrix(i, j) << " ";
-        }
-        std::cout << std::endl;
-    }
+    // target column (used just for testing)
+    arma::vec responses = arma::vec(InputDataTable()->NumberOfRows(), arma::fill::ones);
 
-    //arma::mat data;
-    //arma::mat data = {(0),(1),(2),(3),(4)};
-    arma::vec responses = {3,6,7};
+    mlpack::regression::LinearRegression lr(trans(data), responses);
 
-     //Regress.
-    mlpack::regression::LinearRegression lr(trans(dataMatrix), responses);
-    // Get the parameters, or coefficients.
     arma::vec parameters = lr.Parameters();
+    std::cout << "Paramtetes: " << std::endl;
     std::cout << parameters << std::endl;
 
     arma::vec predictions;
-    lr.Predict(trans(dataMatrix), predictions);
+    lr.Predict(trans(data), predictions);
+    std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
 }

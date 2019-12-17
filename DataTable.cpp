@@ -15,9 +15,18 @@ std::map<std::string, std::vector<double>> DataTable::DoubleColumns() const {
     return doubleColumns;
 }
 
+std::vector<std::string> DataTable::ColumnNames() const {
+    return columnNames;
+}
+
+unsigned long DataTable::NumberOfRows() const {
+    return numberOfRows;
+}
+
 void DataTable::addKey(const std::string& keyName)
 {
     doubleColumns[keyName] = std::vector <double> (numberOfRows);
+    columnNames.push_back(keyName);
 }
 
 void DataTable::SetField(std::string columnName, unsigned long index, double value){

@@ -5,7 +5,7 @@
 #include <list>
 #include "Node.hpp"
 
-// TODO: implement class Stream
+// class that contains nodes and their connections
 class Stream{
 
 public:
@@ -15,23 +15,23 @@ public:
     ~Stream();
 
     // adds an unconnected node to the stream
-    void add (Node& node);
+    void add (Node* node);
 
     // connects node1 to node2
-    void connect_to(Node& node1, Node& node2);
+    void connect_to(Node* node1, Node* node2);
 
     // disconnects nodes
-    void disconnect(Node& node1, Node& node2);
+    void disconnect(Node* node1, Node* node2);
 
     // performs a recursive call of run method from "targetNode" to a source node
-    DataTable RunStream(Node& targetNode);
+    void RunStream(Node* targetNode);
 
-    std::map<const Node*, Node&> MapOfNodes() const;
+    std::map<Node*, Node*> MapOfNodes() const;
 
 private:
 
     // map that contains pairs of nodes (A, B) where B -> A
-    std::map<const Node*, Node&> mapOfNodes;
+    std::map<Node*, Node*> mapOfNodes;
 
 };
 
