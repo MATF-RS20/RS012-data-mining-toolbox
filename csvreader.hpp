@@ -10,6 +10,10 @@ public:
     csvReader(std::string filename);
     ~csvReader();
 
+    //Da li su neophodni konstruktor kopije i operator dodele?
+    //csvReader(csvReader& cr);
+
+
     std::ifstream file;
 };
 

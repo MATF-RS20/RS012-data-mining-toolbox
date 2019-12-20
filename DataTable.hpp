@@ -14,6 +14,10 @@ public:
     DataTable(unsigned long nRows);
 
     // TODO: implement copy constuctor and operator =
+    DataTable(const DataTable& dt);
+    /*DataTable& operator= (const DataTable& dt);
+    DataTable(DataTable&& dt);
+    DataTable& operator= (DataTable&& dt);*/
 
     ~DataTable();
 

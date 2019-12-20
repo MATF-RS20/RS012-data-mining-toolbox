@@ -9,6 +9,7 @@ class SourceNode : public Node{
 public:
 
     SourceNode(std::string name);
+    SourceNode(const SourceNode& sn);
     void setFilename(std::string fName);
 
     void run() override;

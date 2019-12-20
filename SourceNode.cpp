@@ -9,11 +9,19 @@ SourceNode::SourceNode(std::string name): Node(name)
     this->setInputDataTable(nullptr);
 }
 
+//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi konstruktor kopije Stream klase (odnosno da bude pravo kopiranje cvorova)
+//Nema veze sa kopiranjem Stream-a (proveriti kad kopiranje Stream-a proradi).
+SourceNode::SourceNode(const SourceNode& sn) : Node(sn.NodeName()) {
+    this->setFilename(sn.filename);
+    this->setOutDataTable(sn.OutputDataTable());
+}
+
 void SourceNode::setFilename(std::string fName)
 {
     filename = fName;
 }
 
+//TODO: Podeliti na read i set funkciju
 void SourceNode::run()
 {
     csvReader reader(filename);

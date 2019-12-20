@@ -11,6 +11,10 @@ DataTable::DataTable(unsigned long nRows):numberOfRows(nRows){}
 
 DataTable::~DataTable(){}
 
+//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi konstruktor kopije Stream klase, odnosno da bude pravo kopiranje klase Node.
+//Kopiranje Stream-a nema veze sa ovim. Proveriti da li ovo ima veze sa kopiranjem Node-a.
+DataTable::DataTable(const DataTable& dt) : doubleColumns(dt.DoubleColumns()), columnNames(dt.ColumnNames()), numberOfRows(dt.NumberOfRows()) {}
+
 std::map<std::string, std::vector<double>> DataTable::DoubleColumns() const {
     return doubleColumns;
 }

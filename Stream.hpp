@@ -14,6 +14,9 @@ public:
 
     ~Stream();
 
+    Stream(const Stream& s);
+    Stream& operator = (const Stream& s);
+
     // adds an unconnected node to the stream
     void add (Node* node);
 

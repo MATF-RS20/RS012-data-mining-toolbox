@@ -12,6 +12,12 @@ DataTable Node::OutputDataTable() const {
     return outputDataTable;
 }
 
+//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da se pozove konstruktor Node klase u konstruktoru kopije klase SourceNode
+std::string Node::NodeName() const {
+    return nodeName;
+}
+
+//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi destruktor Stream klase
 DataTable * Node::RefOutputDataTable(){
     return &outputDataTable;
 }

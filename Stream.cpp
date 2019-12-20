@@ -16,6 +16,14 @@ Stream::~Stream(){
       }
 }
 
+//TODO: Kopiranje Stream-a ne radi, zbog pokazivaca u mapi. Naci novi nacin za cuvanje strima ili drugacije implementirati kopiranje.
+Stream::Stream(const Stream& s) : mapOfNodes(s.MapOfNodes()) {}
+
+Stream& Stream::operator= (const Stream& s){
+    this->mapOfNodes = s.MapOfNodes();
+    return *this;
+}
+
 void Stream::add(Node *node){
     mapOfNodes[node] = nullptr;
 }

@@ -14,6 +14,7 @@ public:
     const DataTable* InputDataTable() const;
 
     DataTable OutputDataTable() const;
+    std::string NodeName() const;
 
     DataTable * RefOutputDataTable();
 
