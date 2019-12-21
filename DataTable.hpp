@@ -12,8 +12,6 @@ public:
     // we need empty constructor because of Node member variable outputDataTable
     DataTable();
 
-    DataTable(unsigned long nRows);
-
     // TODO: implement copy constuctor and operator '='
     DataTable(const DataTable& dt);
     /*DataTable& operator= (const DataTable& dt);

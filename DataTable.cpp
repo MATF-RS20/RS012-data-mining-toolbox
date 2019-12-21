@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 
-DataTable::DataTable(){}
+DataTable::DataTable(){
+    hasClassTargetVariable = false;
+}
 
 DataTable::~DataTable(){}
 
