@@ -16,8 +16,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ClassificationNode.cpp \
     DataTable.cpp \
+    DecisionTreeNode.cpp \
     LinearRegressionNode.cpp \
+    LinearSVMNode.cpp \
     Node.cpp \
     Stream.cpp \
     main.cpp \
@@ -25,8 +28,11 @@ SOURCES += \
     csvreader.cpp
 
 HEADERS += \
+    ClassificationNode.hpp \
     DataTable.hpp \
+    DecisionTreeNode.hpp \
     LinearRegressionNode.hpp \
+    LinearSVMNode.hpp \
     Node.hpp \
     SourceNode.hpp \
     Stream.hpp \ \
