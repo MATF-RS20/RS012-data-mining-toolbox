@@ -14,7 +14,7 @@ public:
 
     DataTable(unsigned long nRows);
 
-    // TODO: implement copy constuctor and operator =
+    // TODO: implement copy constuctor and operator '='
     DataTable(const DataTable& dt);
     /*DataTable& operator= (const DataTable& dt);
     DataTable(DataTable&& dt);
@@ -25,15 +25,14 @@ public:
     arma::mat DataMatrix() const;
     std::vector<std::string> ColumnNames() const;
     std::vector<std::string> ClassTargetVariable() const;
-    bool ClassTargetVariableSet() const;
-    unsigned long NumberOfRows() const;
+    bool HasClassTargetVariable() const;
 
     void SetDataMatrix(const arma::mat& matrix);
     void addKey(const std::string& keyName);
     void SetClassTargetVariable(const std::vector<std::string>& stringColumn);
 
     //TODO: consider a better name :)
-    void SetClassTargetVariableSet(const bool & isSet);
+    void SetHasClassTargetVariable(const bool & isSet);
 
 private:
 
@@ -42,10 +41,7 @@ private:
 
     //TODO: consider if this needs to be in DataTable
     std::vector<std::string> classTargetVariable;
-    bool classTargetVariableSet;
-
-    //TODO: maybe delete
-    unsigned long numberOfRows;
+    bool hasClassTargetVariable;
 
 };
 

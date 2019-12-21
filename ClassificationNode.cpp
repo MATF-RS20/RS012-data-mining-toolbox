@@ -1,7 +1,7 @@
 #include <ClassificationNode.hpp>
 
 ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
-    targetVariable = std::vector<std::string>(Node::InputDataTable()->NumberOfRows());
+    targetVariable = std::vector<std::string>(Node::InputDataTable()->DataMatrix().n_rows);
 }
 
 bool ClassificationNode::IsVariableSelected(){

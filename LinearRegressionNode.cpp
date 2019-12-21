@@ -14,7 +14,7 @@ void LinearRegressionNode::run(){
     arma::mat data = InputDataTable()->DataMatrix();
 
     // target column (used just for testing)
-    arma::vec responses = arma::vec(InputDataTable()->NumberOfRows(), arma::fill::ones);
+    arma::vec responses = arma::vec(InputDataTable()->DataMatrix().n_rows, arma::fill::ones);
 
     mlpack::regression::LinearRegression lr(trans(data), responses);
 

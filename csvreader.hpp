@@ -10,7 +10,7 @@ public:
     csvReader(std::string filename);
     ~csvReader();
 
-    //Da li su neophodni konstruktor kopije i operator dodele?
+    //Are copy constructor and '=' operator necessary?
     //csvReader(csvReader& cr);
 
 

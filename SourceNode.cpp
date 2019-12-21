@@ -1,7 +1,6 @@
 #include "SourceNode.hpp"
 #include "csvreader.hpp"
 #include <boost/algorithm/string.hpp>
-#include <list>
 #include <string>
 
 SourceNode::SourceNode(std::string name): Node(name)
@@ -21,49 +20,60 @@ void SourceNode::setFilename(std::string fName)
     filename = fName;
 }
 
-//TODO: Podeliti na read i set funkciju
-void SourceNode::run()
-{
+void SourceNode::setHasClass(bool hasCl) {
+    hasClass = hasCl;
+}
+
+std::vector<std::string> SourceNode::read() {
+
+    std::vector<std::string> rows;
+
     csvReader reader(filename);
     if(!reader.file.is_open())
     {
         std::cerr << "Invalid path to file" << std::endl;
-        return;
+        return rows;
     }
     unsigned long n = 0;
 
     std::string line;
-    std::list<std::string> rows;
-
-    getline(reader.file, line);
-    std::list<std::string> columns;
-    boost::split(columns, line, boost::is_any_of(","));
 
     while(getline(reader.file, line))
     {
         rows.push_back(line);
         n++;
     }
+    return rows;
+}
 
-    DataTable dt(n);
+//TODO: Podeliti na read i set funkciju
+void SourceNode::run()
+{
+    std::vector<std::string> rows = read();
+    std::string line = rows.front();
+    rows.erase(rows.begin());
+    unsigned n = rows.size();
+
+    std::vector<std::string> columns;
+    boost::split(columns, line, boost::is_any_of(","));
+
+    DataTable dt;
     for(auto col : columns)
     {
         dt.addKey(col);
     }
 
-    unsigned long i = 0;
-    std::list<std::string> doubleRow;
-    for(auto row : rows)
-    {
-        boost::split(doubleRow, row, boost::is_any_of(","));
-        auto iter = doubleRow.cbegin();
-        for(auto col : columns)
-        {
-            dt.SetField(col, i, std::stod(iter.operator*()));
-            iter++;
+    //TODO: Is there a better way to initialize matrix?
+    arma::mat matrix(n, columns.size());
+    std::vector<std::string> strRow;
+    int j = 0;
+    for(auto r : rows) {
+        boost::split(strRow, r, boost::is_any_of(","));
+        for(auto i = 0; i < matrix.n_cols; i++) {
+            matrix(j,i) = std::stod(strRow.at(i));
         }
-        i++;
     }
+    dt.SetDataMatrix(matrix);
 
     this->setOutDataTable(dt);
 
