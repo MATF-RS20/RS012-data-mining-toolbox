@@ -26,6 +26,8 @@ public:
     std::vector<std::string> ColumnNames() const;
     std::vector<std::string> ClassTargetVariable() const;
     bool HasClassTargetVariable() const;
+    std::vector<bool> Partition() const;
+    bool IsPartitioned() const;
 
     void SetDataMatrix(const arma::mat& matrix);
     void addKey(const std::string& keyName);
@@ -33,6 +35,9 @@ public:
 
     //TODO: consider a better name :)
     void SetHasClassTargetVariable(const bool & isSet);
+
+    void SetPartition(const std::vector<bool>& vector);
+    void SetIsPartitioned(const bool & isSet);
 
 private:
 
@@ -42,6 +47,9 @@ private:
     //TODO: consider if this needs to be in DataTable
     std::vector<std::string> classTargetVariable;
     bool hasClassTargetVariable;
+
+    std::vector<bool> partition;
+    bool isPartitioned;
 
 };
 

@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 
-DataTable::DataTable(){}
+DataTable::DataTable(){
+    isPartitioned = true;
+}
 
 DataTable::~DataTable(){}
 
@@ -31,6 +33,14 @@ bool DataTable::HasClassTargetVariable() const{
     return hasClassTargetVariable;
 }
 
+std::vector<bool> DataTable::Partition() const {
+    return partition;
+}
+
+bool DataTable::IsPartitioned() const {
+    return isPartitioned;
+}
+
 void DataTable::SetDataMatrix(const arma::mat& matrix){
     dataMatrix = matrix;
 }
@@ -45,4 +55,11 @@ void DataTable::SetHasClassTargetVariable(const bool & isSet){
 
 void DataTable::addKey(const std::string& keyName) {
     columnNames.push_back(keyName);
+}
+void DataTable::SetPartition(const std::vector<bool>& vector){
+    partition = vector;
+}
+
+void DataTable::SetIsPartitioned(const bool & isSet){
+    isPartitioned = isSet;
 }
