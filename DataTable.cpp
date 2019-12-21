@@ -13,27 +13,47 @@ DataTable::~DataTable(){}
 
 //TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi konstruktor kopije Stream klase, odnosno da bude pravo kopiranje klase Node.
 //Kopiranje Stream-a nema veze sa ovim. Proveriti da li ovo ima veze sa kopiranjem Node-a.
-DataTable::DataTable(const DataTable& dt) : doubleColumns(dt.DoubleColumns()), columnNames(dt.ColumnNames()), numberOfRows(dt.NumberOfRows()) {}
+DataTable::DataTable(const DataTable& dt)
+    : dataMatrix(dt.DataMatrix()),
+      columnNames(dt.ColumnNames()),
+      classTargetVariable(dt.ClassTargetVariable()),
+      classTargetVariableSet(dt.ClassTargetVariableSet()),
+      numberOfRows(dt.NumberOfRows()){}
 
-std::map<std::string, std::vector<double>> DataTable::DoubleColumns() const {
-    return doubleColumns;
+arma::mat DataTable::DataMatrix() const {
+    return dataMatrix;
 }
 
 std::vector<std::string> DataTable::ColumnNames() const {
     return columnNames;
 }
 
+std::vector<std::string> DataTable::ClassTargetVariable() const{
+    return classTargetVariable;
+}
+
+bool DataTable::ClassTargetVariableSet() const{
+    return classTargetVariableSet;
+}
+
 unsigned long DataTable::NumberOfRows() const {
     return numberOfRows;
 }
 
+void DataTable::SetDataMatrix(const arma::mat& matrix){
+    dataMatrix = matrix;
+}
+
+void DataTable::SetClassTargetVariable(const std::vector<std::string>& stringColumn){
+    classTargetVariable = stringColumn;
+}
+
+void DataTable::SetClassTargetVariableSet(const bool & isSet){
+    classTargetVariableSet = isSet;
+}
+
 void DataTable::addKey(const std::string& keyName)
 {
-    doubleColumns[keyName] = std::vector <double> (numberOfRows);
     columnNames.push_back(keyName);
 }
 
-void DataTable::SetField(std::string columnName, unsigned long index, double value){
-
-    doubleColumns[columnName][index] = value;
-}

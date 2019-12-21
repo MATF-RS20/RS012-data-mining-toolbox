@@ -11,17 +11,7 @@ LinearRegressionNode::~LinearRegressionNode(){}
 
 void LinearRegressionNode::run(){
 
-    // parsing DataTable object into arma matrix
-    // TODO: implement parsing as a member function of class Node
-    arma::mat data(InputDataTable()->NumberOfRows(), InputDataTable()->ColumnNames().size());
-    unsigned long j;
-    for (unsigned long i = 0; i < InputDataTable()->NumberOfRows(); i++){
-        j = 0;
-        for (auto column : InputDataTable()->ColumnNames()){
-             data(i, j) = InputDataTable()->DoubleColumns()[column][i];
-             j++;
-        }
-    }
+    arma::mat data = InputDataTable()->DataMatrix();
 
     // target column (used just for testing)
     arma::vec responses = arma::vec(InputDataTable()->NumberOfRows(), arma::fill::ones);

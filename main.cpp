@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();*/
 
-
 /***********************PROVERA DODAVANJA, VEZIVANJA I POKRETANJA CVOROVA U KLASI STREAM***************************/
     Stream s;
 
@@ -81,4 +80,5 @@ int main(int argc, char *argv[])
     //s2.RunStream(&lr);
     //Pokrecu se kopije strima. Nisu se dobili ocekivani rezultati.
     /***************************************PROVERA NIJE PROSLA!!!*************************************************************/
+
 }

@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <armadillo>
 
 class DataTable {
 
@@ -21,25 +22,31 @@ public:
 
     ~DataTable();
 
-    std::map<std::string, std::vector<double>> DoubleColumns() const;
+    arma::mat DataMatrix() const;
     std::vector<std::string> ColumnNames() const;
+    std::vector<std::string> ClassTargetVariable() const;
+    bool ClassTargetVariableSet() const;
     unsigned long NumberOfRows() const;
 
-
+    void SetDataMatrix(const arma::mat& matrix);
     void addKey(const std::string& keyName);
+    void SetClassTargetVariable(const std::vector<std::string>& stringColumn);
 
-    // sets field where column is columnName and row is index
-    void SetField(std::string columnName, unsigned long index, double value);
+    //TODO: consider a better name :)
+    void SetClassTargetVariableSet(const bool & isSet);
 
 private:
 
-    //map that stores all columns of data
-    //TODO: generic ?
-    std::map<std::string, std::vector<double>> doubleColumns;
-
+    arma::mat dataMatrix;
     std::vector<std::string> columnNames;
 
+    //TODO: consider if this needs to be in DataTable
+    std::vector<std::string> classTargetVariable;
+    bool classTargetVariableSet;
+
+    //TODO: maybe delete
     unsigned long numberOfRows;
+
 };
 
 #endif // DATATABLE_H
