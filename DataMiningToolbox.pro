@@ -22,6 +22,7 @@ SOURCES += \
     LinearRegressionNode.cpp \
     LinearSVMNode.cpp \
     Node.cpp \
+    PartitionNode.cpp \
     Stream.cpp \
     main.cpp \
     SourceNode.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     LinearRegressionNode.hpp \
     LinearSVMNode.hpp \
     Node.hpp \
+    PartitionNode.hpp \
     SourceNode.hpp \
     Stream.hpp \ \
     csvreader.hpp

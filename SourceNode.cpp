@@ -46,7 +46,7 @@ std::vector<std::string> SourceNode::read() {
     return rows;
 }
 
-//TODO: Podeliti na read i set funkciju
+//TODO: Make a set function
 void SourceNode::run()
 {
     std::vector<std::string> rows = read();
@@ -67,10 +67,23 @@ void SourceNode::run()
     arma::mat matrix(n, columns.size());
     std::vector<std::string> strRow;
     int j = 0;
-    for(auto r : rows) {
-        boost::split(strRow, r, boost::is_any_of(","));
-        for(auto i = 0; i < matrix.n_cols; i++) {
-            matrix(j,i) = std::stod(strRow.at(i));
+    if(!hasClass) {
+        for(auto r : rows) {
+            boost::split(strRow, r, boost::is_any_of(","));
+            for(auto i = 0; i < matrix.n_cols; i++) {
+                matrix(j,i) = std::stod(strRow.at(i));
+            }
+        }
+    }
+    else {
+        std::vector<std::string> classes;
+        dt.SetHasClassTargetVariable(true);
+        for(auto r : rows) {
+            boost::split(strRow, r, boost::is_any_of(","));
+            for(auto i = 0; i < matrix.n_cols -1; i++) {
+                matrix(j,i) = std::stod(strRow.at(i));
+            }
+            classes.push_back(strRow.at(matrix.n_cols -1));
         }
     }
     dt.SetDataMatrix(matrix);

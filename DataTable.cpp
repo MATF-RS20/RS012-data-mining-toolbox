@@ -4,7 +4,9 @@
 #include <vector>
 
 DataTable::DataTable(){
-    isPartitioned = true;
+
+    isPartitioned = false;
+    hasClassTargetVariable = false;
 }
 
 DataTable::~DataTable(){}

@@ -15,18 +15,14 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();*/
 
-/*************************CHECK FOR ADD, CONNECT_TO AND RUNSTREAM****************************/
-    Stream s;
-
     SourceNode sn("SN!");
-    s.add(&sn);
-    LinearRegressionNode lr("LR!");
-    s.add(&lr);
-    s.connect_to(&sn, &lr);
+    sn.setHasClass(true);
+    sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
+    sn.run();
 
-    sn.setFilename("../RS012-data-mining-toolbox/zoo.csv");
-
-    s.RunStream(&lr);
-/***************************************CHECKED**********************************************/
-
+    for(auto col : sn.OutputDataTable().ColumnNames())
+    {
+        std::cout << col << " ";
+    }
+    std::cout << std::endl;
 }
