@@ -26,7 +26,8 @@ SOURCES += \
     Stream.cpp \
     main.cpp \
     SourceNode.cpp \
-    csvreader.cpp
+    csvreader.cpp \
+    MainWindow.cpp
 
 HEADERS += \
     ClassificationNode.hpp \
@@ -38,7 +39,11 @@ HEADERS += \
     PartitionNode.hpp \
     SourceNode.hpp \
     Stream.hpp \ \
-    csvreader.hpp
+    csvreader.hpp \
+    MainWindow.hpp
+
+FORMS += \
+    MainWindow.ui
 
 LIBS += -lmlpack
 

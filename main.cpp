@@ -1,4 +1,4 @@
-//#include "mainwindow.hpp"
+#include "MainWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "SourceNode.hpp"
@@ -6,14 +6,14 @@
 
 #include <iostream>
 
-//#include <QApplication>
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-   /* QApplication a(argc, argv);
+    QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    return a.exec();*/
+
 
     SourceNode sn("SN!");
     sn.setHasClass(true);
@@ -25,4 +25,7 @@ int main(int argc, char *argv[])
         std::cout << col << " ";
     }
     std::cout << std::endl;
+
+
+    return a.exec();
 }
