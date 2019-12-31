@@ -3,7 +3,7 @@
 
 #include <map>
 #include <vector>
-#include <armadillo>
+#include <mlpack/core.hpp>
 
 class DataTable {
 

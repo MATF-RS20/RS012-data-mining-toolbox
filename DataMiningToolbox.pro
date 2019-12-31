@@ -22,6 +22,7 @@ SOURCES += \
     LinearRegressionNode.cpp \
     LinearSVMNode.cpp \
     Node.cpp \
+    NormalizationNode.cpp \
     PartitionNode.cpp \
     Stream.cpp \
     main.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     LinearRegressionNode.hpp \
     LinearSVMNode.hpp \
     Node.hpp \
+    NormalizationNode.hpp \
     PartitionNode.hpp \
     SourceNode.hpp \
     Stream.hpp \ \

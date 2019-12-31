@@ -3,17 +3,19 @@
 
 #include "ClassificationNode.hpp"
 
-class DecisionTree : public ClassificationNode{
+class DecisionTreeNode : public ClassificationNode{
 
 public:
 
-    DecisionTree(std::string name);
+    DecisionTreeNode(std::string name);
 
     int MaximumDepth() const;
     int MinimumLeafSize() const;
 
     void SetMaximumDepth(int depth);
     void SetMinimumLeafSize(int size);
+
+    void run() override;
 
 private:
 

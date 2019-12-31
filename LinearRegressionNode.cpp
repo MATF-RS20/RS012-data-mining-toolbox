@@ -1,6 +1,5 @@
 #include "LinearRegressionNode.hpp"
 
-#include <armadillo>
 #include <mlpack/methods/linear_regression/linear_regression.hpp>
 //#include <mlpack/core.hpp>
 
@@ -22,7 +21,7 @@ void LinearRegressionNode::run(){
     std::cout << "Paramtetes: " << std::endl;
     std::cout << parameters << std::endl;
 
-    arma::Row<double> predictions;
+    arma::vec predictions;
     lr.Predict(trans(data), predictions);
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;

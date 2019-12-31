@@ -2,8 +2,6 @@
 
 Node::Node(std::string name) : nodeName(name){}
 
-Node::~Node(){}
-
 const DataTable* Node::InputDataTable() const{
     return inputDataTable;
 }

@@ -9,7 +9,7 @@ public:
 
     Node(std::string name);
 
-    virtual ~Node();
+    virtual ~Node() = default;
 
     const DataTable* InputDataTable() const;
 
