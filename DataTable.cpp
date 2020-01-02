@@ -16,6 +16,7 @@ DataTable::~DataTable(){}
 DataTable::DataTable(const DataTable& dt)
     : dataMatrix(dt.DataMatrix()),
       columnNames(dt.ColumnNames()),
+      categoricalValues(dt.CategoricalValues()),
       classTargetVariable(dt.ClassTargetVariable()),
       hasClassTargetVariable(dt.HasClassTargetVariable()){}
 
@@ -25,6 +26,10 @@ arma::mat DataTable::DataMatrix() const {
 
 std::vector<std::string> DataTable::ColumnNames() const {
     return columnNames;
+}
+
+std::map<std::string, std::set<std::string>> DataTable::CategoricalValues() const {
+    return categoricalValues;
 }
 
 std::vector<std::string> DataTable::ClassTargetVariable() const{

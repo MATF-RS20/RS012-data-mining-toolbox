@@ -22,6 +22,7 @@ public:
 
     arma::mat DataMatrix() const;
     std::vector<std::string> ColumnNames() const;
+    std::map<std::string, std::set<std::string>> CategoricalValues() const;
 
     void SetDataMatrix(const arma::mat& matrix);
     void addKey(const std::string& keyName);
