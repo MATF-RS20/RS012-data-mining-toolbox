@@ -18,9 +18,17 @@ int main(int argc, char *argv[])
 
 
     SourceNode sn("SN!");
-    sn.setHasClass(true);
+    //sn.setHasClass(true);
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
-  //  sn.run();
+    sn.run();
+
+    arma::mat matrix = sn.filterBinarisedCol("Species");
+    for(unsigned i = 0; i < matrix.n_rows; i++) {
+        for(unsigned j = 0; j< matrix.n_cols; j++) {
+            std::cout << matrix(i,j) << " ";
+        }
+        std::cout << std::endl;
+    }
 
    /* for(auto col : sn.OutputDataTable().ColumnNames())
     {
@@ -35,13 +43,13 @@ int main(int argc, char *argv[])
     std::cout << std::endl;*/
 
 
-    DecisionTreeNode nn("nn");
+    /*DecisionTreeNode nn("nn");
 
     Stream s;
     s.add(&sn);
     s.add(&nn);
     s.connect_to(&sn, &nn);
-    s.RunStream(&nn);
+    s.RunStream(&nn);*/
 
    // std::cout << sn.OutputDataTable().DataMatrix() << std::endl << std::endl << std::endl << nn.OutputDataTable().DataMatrix() << std::endl;
 
