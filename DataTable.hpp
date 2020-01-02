@@ -30,14 +30,8 @@ public:
 
 
 /********************************************************************************************************/
-    std::vector<std::string> ClassTargetVariable() const;
-    bool HasClassTargetVariable() const;
     std::vector<bool> Partition() const;
     bool IsPartitioned() const;
-    void SetClassTargetVariable(const std::vector<std::string>& stringColumn);
-
-    //TODO: consider a better name :)
-    void SetHasClassTargetVariable(const bool & isSet);
 
     void SetPartition(const std::vector<bool>& vector);
     void SetIsPartitioned(const bool & isSet);
@@ -52,10 +46,6 @@ private:
 
 
 /********************************************************************************************************/
-    //TODO: consider if this needs to be in DataTable
-    std::vector<std::string> classTargetVariable;
-    bool hasClassTargetVariable;
-
     std::vector<bool> partition;
     bool isPartitioned;
 /********************************************************************************************************/

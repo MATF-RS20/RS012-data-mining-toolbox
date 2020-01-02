@@ -130,5 +130,6 @@ void SourceNode::run()
     dt.SetDataMatrix(matrix);
 
     this->setOutDataTable(dt);
+    setInputDataTable(&(this->outputDataTable));
 
 }

@@ -8,24 +8,23 @@ class Node{
 public:
 
     Node(std::string name);
-
     virtual ~Node() = default;
 
     const DataTable* InputDataTable() const;
-
     DataTable OutputDataTable() const;
     std::string NodeName() const;
-
-    DataTable * RefOutputDataTable();
+    DataTable* RefOutputDataTable();
 
     void setInputDataTable(DataTable* inDataTable);
-
     void setOutDataTable(DataTable outDataTable);
+
+    std::vector<std::string> unbinarize(std::string columnName);
+    arma::mat filterBinarisedCol(std::string colName);
 
     // run is an action that a Node can do (preform clustering/classification, normalize, standardize...)
     virtual void run() = 0;
 
-private:
+protected:
 
     // inputDataTable of Node B points to outputDataTable of Node A where A -> B
     const DataTable* inputDataTable;

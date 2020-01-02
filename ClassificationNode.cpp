@@ -1,26 +1,20 @@
 #include <ClassificationNode.hpp>
 
-#include <map>
-
 ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
-    //targetVariable = std::vector<std::string>(Node::InputDataTable()->DataMatrix().n_rows);
+    targetColumnName = "";
 }
 
 bool ClassificationNode::IsVariableSelected(){
-    return !targetVariable.empty();
+    return targetColumnName.compare("");
 }
 
-std::vector<std::string> ClassificationNode::TargetVariable() const{
-    return targetVariable;
-}
-
-void ClassificationNode::SetTargetVariable(std::vector<std::string> Variable){
-    targetVariable = Variable;
+arma::Row<size_t> ClassificationNode::TargetColumn() const {
+    return targetColumn;
 }
 
 arma::Row<size_t> ClassificationNode::TransformToArma(){
 
-    std::vector<std::string> vectorOfNames = this->InputDataTable()->ClassTargetVariable();
+    std::vector<std::string> vectorOfNames = Node::unbinarize(targetColumnName);
 
     int label_index = 0;
     std::map<std::string, int> mapOfNames;
@@ -42,4 +36,11 @@ arma::Row<size_t> ClassificationNode::TransformToArma(){
 
     return labels;
 
+}
+
+void ClassificationNode::setTarget(std::string targetName) {
+    //TODO: check if targetName is in columnNames
+    targetColumnName = targetName;
+
+    targetColumn = TransformToArma();
 }
