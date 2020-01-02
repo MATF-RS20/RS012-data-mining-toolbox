@@ -5,6 +5,7 @@
 #include "SourceNode.hpp"
 #include "Stream.hpp"
 #include "NormalizationNode.hpp"
+#include "StatisticsNode.hpp"
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
 
 
     SourceNode sn("SN!");
+<<<<<<< HEAD
     //sn.setHasClass(true);
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.run();
@@ -52,6 +54,17 @@ int main(int argc, char *argv[])
     s.RunStream(&nn);*/
 
    // std::cout << sn.OutputDataTable().DataMatrix() << std::endl << std::endl << std::endl << nn.OutputDataTable().DataMatrix() << std::endl;
+=======
+    sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
+
+    StatisticsNode st("st");
+
+    Stream s;
+    s.add(&sn);
+    s.add(&st);
+    s.connect_to(&sn, &st);
+    s.RunStream(&st);
+>>>>>>> f57bfa3c82f7ee28866da04c91b69dac3eac0446
 
    // return a.exec();
     return 0;

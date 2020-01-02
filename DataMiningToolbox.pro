@@ -24,6 +24,7 @@ SOURCES += \
     Node.cpp \
     NormalizationNode.cpp \
     PartitionNode.cpp \
+    StatisticsNode.cpp \
     Stream.cpp \
     main.cpp \
     SourceNode.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     NormalizationNode.hpp \
     PartitionNode.hpp \
     SourceNode.hpp \
+    StatisticsNode.hpp \
     Stream.hpp \ \
     csvreader.hpp \
     MainWindow.hpp
