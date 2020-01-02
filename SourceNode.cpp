@@ -24,68 +24,109 @@ void SourceNode::setHasClass(bool hasCl) {
     hasClass = hasCl;
 }
 
-std::vector<std::string> SourceNode::read() {
-
-    std::vector<std::string> rows;
-
-    csvReader reader(filename);
-    if(!reader.file.is_open())
-    {
-        std::cerr << "Invalid path to file" << std::endl;
-        return rows;
+double helper (std::string value, std::string comparingValue) {
+    if(0 == value.compare(comparingValue)) {
+        return 1;
     }
-    unsigned long n = 0;
-
-    std::string line;
-
-    while(getline(reader.file, line))
-    {
-        rows.push_back(line);
-        n++;
+    else {
+        return 0;
     }
-    return rows;
+}
+
+std::pair<unsigned, std::vector<double>> helper2(std::pair<const unsigned, std::vector<double>> p, unsigned added) {
+    std::pair<unsigned, std::vector<double>> solution;
+    solution.first = p.first + added;
+    solution.second = p.second;
+    return solution;
+}
+
+bool isDouble(std::string s) {
+
+    try {
+        std::stod(s);
+    } catch (std::invalid_argument) {
+        return false;
+    }
+    return true;
 }
 
 //TODO: Make a set function
 void SourceNode::run()
 {
-    std::vector<std::string> rows = read();
-    std::string line = rows.front();
+    //Reading from file
+    std::vector<std::vector<std::string>> rows = csvReader(filename).read();
+
+
+    //Taking and erasing column names from read data
+    std::vector<std::string> columns = rows.front();
     rows.erase(rows.begin());
-    unsigned n = rows.size();
 
-    std::vector<std::string> columns;
-    boost::split(columns, line, boost::is_any_of(","));
 
+    //Checking and memorizing indexes of columns and columns that are categorical/numeric and casting numerical data into double
+    bool isCategorical = false;
+    std::map<unsigned, std::vector<std::string>> categoricalColumns;
+    std::map<unsigned, std::vector<double>> numericalColumns;
+
+    for(unsigned i = 0; i < rows[0].size(); i++) {
+        std::vector<std::string> catCol;
+        std::vector<double> numCol;
+        for(unsigned j = 0; j < rows.size(); j++) {
+            catCol.push_back(rows[j][i]);
+            if(!isCategorical) {
+                isCategorical = !isDouble(rows[j][i]);
+                if(!isCategorical) {
+                    numCol.push_back(std::stod(rows[j][i]));
+                }
+            }
+        }
+        if(isCategorical) {
+            isCategorical = false;
+            categoricalColumns[i] = catCol;
+        }
+        else {
+            numericalColumns[i] = numCol;
+        }
+    }
+
+
+    //Adding column names and their "binary" numbers into DataTable
     DataTable dt;
-    for(auto col : columns)
-    {
-        dt.addKey(col);
+    for(unsigned i = 0; i < columns.size(); i++) {
+        if(numericalColumns.find(i) != numericalColumns.end()) {
+            dt.addKey(columns[i]);
+        }
+        else {
+            dt.addKey(columns[i]);
+        }
+    }
+
+
+    //Binarising categorical columns and adding categories in DataTable dt
+    unsigned added = 0;
+    for(auto c : categoricalColumns) {
+        std::set<std::string> categories(c.second.begin(), c.second.end());
+        dt.addCategoricalValues(c.first, categories);
+        unsigned numOfCategories = categories.size();
+        for(auto i = numericalColumns.rbegin(); i->first <= c.first + added; i++) {
+            std::vector<double> tmp = i->second;
+            numericalColumns[i->first + numOfCategories] = tmp;
+        }
+        for(auto v : categories) {
+            std::vector<double> binCol(numericalColumns[0].size());
+            std::transform(c.second.begin(), c.second.end(), binCol.begin(), std::bind(helper, std::placeholders::_1, v));
+            numericalColumns[c.first + added] = binCol;
+            added++;
+        }
     }
 
     //TODO: Is there a better way to initialize matrix?
-    arma::mat matrix(n, columns.size());
-    std::vector<std::string> strRow;
-    int j = 0;
-    if(!hasClass) {
-        for(auto r : rows) {
-            boost::split(strRow, r, boost::is_any_of(","));
-            for(auto i = 0; i < matrix.n_cols; i++) {
-                matrix(j,i) = std::stod(strRow.at(i));
-            }
+    arma::mat matrix(numericalColumns[0].size(), numericalColumns.size());
+    for(unsigned j = 0; j < numericalColumns.size(); j++) {
+        for(unsigned i = 0; i < numericalColumns[j].size(); i++) {
+            matrix(i,j) = numericalColumns[j][i];
         }
     }
-    else {
-        std::vector<std::string> classes;
-        dt.SetHasClassTargetVariable(true);
-        for(auto r : rows) {
-            boost::split(strRow, r, boost::is_any_of(","));
-            for(auto i = 0; i < matrix.n_cols -1; i++) {
-                matrix(j,i) = std::stod(strRow.at(i));
-            }
-            classes.push_back(strRow.at(matrix.n_cols -1));
-        }
-    }
+
     dt.SetDataMatrix(matrix);
 
     this->setOutDataTable(dt);

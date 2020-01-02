@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <boost/algorithm/string.hpp>
 
 class csvReader
 {
@@ -12,6 +14,9 @@ public:
 
     //Are copy constructor and '=' operator necessary?
     //csvReader(csvReader& cr);
+
+
+    std::vector<std::vector<std::string>> read();
 
 
     std::ifstream file;

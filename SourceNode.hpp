@@ -20,7 +20,6 @@ public:
 private:
     std::string filename;
     bool hasClass;
-    std::vector<std::string> read();
 };
 
 #endif // SOURCENODE_HPP

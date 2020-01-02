@@ -56,8 +56,13 @@ void DataTable::SetHasClassTargetVariable(const bool & isSet){
 }
 
 void DataTable::addKey(const std::string& keyName) {
-    columnNames.push_back(keyName);
+    columnNames.emplace_back(keyName);
 }
+
+void DataTable::addCategoricalValues(unsigned columnIndex, std::set<std::string> setOfValues) {
+    categoricalValues[columnNames[columnIndex]] = setOfValues;
+}
+
 void DataTable::SetPartition(const std::vector<bool>& vector){
     partition = vector;
 }
