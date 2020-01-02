@@ -33,6 +33,8 @@ std::vector<std::vector<std::string>> csvReader::read() {
     for(unsigned i = 0; i < rows.size(); i++) {
         std::vector<std::string> tmp;
         boost::split(tmp, rows[i], boost::is_any_of(","));
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), [](std::string x){return x.erase(x.find_last_not_of(" \n\r\t")+1);});
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), [](std::string x){return x.erase(0, x.find_first_not_of(" \n\r\t"));});
         splitRows.push_back(tmp);
     }
 

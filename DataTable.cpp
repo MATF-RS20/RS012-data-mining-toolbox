@@ -4,9 +4,7 @@
 #include <vector>
 
 DataTable::DataTable(){
-
     isPartitioned = false;
-    hasClassTargetVariable = false;
 }
 
 DataTable::~DataTable(){}
@@ -16,8 +14,7 @@ DataTable::~DataTable(){}
 DataTable::DataTable(const DataTable& dt)
     : dataMatrix(dt.DataMatrix()),
       columnNames(dt.ColumnNames()),
-      classTargetVariable(dt.ClassTargetVariable()),
-      hasClassTargetVariable(dt.HasClassTargetVariable()){}
+      categoricalValues(dt.CategoricalValues()){}
 
 arma::mat DataTable::DataMatrix() const {
     return dataMatrix;
@@ -27,32 +24,12 @@ std::vector<std::string> DataTable::ColumnNames() const {
     return columnNames;
 }
 
-std::vector<std::string> DataTable::ClassTargetVariable() const{
-    return classTargetVariable;
-}
-
-bool DataTable::HasClassTargetVariable() const{
-    return hasClassTargetVariable;
-}
-
-std::vector<bool> DataTable::Partition() const {
-    return partition;
-}
-
-bool DataTable::IsPartitioned() const {
-    return isPartitioned;
+std::map<std::string, std::set<std::string>> DataTable::CategoricalValues() const {
+    return categoricalValues;
 }
 
 void DataTable::SetDataMatrix(const arma::mat& matrix){
     dataMatrix = matrix;
-}
-
-void DataTable::SetClassTargetVariable(const std::vector<std::string>& stringColumn){
-    classTargetVariable = stringColumn;
-}
-
-void DataTable::SetHasClassTargetVariable(const bool & isSet){
-    hasClassTargetVariable = isSet;
 }
 
 void DataTable::addKey(const std::string& keyName) {
@@ -63,6 +40,9 @@ void DataTable::addCategoricalValues(unsigned columnIndex, std::set<std::string>
     categoricalValues[columnNames[columnIndex]] = setOfValues;
 }
 
+
+
+/************************************************************************/
 void DataTable::SetPartition(const std::vector<bool>& vector){
     partition = vector;
 }
@@ -70,3 +50,12 @@ void DataTable::SetPartition(const std::vector<bool>& vector){
 void DataTable::SetIsPartitioned(const bool & isSet){
     isPartitioned = isSet;
 }
+
+std::vector<bool> DataTable::Partition() const {
+    return partition;
+}
+
+bool DataTable::IsPartitioned() const {
+    return isPartitioned;
+}
+/*************************************************************************/

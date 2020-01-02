@@ -3,6 +3,7 @@
 
 #include "Node.hpp"
 #include <mlpack/core.hpp>
+#include <map>
 
 class ClassificationNode : public Node{
 
@@ -12,15 +13,16 @@ public:
 
     bool IsVariableSelected();
 
-    std::vector<std::string> TargetVariable() const;
-
-    void SetTargetVariable(std::vector<std::string> Variable);
+    arma::Row<size_t> TargetColumn() const;
+    std::vector<std::string> unbinarize(std::string columnName);
 
     arma::Row<size_t> TransformToArma();
+    void setTarget(std::string targetName);
 
 private:
 
-    std::vector<std::string> targetVariable;
+    std::string targetColumnName;
+    arma::Row<size_t> targetColumn;
 
 };
 
