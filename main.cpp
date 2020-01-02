@@ -13,14 +13,15 @@
 
 int main(int argc, char *argv[])
 {
-  /*  QApplication a(argc, argv);
+    QApplication a(argc, argv);
     MainWindow w;
-    w.show();*/
+    w.show();
 
 
     SourceNode sn("SN!");
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
 
+    /*
     StatisticsNode st("st");
 
     Stream s;
@@ -29,6 +30,9 @@ int main(int argc, char *argv[])
     s.connect_to(&sn, &st);
     s.RunStream(&st);
 
-   // return a.exec();
-    return 0;
+
+   */
+
+    return a.exec();
+    //return 0;
 }

@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <Stream.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,11 +20,15 @@ public:
     ~MainWindow();
 
 private Q_SLOTS:
-    void buttonRunStreamClicked();
-    void buttonAddNodeClicked();
+
+
+    void on_AddNodeButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scena;
+    Stream *TokPodataka;
+
 };
 
 

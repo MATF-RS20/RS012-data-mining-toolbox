@@ -21,7 +21,7 @@ void LinearRegressionNode::run(){
     std::cout << "Paramtetes: " << std::endl;
     std::cout << parameters << std::endl;
 
-    arma::vec predictions;
+    arma::Row<double> predictions;
     lr.Predict(trans(data), predictions);
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
