@@ -65,20 +65,27 @@ std::vector<std::string> Node::unbinarize(std::string columnName) {
 
 arma::mat Node::filterBinarisedCol(std::string colName) {
     std::vector<std::string> colNames = inputDataTable->ColumnNames();
+    const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     unsigned index = 0;
     for(unsigned i = 0; i != colNames.size(); i++) {
         if(0 == colNames[i].compare(colName)) {
-            index = i;
             break;
+        }
+        else if(map_tmp.find(colNames[i]) != map_tmp.end()) {
+            index += map_tmp.at(colNames[i]).size();
+        }
+        else {
+            index++;
         }
     }
 
-    unsigned numberOfCol = inputDataTable->CategoricalValues()[colName].size();
+    unsigned numberOfCol = map_tmp.at(colName).size();
 
     arma::mat result = inputDataTable->DataMatrix();
-    for(unsigned i = index+numberOfCol -1; i >= index; i--) {
+    for(unsigned i = index+numberOfCol -1; i > index; i--) {
         result.shed_col(i);
     }
+    result.shed_col(index);
 
     return result;
 }

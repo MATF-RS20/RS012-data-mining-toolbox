@@ -13,7 +13,13 @@ public:
 
     ~LinearRegressionNode() override;
 
+    void setTarget(std::string targetName);
     void run() override;
+
+
+protected:
+    std::string targetColumnName;
+    arma::Col<double> targetColumn;
 };
 
 #endif // LINEARREGRESSIONNODE_HPP

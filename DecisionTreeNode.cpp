@@ -1,4 +1,4 @@
-#include <mlpack/methods/decision_tree/decision_tree.hpp>
+//#include <mlpack/methods/decision_tree/decision_tree.hpp
 #include "DecisionTreeNode.hpp"
 
 #include <string>
@@ -40,11 +40,11 @@ void DecisionTreeNode::run() {
     std::cout << train_labels << std::endl;*/
 
     data1 = trans(data1);
-    mlpack::tree::DecisionTree<> treeClassifier;
-    treeClassifier.Train(data1, train_labels, 3);
+    //mlpack::tree::DecisionTree<> treeClassifier;
+    //treeClassifier.Train(data1, train_labels, 3);
 
     arma::Row<size_t> predictions;
-    treeClassifier.Classify(data1, predictions);
+    //treeClassifier.Classify(data1, predictions);
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
 }

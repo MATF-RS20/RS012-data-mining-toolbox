@@ -8,21 +8,36 @@ LinearRegressionNode::LinearRegressionNode(std::string name)
 
 LinearRegressionNode::~LinearRegressionNode(){}
 
+void LinearRegressionNode::setTarget(std::string targetName) {
+    targetColumnName = targetName;
+
+    std::vector<std::string> columns = inputDataTable->ColumnNames();
+    for(unsigned i = 0; i < columns.size(); i++) {
+        if(0 == columns[i].compare(targetName)) {
+            std::map<std::string, std::set<std::string>> map = inputDataTable->CategoricalValues();
+            if(map.find(targetName) != map.end()) {
+                std::cout << "Greska! Izabrana kolona sa kategorickom vrednoscu!" << std::endl;
+                return;
+            }
+            else {
+                targetColumn = *(inputDataTable->DataMatrix().begin_col(i));
+            }
+        }
+    }
+}
+
 void LinearRegressionNode::run(){
 
     arma::mat data = InputDataTable()->DataMatrix();
-
-    // target column (used just for testing)
-    arma::vec responses = arma::vec(InputDataTable()->DataMatrix().n_rows, arma::fill::ones);
-
-    mlpack::regression::LinearRegression lr(trans(data), responses);
+    mlpack::regression::LinearRegression lr(trans(data), targetColumn);
 
     arma::vec parameters = lr.Parameters();
     std::cout << "Paramtetes: " << std::endl;
     std::cout << parameters << std::endl;
 
-    arma::vec predictions;
+    arma::Col<double> predictions;
     lr.Predict(trans(data), predictions);
+
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
 }
