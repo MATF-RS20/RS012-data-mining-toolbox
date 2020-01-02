@@ -26,8 +26,8 @@ private Q_SLOTS:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scena;
-    Stream *TokPodataka;
+    QGraphicsScene *scena; //scena koja se iscrtava
+    Stream *TokPodataka;   //glavni tok podataka
 
 };
 

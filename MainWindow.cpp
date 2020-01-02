@@ -24,12 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_AddNodeButton_clicked()
 {
-    /*
-    ui->LISTA_Klasifikacija->isActiveWindow()
-    auto selektovani = ui->LISTA_Preprocesiranje->selectedItems();
-    QListWidgetItem* item = selektovani.first();
-    QString tekst = item->text();
-    */
+
 
     QString cvor;
 
