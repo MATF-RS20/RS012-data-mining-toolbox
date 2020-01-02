@@ -13,13 +13,14 @@ public:
 
     bool IsVariableSelected();
 
+    std::string TargetColumnName() const;
     arma::Row<size_t> TargetColumn() const;
     std::vector<std::string> unbinarize(std::string columnName);
 
     arma::Row<size_t> TransformToArma();
     void setTarget(std::string targetName);
 
-private:
+protected:
 
     std::string targetColumnName;
     arma::Row<size_t> targetColumn;

@@ -2,6 +2,7 @@
 
 StatisticsNode::StatisticsNode(std::string name) : Node(name){}
 
+
 void StatisticsNode::run() {
 
     arma::mat data = InputDataTable()->DataMatrix();
@@ -45,4 +46,6 @@ void StatisticsNode::run() {
 
     DataTable dt = *InputDataTable();
     this->setOutDataTable(dt);
+
 }
+

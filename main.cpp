@@ -13,33 +13,23 @@
 
 int main(int argc, char *argv[])
 {
-  /*  QApplication a(argc, argv);
+   /* QApplication a(argc, argv);
     MainWindow w;
     w.show();*/
 
 
     SourceNode sn("SN!");
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
-    sn.run();
 
-    arma::mat matrix = sn.filterBinarisedCol("Species");
-    for(unsigned i = 0; i < matrix.n_rows; i++) {
-        for(unsigned j = 0; j< matrix.n_cols; j++) {
-            std::cout << matrix(i,j) << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
-
-    StatisticsNode st("st");
+    DecisionTreeNode dt("dt");
 
     Stream s;
     s.add(&sn);
-    s.add(&st);
-    s.connect_to(&sn, &st);
-    s.RunStream(&st);
+    s.add(&dt);
+    s.connect_to(&sn, &dt);
+    dt.setTarget("Species");
+    s.RunStream(&dt);
 
-   // return a.exec();
+    //return a.exec();
     return 0;
 }

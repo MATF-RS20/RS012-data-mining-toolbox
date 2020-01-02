@@ -5,11 +5,15 @@ ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
 }
 
 bool ClassificationNode::IsVariableSelected(){
-    return targetColumnName.compare("");
+    return !(targetColumnName.compare("") == 0);
 }
 
 arma::Row<size_t> ClassificationNode::TargetColumn() const {
     return targetColumn;
+}
+
+std::string ClassificationNode::TargetColumnName() const {
+    return targetColumnName;
 }
 
 arma::Row<size_t> ClassificationNode::TransformToArma(){

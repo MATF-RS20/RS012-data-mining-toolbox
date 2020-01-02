@@ -32,15 +32,20 @@ void Node::setOutDataTable(DataTable outDataTable)
 
 
 std::vector<std::string> Node::unbinarize(std::string columnName) {
+    
     std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
     unsigned colIndex = 0;
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
-    for(auto i = InputDataTable()->ColumnNames().begin(); i != InputDataTable()->ColumnNames().end(); i++) {
-        if(0 == (*i).compare(columnName)) {
+    std::cout << "1" << std::endl;
+    auto colNames = InputDataTable()->ColumnNames();
+    std::cout << "2" << std::endl;
+    for(auto i = 0; i < colNames.size(); i++) {
+        std::cout << i << std::endl;
+        if(0 == colNames[i].compare(columnName)) {
             break;
         }
-        else if(map_tmp.find(*i) != map_tmp.end()) {
-            colIndex += map_tmp.at(*i).size();
+        else if(map_tmp.find(colNames[i]) != map_tmp.end()) {
+            colIndex += map_tmp.at(colNames[i]).size();
         }
         else {
             colIndex++;

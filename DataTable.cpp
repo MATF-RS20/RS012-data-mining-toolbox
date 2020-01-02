@@ -58,4 +58,5 @@ void DataTable::SetPartition(const std::vector<bool>& vector){
 void DataTable::SetIsPartitioned(const bool & isSet){
     isPartitioned = isSet;
 }
+
 /*************************************************************************/

@@ -24,6 +24,7 @@ SOURCES += \
     Node.cpp \
     NormalizationNode.cpp \
     PartitionNode.cpp \
+    PerceptronNode.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
     main.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     LinearSVMNode.hpp \
     Node.hpp \
     NormalizationNode.hpp \
+    PerceptronNode.hpp \
     PartitionNode.hpp \
     SourceNode.hpp \
     StatisticsNode.hpp \
