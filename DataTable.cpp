@@ -14,7 +14,12 @@ DataTable::~DataTable(){}
 DataTable::DataTable(const DataTable& dt)
     : dataMatrix(dt.DataMatrix()),
       columnNames(dt.ColumnNames()),
+<<<<<<< HEAD
       categoricalValues(dt.CategoricalValues()){}
+=======
+      categoricalValues(dt.CategoricalValues())
+    {}
+>>>>>>> 59bddef1d2a1a5cc45864427b292f307edb84d78
 
 arma::mat DataTable::DataMatrix() const {
     return dataMatrix;
@@ -26,6 +31,20 @@ std::vector<std::string> DataTable::ColumnNames() const {
 
 std::map<std::string, std::set<std::string>> DataTable::CategoricalValues() const {
     return categoricalValues;
+<<<<<<< HEAD
+=======
+
+}
+
+
+
+std::vector<bool> DataTable::Partition() const {
+    return partition;
+}
+
+bool DataTable::IsPartitioned() const {
+    return isPartitioned;
+>>>>>>> 59bddef1d2a1a5cc45864427b292f307edb84d78
 }
 
 void DataTable::SetDataMatrix(const arma::mat& matrix){
@@ -51,11 +70,4 @@ void DataTable::SetIsPartitioned(const bool & isSet){
     isPartitioned = isSet;
 }
 
-std::vector<bool> DataTable::Partition() const {
-    return partition;
-}
-
-bool DataTable::IsPartitioned() const {
-    return isPartitioned;
-}
 /*************************************************************************/
