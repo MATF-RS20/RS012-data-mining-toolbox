@@ -6,6 +6,7 @@
 SourceNode::SourceNode(std::string name): Node(name)
 {
     this->setInputDataTable(nullptr);
+    isRead = false;
 }
 
 //TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi konstruktor kopije Stream klase (odnosno da bude pravo kopiranje cvorova)
@@ -17,12 +18,12 @@ SourceNode::SourceNode(const SourceNode& sn) : Node(sn.NodeName()) {
 
 void SourceNode::setFilename(std::string fName)
 {
-    filename = fName;
+    if (filename.compare(fName) != 0){
+        isRead = false;
+        filename = fName;
+    }
 }
 
-void SourceNode::setHasClass(bool hasCl) {
-    hasClass = hasCl;
-}
 
 double helper (std::string value, std::string comparingValue) {
     if(0 == value.compare(comparingValue)) {
@@ -50,9 +51,8 @@ bool isDouble(std::string s) {
     return true;
 }
 
-//TODO: Make a set function
-void SourceNode::run()
-{
+void SourceNode::read(){
+    
     //Reading from file
     std::vector<std::vector<std::string>> rows = csvReader(filename).read();
 
@@ -99,20 +99,26 @@ void SourceNode::run()
             dt.addKey(columns[i]);
         }
     }
-
-
+    
     //Binarising categorical columns and adding categories in DataTable dt
     unsigned added = 0;
     for(auto c : categoricalColumns) {
         std::set<std::string> categories(c.second.begin(), c.second.end());
         dt.addCategoricalValues(c.first, categories);
         unsigned numOfCategories = categories.size();
-        for(auto i = numericalColumns.rbegin(); i->first <= c.first + added; i++) {
+        for(auto i = numericalColumns.rbegin(); i != numericalColumns.rend(); i++) {
+            if(i->first <= c.first + added) {
+                break;
+            }
+            auto iter = i;
+
             std::vector<double> tmp = i->second;
-            numericalColumns[i->first + numOfCategories] = tmp;
+            numericalColumns[i->first + numOfCategories-1] = tmp;
+
+            i = iter;
         }
         for(auto v : categories) {
-            std::vector<double> binCol(numericalColumns[0].size());
+            std::vector<double> binCol((*numericalColumns.begin()).second.size());
             std::transform(c.second.begin(), c.second.end(), binCol.begin(), std::bind(helper, std::placeholders::_1, v));
             numericalColumns[c.first + added] = binCol;
             added++;
@@ -120,7 +126,7 @@ void SourceNode::run()
     }
 
     //TODO: Is there a better way to initialize matrix?
-    arma::mat matrix(numericalColumns[0].size(), numericalColumns.size());
+    arma::mat matrix((*numericalColumns.begin()).second.size(), numericalColumns.size());
     for(unsigned j = 0; j < numericalColumns.size(); j++) {
         for(unsigned i = 0; i < numericalColumns[j].size(); i++) {
             matrix(i,j) = numericalColumns[j][i];
@@ -131,5 +137,14 @@ void SourceNode::run()
 
     this->setOutDataTable(dt);
     setInputDataTable(&(this->outputDataTable));
+    
+    isRead = true;
+}
 
+//TODO: Make a set function
+void SourceNode::run()
+{
+    if (!isRead) {
+        this->read();
+    }
 }

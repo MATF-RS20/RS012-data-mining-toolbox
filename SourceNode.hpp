@@ -13,13 +13,13 @@ public:
     SourceNode(std::string name);
     SourceNode(const SourceNode& sn);
     void setFilename(std::string fName);
-    void setHasClass(bool hasCl);
+    void read();
 
     void run() override;
 
 private:
     std::string filename;
-    bool hasClass;
+    bool isRead;
 };
 
 #endif // SOURCENODE_HPP

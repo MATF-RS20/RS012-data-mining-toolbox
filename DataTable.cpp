@@ -48,7 +48,13 @@ void DataTable::addCategoricalValues(unsigned columnIndex, std::set<std::string>
     categoricalValues[columnNames[columnIndex]] = setOfValues;
 }
 
-
+void DataTable::SetCategoricalValues(const std::map<std::string, std::set<std::string>> & catVal){
+    categoricalValues = catVal;
+}
+   
+void DataTable::SetColumnNames(const std::vector<std::string>& colNames){
+    columnNames = colNames;
+}
 
 /************************************************************************/
 void DataTable::SetPartition(const std::vector<bool>& vector){

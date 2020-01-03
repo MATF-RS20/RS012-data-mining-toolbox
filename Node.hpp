@@ -20,6 +20,7 @@ public:
 
     std::vector<std::string> unbinarize(std::string columnName);
     arma::mat filterBinarisedCol(std::string colName);
+    DataTable filter(std::string colName);
 
     // run is an action that a Node can do (preform clustering/classification, normalize, standardize...)
     virtual void run() = 0;

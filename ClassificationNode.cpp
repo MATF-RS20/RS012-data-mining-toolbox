@@ -45,6 +45,4 @@ arma::Row<size_t> ClassificationNode::TransformToArma(){
 void ClassificationNode::setTarget(std::string targetName) {
     //TODO: check if targetName is in columnNames
     targetColumnName = targetName;
-
-    targetColumn = TransformToArma();
 }

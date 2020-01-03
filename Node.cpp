@@ -36,11 +36,8 @@ std::vector<std::string> Node::unbinarize(std::string columnName) {
     std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
     unsigned colIndex = 0;
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
-    std::cout << "1" << std::endl;
     auto colNames = InputDataTable()->ColumnNames();
-    std::cout << "2" << std::endl;
     for(auto i = 0; i < colNames.size(); i++) {
-        std::cout << i << std::endl;
         if(0 == colNames[i].compare(columnName)) {
             break;
         }
@@ -70,20 +67,58 @@ std::vector<std::string> Node::unbinarize(std::string columnName) {
 
 arma::mat Node::filterBinarisedCol(std::string colName) {
     std::vector<std::string> colNames = inputDataTable->ColumnNames();
+    const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     unsigned index = 0;
     for(unsigned i = 0; i != colNames.size(); i++) {
         if(0 == colNames[i].compare(colName)) {
-            index = i;
             break;
+        }
+        else if(map_tmp.find(colNames[i]) != map_tmp.end()) {
+            index += map_tmp.at(colNames[i]).size();
+        }
+        else {
+            index++;
         }
     }
 
-    unsigned numberOfCol = inputDataTable->CategoricalValues()[colName].size();
+    unsigned numberOfCol = map_tmp.at(colName).size();
 
     arma::mat result = inputDataTable->DataMatrix();
-    for(unsigned i = index+numberOfCol -1; i >= index; i--) {
+    for(unsigned i = index+numberOfCol -1; i > index; i--) {
         result.shed_col(i);
     }
+    result.shed_col(index);
 
     return result;
+}
+
+DataTable Node::filter(std::string colName) {
+    
+    std::vector<std::string> vectorOfNames = inputDataTable->ColumnNames();
+    unsigned long i = 0;
+    for(; i < vectorOfNames.size(); i++){
+        if (vectorOfNames[i].compare(colName) == 0){
+            break;
+        }
+    }
+    if (i == vectorOfNames.size()){
+        std::cout << "Invalid column name" << std::endl;
+        return *inputDataTable;
+    }
+    arma::mat dataMatrix;
+    auto catVal = this->inputDataTable->CategoricalValues();
+    if (catVal.find(colName) != catVal.end()){
+        dataMatrix = this->filterBinarisedCol(colName);
+        catVal.erase(colName);
+    } else {
+        dataMatrix = inputDataTable->DataMatrix();
+        dataMatrix.shed_col(i);
+    }
+    vectorOfNames.erase(vectorOfNames.begin()+i);
+    DataTable dt;
+    dt.SetDataMatrix(dataMatrix);
+    dt.SetCategoricalValues(catVal);
+    dt.SetColumnNames(vectorOfNames);
+    
+    return dt;
 }

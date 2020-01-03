@@ -27,6 +27,8 @@ public:
     void SetDataMatrix(const arma::mat& matrix);
     void addKey(const std::string& keyName);
     void addCategoricalValues(unsigned columnIndex, std::set<std::string>);
+    void SetCategoricalValues(const std::map<std::string, std::set<std::string>> & catVal);
+    void SetColumnNames(const std::vector<std::string>& colNames);
 
 
 /********************************************************************************************************/

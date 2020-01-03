@@ -15,16 +15,18 @@ void DecisionTreeNode::run() {
         DataTable dt = *InputDataTable();
         this->setOutDataTable(dt);
         return;
-    }
+    }    
+    targetColumn = TransformToArma();
+    
+    DataTable dt = filter(targetColumnName);
+    arma::mat data = dt.DataMatrix();
 
-    arma::mat data1 = InputDataTable()->DataMatrix();
-
-    data1 = trans(data1);
+    data = trans(data);
     mlpack::tree::DecisionTree<> treeClassifier;
-    treeClassifier.Train(data1, this->targetColumn, 3);
+    treeClassifier.Train(data, this->targetColumn, 3);
 
     arma::Row<size_t> predictions;
-    treeClassifier.Classify(data1, predictions);
+    treeClassifier.Classify(data, predictions);
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
 }
