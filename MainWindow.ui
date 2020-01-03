@@ -116,6 +116,19 @@
          <property name="text">
           <string>Binarizacija</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>88</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
+         </property>
          <property name="flags">
           <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
          </property>
@@ -124,25 +137,90 @@
          <property name="text">
           <string>Binarizacija Neprekidnih Atributa</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>80</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Normalizacija</string>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>80</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
          </property>
         </item>
         <item>
          <property name="text">
           <string>Filter</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>80</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Nedostajuce Vrednosti</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>80</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Elementi van Granica</string>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>80</red>
+            <green>160</green>
+            <blue>182</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
          </property>
         </item>
        </widget>
@@ -182,25 +260,72 @@
          <property name="text">
           <string>Stabla Odlucivanja</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>38</red>
+            <green>190</green>
+            <blue>35</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>K Najblizih Suseda</string>
          </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Naivni Bajesov Klasifikator</string>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>38</red>
+            <green>190</green>
+            <blue>35</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
          </property>
         </item>
         <item>
          <property name="text">
           <string>Neuralne Mreze</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>38</red>
+            <green>190</green>
+            <blue>35</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Metod Podrzavajucih Vektora (SVM)</string>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>38</red>
+            <green>190</green>
+            <blue>35</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
          </property>
         </item>
        </widget>
@@ -237,15 +362,54 @@
          <property name="text">
           <string>K-Sredina</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>35</red>
+            <green>30</green>
+            <blue>184</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>DBSCAN</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>35</red>
+            <green>30</green>
+            <blue>184</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Hijerarhijsko Klasterovanje</string>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>35</red>
+            <green>30</green>
+            <blue>184</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
          </property>
         </item>
        </widget>
@@ -295,10 +459,36 @@
          <property name="text">
           <string>Prosta Linearna Regresija</string>
          </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>165</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
+         </property>
         </item>
         <item>
          <property name="text">
           <string>Logisticka Regresija</string>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>165</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="icon">
+          <iconset resource="Resources.qrc">
+           <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
          </property>
         </item>
        </widget>
@@ -396,6 +586,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

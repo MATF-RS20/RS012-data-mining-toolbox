@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>Resources/Icons/klasifikacija_ikonica.bmp</file>
+        <file>Resources/Icons/klsterovanje_ikonica.bmp</file>
+        <file>Resources/Icons/linReg_ikonica.bmp</file>
+        <file>Resources/Icons/preprocesiranje_ikonica.bmp</file>
+    </qresource>
+</RCC>

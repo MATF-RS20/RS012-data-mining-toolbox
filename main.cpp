@@ -13,9 +13,9 @@
 
 int main(int argc, char *argv[])
 {
-   /* QApplication a(argc, argv);
+    QApplication a(argc, argv);
     MainWindow w;
-    w.show();*/
+    w.show();
 
 
     SourceNode sn("SN!");
@@ -42,6 +42,6 @@ int main(int argc, char *argv[])
     dt.setTarget("Species");
     s.RunStream(&dt);
 
-    //return a.exec();
-    return 0;
+    return a.exec();
+    //return 0;
 }
