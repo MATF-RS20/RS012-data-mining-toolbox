@@ -24,6 +24,7 @@ SOURCES += \
     Node.cpp \
     NormalizationNode.cpp \
     PartitionNode.cpp \
+    SamplingNode.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
     main.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     Node.hpp \
     NormalizationNode.hpp \
     PartitionNode.hpp \
+    SamplingNode.hpp \
     SourceNode.hpp \
     StatisticsNode.hpp \
     Stream.hpp \ \
