@@ -37,8 +37,8 @@ void SamplingNode::run(){
             
             for (unsigned long j = 0; j < colSize; j++) {
                 newData(k, j) = oldData(i, j);
-                k++;
             }
+            k++;
         }
     }
 
