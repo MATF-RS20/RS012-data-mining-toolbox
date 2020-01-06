@@ -46,3 +46,23 @@ void ClassificationNode::setTarget(std::string targetName) {
     //TODO: check if targetName is in columnNames
     targetColumnName = targetName;
 }
+
+double ClassificationNode::Precision(arma::Row<size_t> predictions) const {
+    
+    int nRows = this->targetColumn.size();
+    int nTrue = 0;
+    for(unsigned long i = 0; i < nRows; i++){
+        if (this->targetColumn[i] == predictions[i]){
+            nTrue++;
+        }
+    }
+    
+    if (nRows == 0){
+        return 0.0;
+    }
+    
+    double precision = static_cast<double>(nTrue)/nRows;
+    return precision;
+    
+    
+}

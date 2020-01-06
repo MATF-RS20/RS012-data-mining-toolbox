@@ -19,6 +19,8 @@ public:
 
     arma::Row<size_t> TransformToArma();
     void setTarget(std::string targetName);
+    
+    double Precision(arma::Row<size_t> predictions) const;
 
 protected:
 

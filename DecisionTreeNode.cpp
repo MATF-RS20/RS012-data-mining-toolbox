@@ -29,6 +29,12 @@ void DecisionTreeNode::run() {
     treeClassifier.Classify(data, predictions);
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
+    
+    double precision = ClassificationNode::Precision(predictions);
+    std::cout << precision << std::endl;
+    
+    DataTable dataTable = *InputDataTable();
+    this->setOutDataTable(dataTable);
 }
 
 int DecisionTreeNode::MaximumDepth() const{
