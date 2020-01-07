@@ -7,6 +7,7 @@
 #include "StatisticsNode.hpp"
 #include "SamplingNode.hpp"
 #include "NormalizationNode.hpp"
+#include "PerceptronNode.hpp"
 
 #include <iostream>
 
@@ -24,17 +25,17 @@ int main(int argc, char *argv[])
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.read();
 
-    DecisionTreeNode dt("DT!");
+    PerceptronNode pn("PN!");
     
     Stream s;
  
     s.add(&sn);
-    s.add(&dt);
+    s.add(&pn);
  
-    s.connect_to(&sn, &dt);
+    s.connect_to(&sn, &pn);
  
-    dt.setTarget("Species");
-    s.RunStream(&dt);
+    pn.setTarget("Species");
+    s.RunStream(&pn);
     
 
     //return a.exec();

@@ -23,6 +23,7 @@ SOURCES += \
     LinearSVMNode.cpp \
     Node.cpp \
     NormalizationNode.cpp \
+    PerceptronNode.cpp \
     PartitionNode.cpp \
     SamplingNode.cpp \
     StatisticsNode.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     Node.hpp \
     NormalizationNode.hpp \
     PartitionNode.hpp \
+    PerceptronNode.hpp \
     SamplingNode.hpp \
     SourceNode.hpp \
     StatisticsNode.hpp \
@@ -51,7 +53,7 @@ HEADERS += \
 FORMS += \
     MainWindow.ui
 
-LIBS += -lmlpack
+LIBS += -lmlpack -larmadillo -llapack -lblas
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
