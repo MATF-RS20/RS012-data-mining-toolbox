@@ -21,6 +21,7 @@ public:
     void setTarget(std::string targetName);
     
     double Precision(arma::Row<size_t> predictions) const;
+    void ConfussionMatrix(arma::Row<size_t> predictions) const;
 
 protected:
 

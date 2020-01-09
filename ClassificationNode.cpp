@@ -1,4 +1,5 @@
 #include <ClassificationNode.hpp>
+#include <algorithm>
 
 ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
     targetColumnName = "";
@@ -64,5 +65,33 @@ double ClassificationNode::Precision(arma::Row<size_t> predictions) const {
     double precision = static_cast<double>(nTrue)/nRows;
     return precision;
     
+    
+}
+
+void ClassificationNode::ConfussionMatrix(arma::Row<size_t> predictions) const{
+    
+    auto it = std::max_element(std::begin(predictions), std::end(predictions));
+    size_t maximum = *it;
+    unsigned long nRows = this->targetColumn.size();
+    
+    int nMatch;
+    std::cout << "T-P ";
+    for(size_t pLabel = 0; pLabel <= maximum; pLabel++){
+        std::cout << pLabel << " ";
+    }
+    std::cout << std::endl;
+    for(size_t tLabel = 0; tLabel <= maximum; tLabel++){
+        std::cout << tLabel << " ";
+        for (size_t pLabel = 0; pLabel <= maximum; pLabel++){
+            nMatch = 0;
+            for (unsigned long i = 0; i < nRows; i++){
+                if(this->targetColumn[i] == tLabel && predictions[i] == pLabel){
+                    nMatch++;
+                }
+            }
+            std::cout << nMatch << " ";
+        }
+        std::cout << std::endl;
+    }
     
 }
