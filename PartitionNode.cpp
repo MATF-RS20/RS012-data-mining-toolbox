@@ -15,6 +15,7 @@ void PartitionNode::SetTestSizeRatio(const double &size){
 }
 
 void PartitionNode::run(){
+
     unsigned long rowSize = InputDataTable()->DataMatrix().n_rows;
     std::vector<bool> partition(rowSize);
 
@@ -28,7 +29,10 @@ void PartitionNode::run(){
     }
     std::random_shuffle(partition.begin(), partition.end());
 
-    OutputDataTable() = *InputDataTable();
-    OutputDataTable().SetIsPartitioned(true);
-    OutputDataTable().SetPartition(partition);
+    DataTable dt = *InputDataTable();
+    
+    this->setOutDataTable(dt);
+    outputDataTable.SetIsPartitioned(true);
+    outputDataTable.SetPartition(partition);
+    outputDataTable.SetTestSize(testSize);
 }

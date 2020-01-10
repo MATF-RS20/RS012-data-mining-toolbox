@@ -4,7 +4,8 @@
 #include <vector>
 
 DataTable::DataTable(){
-    isPartitioned = false;
+    isPartitioned = 0;
+    testSize = 0;
 }
 
 DataTable::~DataTable(){}
@@ -14,7 +15,10 @@ DataTable::~DataTable(){}
 DataTable::DataTable(const DataTable& dt)
     : dataMatrix(dt.DataMatrix()),
       columnNames(dt.ColumnNames()),
-      categoricalValues(dt.CategoricalValues()){}
+      categoricalValues(dt.CategoricalValues()),
+      partition(dt.Partition()),
+      isPartitioned(dt.IsPartitioned()),
+      testSize(dt.TestSize()){}
 
 arma::mat DataTable::DataMatrix() const {
     return dataMatrix;
@@ -63,6 +67,14 @@ void DataTable::SetPartition(const std::vector<bool>& vector){
 
 void DataTable::SetIsPartitioned(const bool & isSet){
     isPartitioned = isSet;
+}
+
+void DataTable::SetTestSize(const unsigned long & size){
+    testSize = size;
+}
+
+unsigned long DataTable::TestSize() const {
+    return testSize;
 }
 
 /*************************************************************************/

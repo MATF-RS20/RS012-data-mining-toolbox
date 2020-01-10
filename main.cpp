@@ -24,18 +24,22 @@ int main(int argc, char *argv[])
 
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.read();
+    
+    PartitionNode pn("PN!");
 
-    PerceptronNode pn("PN!");
+    DecisionTreeNode dt("DT!");
     
     Stream s;
  
     s.add(&sn);
     s.add(&pn);
+    s.add(&dt);
  
     s.connect_to(&sn, &pn);
+    s.connect_to(&pn, &dt);
  
-    pn.setTarget("Species");
-    s.RunStream(&pn);
+    dt.setTarget("Species");
+    s.RunStream(&dt);
     
 
     //return a.exec();

@@ -37,6 +37,7 @@ std::vector<std::string> Node::unbinarize(std::string columnName) {
     unsigned colIndex = 0;
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     auto colNames = InputDataTable()->ColumnNames();
+    
     for(auto i = 0; i < colNames.size(); i++) {
         if(0 == colNames[i].compare(columnName)) {
             break;
@@ -115,10 +116,16 @@ DataTable Node::filter(std::string colName) {
         dataMatrix.shed_col(i);
     }
     vectorOfNames.erase(vectorOfNames.begin()+i);
-    DataTable dt;
+    DataTable dt = DataTable();
     dt.SetDataMatrix(dataMatrix);
     dt.SetCategoricalValues(catVal);
     dt.SetColumnNames(vectorOfNames);
-    
+    if (!inputDataTable->IsPartitioned()){
+        dt.SetIsPartitioned(false);
+    } else {
+        dt.SetIsPartitioned(true);
+        dt.SetPartition(inputDataTable->Partition());
+        dt.SetTestSize(inputDataTable->TestSize());
+    }
     return dt;
 }

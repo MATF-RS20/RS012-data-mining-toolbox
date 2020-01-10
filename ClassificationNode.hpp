@@ -20,8 +20,8 @@ public:
     arma::Row<size_t> TransformToArma();
     void setTarget(std::string targetName);
     
-    double Precision(arma::Row<size_t> predictions) const;
-    void ConfussionMatrix(arma::Row<size_t> predictions) const;
+    double Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) const;
+    void ConfussionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions) const;
 
 protected:
 

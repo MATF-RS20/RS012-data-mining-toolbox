@@ -27,10 +27,10 @@ void PerceptronNode::run() {
     std::cout << "Predictions: " << std::endl;
     std::cout << predictions << std::endl;
     
-    double precision = ClassificationNode::Precision(predictions);
+    double precision = ClassificationNode::Precision(targetColumn, predictions);
     std::cout << precision << std::endl;
     
-    ClassificationNode::ConfussionMatrix(predictions);
+    ClassificationNode::ConfussionMatrix(targetColumn, predictions);
     
     DataTable dataTable = *InputDataTable();
     this->setOutDataTable(dataTable);

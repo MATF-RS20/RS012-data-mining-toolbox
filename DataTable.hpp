@@ -34,9 +34,11 @@ public:
 /********************************************************************************************************/
     std::vector<bool> Partition() const;
     bool IsPartitioned() const;
+    unsigned long TestSize() const;
 
     void SetPartition(const std::vector<bool>& vector);
     void SetIsPartitioned(const bool & isSet);
+    void SetTestSize(const unsigned long& size);
 /********************************************************************************************************/
 
 private:
@@ -44,12 +46,14 @@ private:
     arma::mat dataMatrix;
     std::vector<std::string> columnNames;
     std::map<std::string, std::set<std::string>> categoricalValues;
+    std::vector<bool> partition;
+    unsigned long testSize;
+    bool isPartitioned = false;
 
 
 
 /********************************************************************************************************/
-    std::vector<bool> partition;
-    bool isPartitioned;
+    
 /********************************************************************************************************/
 };
 

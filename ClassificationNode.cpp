@@ -19,6 +19,7 @@ std::string ClassificationNode::TargetColumnName() const {
 
 arma::Row<size_t> ClassificationNode::TransformToArma(){
 
+    
     std::vector<std::string> vectorOfNames = Node::unbinarize(targetColumnName);
 
     int label_index = 0;
@@ -27,12 +28,14 @@ arma::Row<size_t> ClassificationNode::TransformToArma(){
     mapOfNames[vectorOfNames[0]] = label_index;
     label_index++;
 
+
     for(unsigned long i = 1; i < vectorOfNames.size(); i++){
         if (mapOfNames.find(vectorOfNames[i]) == mapOfNames.end()){
             mapOfNames[vectorOfNames[i]] = label_index;
             label_index++;
         }
     }
+
 
     arma::Row<size_t> labels(vectorOfNames.size());
     for (unsigned long i = 0; i < vectorOfNames.size(); i++){
@@ -48,12 +51,12 @@ void ClassificationNode::setTarget(std::string targetName) {
     targetColumnName = targetName;
 }
 
-double ClassificationNode::Precision(arma::Row<size_t> predictions) const {
+double ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) const {
     
-    int nRows = this->targetColumn.size();
+    int nRows = values.size();
     int nTrue = 0;
     for(unsigned long i = 0; i < nRows; i++){
-        if (this->targetColumn[i] == predictions[i]){
+        if (values[i] == predictions[i]){
             nTrue++;
         }
     }
@@ -68,11 +71,11 @@ double ClassificationNode::Precision(arma::Row<size_t> predictions) const {
     
 }
 
-void ClassificationNode::ConfussionMatrix(arma::Row<size_t> predictions) const{
+void ClassificationNode::ConfussionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions) const{
     
     auto it = std::max_element(std::begin(predictions), std::end(predictions));
     size_t maximum = *it;
-    unsigned long nRows = this->targetColumn.size();
+    unsigned long nRows = values.size();
     
     int nMatch;
     std::cout << "T-P ";
@@ -85,7 +88,7 @@ void ClassificationNode::ConfussionMatrix(arma::Row<size_t> predictions) const{
         for (size_t pLabel = 0; pLabel <= maximum; pLabel++){
             nMatch = 0;
             for (unsigned long i = 0; i < nRows; i++){
-                if(this->targetColumn[i] == tLabel && predictions[i] == pLabel){
+                if(values[i] == tLabel && predictions[i] == pLabel){
                     nMatch++;
                 }
             }
