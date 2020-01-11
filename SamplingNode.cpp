@@ -1,6 +1,8 @@
 #include "SamplingNode.hpp"
 
 #include <algorithm>
+#include <stdlib.h>    
+#include <time.h>  
 
 SamplingNode::SamplingNode(std::string name):Node(name){
     sampleSizeRatio = 0.3;
@@ -25,6 +27,7 @@ void SamplingNode::run(){
     for(unsigned long long i = sampleSize; i < rowSize; i++){
         sample[i] = false;
     }
+    srand(time(0));
     std::random_shuffle(sample.begin(), sample.end());
 
     unsigned long colSize = InputDataTable()->DataMatrix().n_cols;

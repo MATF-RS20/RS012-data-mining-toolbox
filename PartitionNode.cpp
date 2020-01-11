@@ -1,6 +1,8 @@
 #include "PartitionNode.hpp"
 
 #include <algorithm>
+#include <stdlib.h>    
+#include <time.h>  
 
 PartitionNode::PartitionNode(std::string name):Node(name){
     testSizeRatio = 0.3;
@@ -27,6 +29,8 @@ void PartitionNode::run(){
     for(unsigned long long i = testSize; i < rowSize; i++){
         partition[i] = false;
     }
+    
+    srand(time(0));
     std::random_shuffle(partition.begin(), partition.end());
 
     DataTable dt = *InputDataTable();

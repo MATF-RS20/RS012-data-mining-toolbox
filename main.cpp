@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     
     PartitionNode pn("PN!");
 
-    DecisionTreeNode dt("DT!");
+    PerceptronNode dt("DT!");
     
     Stream s;
  
