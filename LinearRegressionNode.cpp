@@ -46,14 +46,60 @@ void LinearRegressionNode::run(){
     
     DataTable dt = filter(targetColumnName);
     arma::mat data = dt.DataMatrix();
-    mlpack::regression::LinearRegression lr(trans(data), targetColumn);
+    
+    if (!dt.IsPartitioned()){
+    
+        data = trans(data);
+        mlpack::regression::LinearRegression lr(data, targetColumn);
 
-    arma::vec parameters = lr.Parameters();
-    std::cout << "Paramtetes: " << std::endl;
-    std::cout << parameters << std::endl;
+        arma::vec parameters = lr.Parameters();
+        std::cout << "Paramtetes: " << std::endl;
+        std::cout << parameters << std::endl;
 
-    arma::Col<double> predictions;
-    lr.Predict(trans(data), predictions);
-    std::cout << "Predictions: " << std::endl;
-    std::cout << predictions << std::endl;
+        arma::Col<double> predictions;
+        lr.Predict(data, predictions);
+        std::cout << "Predictions: " << std::endl;
+        std::cout << predictions << std::endl;
+    } else {
+        
+        arma::mat testData(dt.TestSize(), data.n_cols);
+        arma::mat trainData(data.n_rows - dt.TestSize(), data.n_cols);
+        
+        arma::Col<double> testTarget(dt.TestSize());
+        arma::Col<double> trainTarget(data.n_rows - dt.TestSize());
+        
+        std::vector<bool> partition = dt.Partition();
+        
+        unsigned long train_index = 0;
+        unsigned long test_index = 0;
+        for(unsigned long i = 0; i < data.n_rows; i++){
+            if (partition[i]){
+                testTarget[test_index] = targetColumn[i];
+                for(unsigned long j = 0; j < data.n_cols; j++){
+                    testData(test_index, j) = data(i, j);
+                }
+                test_index++;
+            } else {
+                trainTarget[train_index] = targetColumn[i];
+                for(unsigned long j = 0; j < data.n_cols; j++){
+                    trainData(train_index, j) = data(i, j);
+                }
+                train_index++;
+            }
+        }
+        
+        trainData = trans(trainData);
+        testData = trans(testData);
+        
+        mlpack::regression::LinearRegression lr(trainData, trainTarget);
+
+        arma::vec parameters = lr.Parameters();
+        std::cout << "Paramtetes: " << std::endl;
+        std::cout << parameters << std::endl;
+        
+        arma::Col<double> predictions;
+        lr.Predict(testData, predictions);
+        std::cout << "Predictions: " << std::endl;
+        std::cout << predictions << std::endl;
+    }
 }

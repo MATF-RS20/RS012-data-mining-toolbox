@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     
     PartitionNode pn("PN!");
 
-    PerceptronNode dt("DT!");
+    LinearRegressionNode dt("DT!");
     
     Stream s;
  
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     s.connect_to(&sn, &pn);
     s.connect_to(&pn, &dt);
  
-    dt.setTarget("Species");
+    dt.setTarget("Sepal_Length");
     s.RunStream(&dt);
     
 
