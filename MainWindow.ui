@@ -23,11 +23,20 @@
       <height>791</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QPushButton" name="RunStreamButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -38,13 +47,20 @@
          <height>0</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="text">
         <string>Run Stream</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="GlavniTok"/>
+      <widget class="QGraphicsView" name="GlavniTok">
+       <property name="dragMode">
+        <enum>QGraphicsView::RubberBandDrag</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -513,6 +529,20 @@
        <widget class="QPushButton" name="AddNodeButton">
         <property name="text">
          <string>Add Node</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ConnectButton">
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="DisconnectButton">
+        <property name="text">
+         <string>Disconnect</string>
         </property>
        </widget>
       </item>

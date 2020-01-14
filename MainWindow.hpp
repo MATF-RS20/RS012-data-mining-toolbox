@@ -7,6 +7,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsRectItem>
+#include <QGraphicsLineItem>
+#include <ConnectionLine.hpp>
 
 #include <Stream.hpp>
 #include <Node.hpp>
@@ -37,13 +39,18 @@ private Q_SLOTS:
     void on_LISTA_Klasterovanje_clicked(const QModelIndex &index);
     void on_LISTA_LinReg_clicked(const QModelIndex &index);
 
+    void on_RunStreamButton_clicked(); //TODO (implementirati...)
+
+    void on_ConnectButton_clicked();
+
 private:
+    void nacrtajCvor(QString nazivAlgoritma);
+    void dodajCvorUTok(QString nazivAlgoritma);
+
     Ui::MainWindow *ui;
     QGraphicsScene *scena; //scena koja se iscrtava
     Stream *TokPodataka;   //glavni tok podataka
     QString izabranaLista;
-    void nacrtajCvor(QString nazivAlgoritma);
-    void dodajCvorUTok(QString nazivAlgoritma);
     int privremeniBrojacCvorova;
 };
 

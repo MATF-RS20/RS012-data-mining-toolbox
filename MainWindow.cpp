@@ -12,6 +12,11 @@ MainWindow::MainWindow(QWidget *parent)
     scena = new QGraphicsScene(this); //scena cvorova
     TokPodataka = new Stream();       //odgovarajuci tok podataka
 
+    //BITNO!!
+    //Ova opcija se postavlja zbog izscrtavanja veza izmedju cvorova
+    ui->GlavniTok->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+
+
 }
 
 
@@ -86,6 +91,7 @@ void MainWindow::nacrtajCvor(QString nazivCvora){
     cvor->setFlag(QGraphicsItem::ItemIsMovable);
     cvor->setFlag(QGraphicsItem::ItemIsSelectable);
 
+
     ui->GlavniTok->setScene(scena);
 }
 
@@ -141,6 +147,34 @@ void MainWindow::dodajCvorUTok(QString nazivCvora){
 
 
 
+void MainWindow::on_ConnectButton_clicked()
+{
+
+    auto selektovaniCvorovi = scena->selectedItems();
+
+
+    if(selektovaniCvorovi.size() > 2 or selektovaniCvorovi.size() < 2)
+        return;
+
+
+    auto cvor1 = selektovaniCvorovi[0];
+    auto cvor2 = selektovaniCvorovi[1];        
+
+    ConnectionLine* l = new ConnectionLine(cvor1, cvor2);
+    scena->addItem(l);
+
+    ui->GlavniTok->setScene(scena);
+}
+
+
+
+
+
+void MainWindow::on_RunStreamButton_clicked()
+{
+    //TODO
+    //Metoda jos nije implemetirana
+}
 
 
 
@@ -165,3 +199,6 @@ void MainWindow::on_LISTA_LinReg_clicked(const QModelIndex &index)
 {
     izabranaLista = "LinearnaRegresija";
 }
+
+
+

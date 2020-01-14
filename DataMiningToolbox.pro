@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ClassificationNode.cpp \
+    ConnectionLine.cpp \
     DataTable.cpp \
     DecisionTreeNode.cpp \
     LinearRegressionNode.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
     ClassificationNode.hpp \
+    ConnectionLine.hpp \
     DataTable.hpp \
     DecisionTreeNode.hpp \
     LinearRegressionNode.hpp \
