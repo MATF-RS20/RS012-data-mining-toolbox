@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "TableWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
@@ -15,9 +16,10 @@
 
 int main(int argc, char *argv[])
 {
-  /*  QApplication a(argc, argv);
+    QApplication a(argc, argv);
     MainWindow w;
-    w.show();*/
+    TableWindow w1;
+    w.show();
 
 
     SourceNode sn("SN!");
@@ -27,7 +29,7 @@ int main(int argc, char *argv[])
     
     PartitionNode pn("PN!");
 
-    LinearRegressionNode dt("DT!");
+    DecisionTreeNode dt("DT!");
     
     Stream s;
  
@@ -38,10 +40,14 @@ int main(int argc, char *argv[])
     s.connect_to(&sn, &pn);
     s.connect_to(&pn, &dt);
  
-    dt.setTarget("Sepal_Length");
+    dt.setTarget("Species");
     s.RunStream(&dt);
     
+    w1.view(dt.OutputDataTable());
+    w1.show();
+    
+    
 
-    //return a.exec();
-    return 0;
+    return a.exec();
+    //return 0;
 }
