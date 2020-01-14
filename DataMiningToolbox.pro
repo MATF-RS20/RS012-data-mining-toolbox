@@ -32,7 +32,8 @@ SOURCES += \
     main.cpp \
     SourceNode.cpp \
     csvreader.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    TableWindow.cpp
 
 HEADERS += \
     ClassificationNode.hpp \
@@ -50,7 +51,8 @@ HEADERS += \
     StatisticsNode.hpp \
     Stream.hpp \ \
     csvreader.hpp \
-    MainWindow.hpp
+    MainWindow.hpp \
+    TableWindow.hpp
 
 FORMS += \
     MainWindow.ui

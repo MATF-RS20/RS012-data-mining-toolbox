@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "TableWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
@@ -16,8 +17,13 @@
 int main(int argc, char *argv[])
 {
 
+
+
+
     QApplication a(argc, argv);
     MainWindow w;
+    TableWindow w1;
+
     w.show();
 
 
@@ -40,9 +46,20 @@ int main(int argc, char *argv[])
     s.connect_to(&sn, &pn);
     s.connect_to(&pn, &dt);
 
+
     dt.setTarget("Sepal_Length");
     s.RunStream(&dt);
+
+
+ 
+    dt.setTarget("Species");
+    s.RunStream(&dt);
+    
+    w1.view(dt.OutputDataTable());
+    w1.show();
+    
     */
+
 
     return a.exec();
     //return 0;
