@@ -67,7 +67,7 @@ void LinearRegressionNode::run(){
         std::cout << "Parameters: " << std::endl;
         std::cout << parameters << std::endl;
 
-        arma::Col<double> predictions;
+        arma::Row<double> predictions;
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -108,7 +108,7 @@ void LinearRegressionNode::run(){
         std::cout << "Paramtetes: " << std::endl;
         std::cout << parameters << std::endl;
         
-        arma::Col<double> predictions;
+        arma::Row<double> predictions;
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
