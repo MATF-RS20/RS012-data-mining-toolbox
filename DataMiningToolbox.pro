@@ -17,9 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ClassificationNode.cpp \
+    ClusteringNode.cpp \
+    DBSCANNode.cpp \
     ConnectionLine.cpp \
     DataTable.cpp \
     DecisionTreeNode.cpp \
+    FilterNode.cpp \
+    KMeansNode.cpp \
     LinearRegressionNode.cpp \
     LinearSVMNode.cpp \
     Node.cpp \
@@ -38,9 +42,13 @@ SOURCES += \
 
 HEADERS += \
     ClassificationNode.hpp \
+    ClusteringNode.hpp \
+    DBSCANNode.hpp \
     ConnectionLine.hpp \
     DataTable.hpp \
     DecisionTreeNode.hpp \
+    FilterNode.hpp \
+    KMeansNode.hpp \
     LinearRegressionNode.hpp \
     LinearSVMNode.hpp \
     Node.hpp \

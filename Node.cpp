@@ -31,7 +31,7 @@ void Node::setOutDataTable(DataTable outDataTable)
 }
 
 
-std::vector<std::string> Node::unbinarize(std::string columnName) {
+std::vector<std::string> Node::unbinarize(std::string columnName) const {
     
     std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
     unsigned colIndex = 0;
