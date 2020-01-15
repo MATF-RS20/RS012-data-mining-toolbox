@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "TableWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
@@ -18,10 +19,12 @@
 
 int main(int argc, char *argv[])
 {
-  /*  QApplication a(argc, argv);
-    MainWindow w;
-    w.show();*/
 
+    /*QApplication a(argc, argv);
+    MainWindow w;
+    TableWindow w1;
+
+    w.show();*/
 
     SourceNode sn("SN!");
 
@@ -45,6 +48,7 @@ int main(int argc, char *argv[])
     FilterNode fn("FN!");
     fn.SetColumnNames(std::set<std::string>({"IME", "KLASA"}));
 
+    DecisionTreeNode dt("DT!");
     Stream s;
 
     s.add(&sn);
@@ -56,7 +60,7 @@ int main(int argc, char *argv[])
     s.add(&lr);
     /*s.add(&dn);
     s.add(&kn);*/
- 
+
     s.connect_to(&sn, &fn);
     s.connect_to(&fn, &lr);
     /*s.connect_to(&fn, &pn);
@@ -72,12 +76,7 @@ int main(int argc, char *argv[])
 
     s.RunStream(&lr);
 
-    /*auto c = fn.OutputDataTable().ColumnNames();
-    for(auto i = 0; i != c.size(); i++) {
 
-        std::cout << i << ": " << c[i] << std::endl;
-    }*/
-    
     //return a.exec();
     return 0;
 }

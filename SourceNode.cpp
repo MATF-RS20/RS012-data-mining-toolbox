@@ -34,13 +34,6 @@ double helper (std::string value, std::string comparingValue) {
     }
 }
 
-std::pair<unsigned, std::vector<double>> helper2(std::pair<const unsigned, std::vector<double>> p, unsigned added) {
-    std::pair<unsigned, std::vector<double>> solution;
-    solution.first = p.first + added;
-    solution.second = p.second;
-    return solution;
-}
-
 bool isDouble(std::string s) {
 
     try {
@@ -52,7 +45,7 @@ bool isDouble(std::string s) {
 }
 
 void SourceNode::read(){
-    
+
     //Reading from file
     std::vector<std::vector<std::string>> rows = csvReader(filename).read();
 
@@ -88,8 +81,7 @@ void SourceNode::read(){
         }
     }
 
-
-    //Adding column names and their "binary" numbers into DataTable
+    //Adding column names into DataTable
     DataTable dt;
     for(unsigned i = 0; i < columns.size(); i++) {
         if(numericalColumns.find(i) != numericalColumns.end()) {
@@ -99,23 +91,25 @@ void SourceNode::read(){
             dt.addKey(columns[i]);
         }
     }
-    
+
     //Binarising categorical columns and adding categories in DataTable dt
     unsigned added = 0;
     for(auto c : categoricalColumns) {
+
         std::set<std::string> categories(c.second.begin(), c.second.end());
         dt.addCategoricalValues(c.first, categories);
-        unsigned numOfCategories = categories.size();
-        for(auto i = numericalColumns.rbegin(); i != numericalColumns.rend(); i++) {
-            if(i->first <= c.first + added) {
+        size_t numOfCategories = categories.size();
+        std::vector<unsigned int> keysOfNumerical(numericalColumns.size());
+        std::transform(numericalColumns.begin(), numericalColumns.end(), keysOfNumerical.begin(),
+                       [](std::pair<unsigned int, std::vector<double>> x){return x.first;});
+        for(long int i = keysOfNumerical.size() -1; i >= 0; i--) {
+
+            if(keysOfNumerical[i] <= c.first + added) {
                 break;
             }
-            auto iter = i;
 
-            std::vector<double> tmp = i->second;
-            numericalColumns[i->first + numOfCategories-1] = tmp;
-
-            i = iter;
+            std::vector<double> tmp = numericalColumns[keysOfNumerical[i]];
+            numericalColumns[keysOfNumerical[i] + numOfCategories-1] = tmp;
         }
         for(auto v : categories) {
             std::vector<double> binCol((*numericalColumns.begin()).second.size());
@@ -123,12 +117,16 @@ void SourceNode::read(){
             numericalColumns[c.first + added] = binCol;
             added++;
         }
+        added--;
     }
+
+    std::cout << std::endl;
 
     //TODO: Is there a better way to initialize matrix?
     arma::mat matrix((*numericalColumns.begin()).second.size(), numericalColumns.size());
     for(unsigned j = 0; j < numericalColumns.size(); j++) {
         for(unsigned i = 0; i < numericalColumns[j].size(); i++) {
+
             matrix(i,j) = numericalColumns[j][i];
         }
     }
@@ -137,7 +135,7 @@ void SourceNode::read(){
 
     this->setOutDataTable(dt);
     setInputDataTable(&(this->outputDataTable));
-    
+
     isRead = true;
 }
 

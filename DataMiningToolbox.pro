@@ -19,6 +19,7 @@ SOURCES += \
     ClassificationNode.cpp \
     ClusteringNode.cpp \
     DBSCANNode.cpp \
+    ConnectionLine.cpp \
     DataTable.cpp \
     DecisionTreeNode.cpp \
     FilterNode.cpp \
@@ -35,12 +36,14 @@ SOURCES += \
     main.cpp \
     SourceNode.cpp \
     csvreader.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    TableWindow.cpp
 
 HEADERS += \
     ClassificationNode.hpp \
     ClusteringNode.hpp \
     DBSCANNode.hpp \
+    ConnectionLine.hpp \
     DataTable.hpp \
     DecisionTreeNode.hpp \
     FilterNode.hpp \
@@ -56,7 +59,8 @@ HEADERS += \
     StatisticsNode.hpp \
     Stream.hpp \ \
     csvreader.hpp \
-    MainWindow.hpp
+    MainWindow.hpp \
+    TableWindow.hpp
 
 FORMS += \
     MainWindow.ui
