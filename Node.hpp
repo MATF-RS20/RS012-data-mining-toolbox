@@ -18,7 +18,7 @@ public:
     void setInputDataTable(DataTable* inDataTable);
     void setOutDataTable(DataTable outDataTable);
 
-    std::vector<std::string> unbinarize(std::string columnName);
+    std::vector<std::string> unbinarize(std::string columnName) const;
     arma::mat filterBinarisedCol(std::string colName);
     DataTable filter(std::string colName);
 

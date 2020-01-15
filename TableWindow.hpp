@@ -2,6 +2,7 @@
 #define TABLEWINDOW_H
 
 #include "DataTable.hpp"
+#include "Node.hpp"
 
 #include <QMainWindow>
 #include <QTableWidget>
@@ -18,7 +19,7 @@ public:
     
     TableWindow(QWidget *parent = nullptr);
     ~TableWindow();
-    void view(const DataTable& data);
+    void view(const Node& node);
 
 private:
     
