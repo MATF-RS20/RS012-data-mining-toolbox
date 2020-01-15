@@ -19,16 +19,28 @@ void LinearRegressionNode::setTarget(std::string targetName) {
 void LinearRegressionNode::SetTargetColumn() {
     
     std::vector<std::string> columns = inputDataTable->ColumnNames();
+    std::map<std::string, std::set<std::string>> map = inputDataTable->CategoricalValues();
+    size_t index = 0;
     for(unsigned i = 0; i < columns.size(); i++) {
         if(0 == columns[i].compare(targetColumnName)) {
-            std::map<std::string, std::set<std::string>> map = inputDataTable->CategoricalValues();
             if(map.find(targetColumnName) != map.end()) {
                 std::cout << "Greska! Izabrana kolona sa kategorickom vrednoscu!" << std::endl;
                 return;
             }
             else {
-                targetColumn = *(inputDataTable->DataMatrix().begin_col(i));
+                auto matrix = inputDataTable->DataMatrix();
+                targetColumn.set_size(matrix.n_rows);
+                std::copy(matrix.begin_col(index), matrix.end_col(index), targetColumn.begin());
             }
+            break;
+        }
+
+        if(map.find(columns[i]) != map.end()) {
+
+            index += map.at(columns[i]).size();
+        } else {
+
+             index++;
         }
     }
 }
@@ -43,17 +55,16 @@ void LinearRegressionNode::run(){
     }
     
     this->SetTargetColumn();
-    
     DataTable dt = filter(targetColumnName);
     arma::mat data = dt.DataMatrix();
     
     if (!dt.IsPartitioned()){
-    
+
         data = trans(data);
         mlpack::regression::LinearRegression lr(data, targetColumn);
 
         arma::vec parameters = lr.Parameters();
-        std::cout << "Paramtetes: " << std::endl;
+        std::cout << "Parameters: " << std::endl;
         std::cout << parameters << std::endl;
 
         arma::Col<double> predictions;
@@ -61,7 +72,7 @@ void LinearRegressionNode::run(){
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
     } else {
-        
+
         arma::mat testData(dt.TestSize(), data.n_cols);
         arma::mat trainData(data.n_rows - dt.TestSize(), data.n_cols);
         
