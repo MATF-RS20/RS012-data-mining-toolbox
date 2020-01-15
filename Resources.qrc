@@ -4,5 +4,6 @@
         <file>Resources/Icons/klsterovanje_ikonica.bmp</file>
         <file>Resources/Icons/linReg_ikonica.bmp</file>
         <file>Resources/Icons/preprocesiranje_ikonica.bmp</file>
+        <file>Resources/Icons/csv_in.bmp</file>
     </qresource>
 </RCC>

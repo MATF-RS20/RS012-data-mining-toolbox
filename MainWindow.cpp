@@ -6,7 +6,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      privremeniBrojacCvorova(0)
+      broj_cvorova(0)
+
 {
     ui->setupUi(this);
     scena = new QGraphicsScene(this); //scena cvorova
@@ -59,91 +60,116 @@ void MainWindow::on_AddNodeButton_clicked()
         QListWidgetItem* item = selektovani.first();
         nazivAlgoritma = item->text();
 
+    }else if(!izabranaLista.compare("Ulaz")){
+
+        auto selektovani = ui->LISTA_Ulaz->selectedItems();
+        QListWidgetItem* item = selektovani.first();
+        nazivAlgoritma = item->text();
+
     }else{
         return;
     }
 
 
-    nacrtajCvor(nazivAlgoritma);
+    auto nodeID = generisiID(nazivAlgoritma);
 
-    dodajCvorUTok(nazivAlgoritma);
+    nacrtajCvor(nodeID);
+
+    dodajCvorUTok(nodeID);
 
 }
 
-void MainWindow::nacrtajCvor(QString nazivCvora){
-
-    QPen blackPen(Qt::black);
-    blackPen.setWidth(2);
-    QBrush brush;
-    if(!izabranaLista.compare("Prepocesiranje"))
-        brush = QBrush(Qt::darkCyan);
-    else if(!izabranaLista.compare("Klasifikacija"))
-        brush = QBrush(Qt::darkGreen);
-    else if(!izabranaLista.compare("Klasterovanje"))
-        brush = QBrush(Qt::darkBlue);
-    else if(!izabranaLista.compare("LinearnaRegresija"))
-        brush = QBrush(Qt::darkRed);
-    else
-        brush = QBrush(Qt::red);
+void MainWindow::nacrtajCvor(QString nodeID){
 
 
-    QGraphicsEllipseItem *cvor = scena->addEllipse(10,10,50,50,blackPen,brush);
-    cvor->setFlag(QGraphicsItem::ItemIsMovable);
-    cvor->setFlag(QGraphicsItem::ItemIsSelectable);
+    SceneNode *sn = new SceneNode(nodeID);
 
+    scena->addItem(sn);
 
     ui->GlavniTok->setScene(scena);
 }
 
-void MainWindow::dodajCvorUTok(QString nazivCvora){
+void MainWindow::dodajCvorUTok(QString nodeID){
 
     Node *noviCvor;
 
-    if(!nazivCvora.compare("Particionisanje")){
+    if(nodeID[0] == 'U'){
 
-        noviCvor = new PartitionNode(std::to_string(privremeniBrojacCvorova));
-        TokPodataka->add(noviCvor);
-        privremeniBrojacCvorova++;
+        if(nodeID[2] == 'P'){
+            noviCvor = new SourceNode(nodeID.toStdString());
+            auto sn = static_cast<SourceNode*>(noviCvor);
+            sn->setFilename("../RS012-data-mining-toolbox/iris.csv");
+            sn->read();
+            TokPodataka->add(sn);
+        }
 
-    }else if(!nazivCvora.compare("Normalizacija")){
 
-        noviCvor = new NormalizationNode(std::to_string(privremeniBrojacCvorova));
-        TokPodataka->add(noviCvor);
-        privremeniBrojacCvorova++;
+    }else if(nodeID[0] == 'P'){
 
-    }else if(!nazivCvora.compare("Statistike")){
+        if(nodeID[2] == 'P'){
+            noviCvor = new PartitionNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
 
-        noviCvor = new StatisticsNode(std::to_string(privremeniBrojacCvorova));
-        TokPodataka->add(noviCvor);
-        privremeniBrojacCvorova++;
+        if(nodeID[2] == 'N'){
+            noviCvor = new NormalizationNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
 
-    }else if(!nazivCvora.compare("Stablo Odlucivanja")){
+        if(nodeID[2] == 'S'){
+            noviCvor = new StatisticsNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
 
-        noviCvor = new DecisionTreeNode(std::to_string(privremeniBrojacCvorova));
-        TokPodataka->add(noviCvor);
-        privremeniBrojacCvorova++;
+        if(nodeID[2] == 'U'){
+            noviCvor = new SamplingNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
 
-    }else if(!nazivCvora.compare("K-Sredina")){
+        if(nodeID[2] == 'F'){
+            //FilterNode
+            //Nije jos implementirano
+            return;
+        }
 
-        //JOS NIJE IMPLEMENTIRANO
-        return;
 
-    }else if(!nazivCvora.compare("DBSCAN")){
+    }else if(nodeID[0] == 'K'){
 
-        //JOS NIJE IMPLEMENTIRANO
-        return;
+        if(nodeID[2] == 'D' && nodeID[3] == 'T'){
+            noviCvor = new DecisionTreeNode(nodeID.toStdString());
+            auto dt = static_cast<DecisionTreeNode*>(noviCvor);
+            dt->setTarget("Species");
+            TokPodataka->add(dt);
+        }
 
-    }else if(!nazivCvora.compare("Prosta Linearna regresija")){
+        if(nodeID[2] == 'P'){
+            noviCvor = new PerceptronNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
 
-        noviCvor = new LinearRegressionNode(std::to_string(privremeniBrojacCvorova));
-        TokPodataka->add(noviCvor);
-        privremeniBrojacCvorova++;
+
+    }else if(nodeID[0] == 'C'){
+
+        if(nodeID[2] == 'K' && nodeID[3] == 'M'){
+            //KMeans
+            //nije jos implementirano
+            return;
+        }
+
+    }else if(nodeID[0] == 'R'){
+
+        if(nodeID[2] == 'L'){
+            noviCvor = new LinearRegressionNode(nodeID.toStdString());
+            TokPodataka->add(noviCvor);
+        }
+
 
     }else
         return;
 
-
 }
+
+
 
 
 
@@ -164,6 +190,147 @@ void MainWindow::on_ConnectButton_clicked()
     scena->addItem(l);
 
     ui->GlavniTok->setScene(scena);
+
+
+    QString id1 = static_cast<SceneNode*>(cvor1)->getID();
+    QString id2 = static_cast<SceneNode*>(cvor2)->getID();
+
+    //-------------------------
+
+    auto mapaCvorova = TokPodataka->MapOfNodes();
+
+    Node* prvi  = nullptr;
+    Node* drugi = nullptr;
+
+    //pronalazenje cvorova
+    for(std::pair<Node*, Node*> e : mapaCvorova){
+
+        if(!e.first->NodeName().compare(id1.toStdString()))
+            prvi = e.first;
+
+        if(!e.first->NodeName().compare(id2.toStdString()))
+            drugi = e.first;
+    }
+
+
+
+
+    TokPodataka->connect_to(prvi, drugi);
+
+
+    mapaCvorova = TokPodataka->MapOfNodes();
+
+    for(std::pair<Node*, Node*> e : mapaCvorova){
+
+        if(e.second == nullptr)
+            std::cout << e.first->NodeName() << ":" << "nullptr" << std::endl;
+        else
+            std::cout << e.first->NodeName() << ":" << e.second->NodeName() << std::endl;
+    }
+
+}
+
+
+
+
+
+
+QString MainWindow::generisiID(QString nazivAlgoritma)
+{
+    //pri generisanju jedinstvenog ID-a za cvorove brine se i o ukupnom broju cvorova
+    //f-ja uvecava ukupan broj cvorova
+
+    QString nodeName("");
+
+    if(!nazivAlgoritma.compare("Ulazni Podaci")){
+
+        nodeName = nodeName.append("U_");
+        nodeName = nodeName.append("P_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+    }else if(!nazivAlgoritma.compare("Particionisanje")){
+
+        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("P_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else if(!nazivAlgoritma.compare("Normalizacija")){
+
+        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("N_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else if(!nazivAlgoritma.compare("Uzorkovanje")){
+
+        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("U_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+    }else if(!nazivAlgoritma.compare("Filter")){
+
+        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("F_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else if(!nazivAlgoritma.compare("Statistike")){
+
+        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("S_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else if(!nazivAlgoritma.compare("Stablo Odlucivanja")){
+
+        nodeName = nodeName.append("K_");
+        nodeName = nodeName.append("DT_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else if(!nazivAlgoritma.compare("Perceptron")){
+
+        nodeName = nodeName.append("K_");
+        nodeName = nodeName.append("P_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+    }else if(!nazivAlgoritma.compare("K-Sredina")){
+
+        nodeName = nodeName.append("C_");
+        nodeName = nodeName.append("KM_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+    }else if(!nazivAlgoritma.compare("DBSCAN")){
+
+        //JOS NIJE IMPLEMENTIRANO
+        return "";
+
+    }else if(!nazivAlgoritma.compare("Prosta Linearna Regresija")){
+
+        nodeName = nodeName.append("R_");
+        nodeName = nodeName.append("L_");
+        broj_cvorova++;
+        nodeName = nodeName.append(QString::number(broj_cvorova));
+
+
+    }else
+        return "";
+
+    std::cout << nodeName.toStdString() << std::endl;
+    return nodeName;
+
+
+
 }
 
 
@@ -172,33 +339,54 @@ void MainWindow::on_ConnectButton_clicked()
 
 void MainWindow::on_RunStreamButton_clicked()
 {
-    //TODO
-    //Metoda jos nije implemetirana
+
+    auto odabranCvor = scena->selectedItems();
+    if(odabranCvor.size() != 1)
+        return;
+
+    auto cvorSaScene = odabranCvor[0];
+    QString ID = static_cast<SceneNode*>(cvorSaScene)->getID();
+
+
+    Node* cvorIzMape = nullptr;
+    auto mapaCvorova = TokPodataka->MapOfNodes();
+    for(std::pair<Node*, Node*> e : mapaCvorova){
+
+        if(!e.first->NodeName().compare(ID.toStdString()))
+            cvorIzMape = e.first;
+    }
+
+    TokPodataka->RunStream(cvorIzMape);
 }
-
-
-
 
 void MainWindow::on_LISTA_Preprocesiranje_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index)
     izabranaLista = "Prepocesiranje";
 
 }
 
 void MainWindow::on_LISTA_Klasifikacija_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index)
     izabranaLista = "Klasifikacija";
 }
 
 void MainWindow::on_LISTA_Klasterovanje_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index)
     izabranaLista = "Klasterovanje";
 }
 
 void MainWindow::on_LISTA_LinReg_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index)
     izabranaLista = "LinearnaRegresija";
 }
 
 
-
+void MainWindow::on_LISTA_Ulaz_clicked(const QModelIndex &index)
+{
+    Q_UNUSED(index)
+    izabranaLista = "Ulaz";
+}

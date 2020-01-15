@@ -27,13 +27,14 @@ SOURCES += \
     PerceptronNode.cpp \
     PartitionNode.cpp \
     SamplingNode.cpp \
+    SceneNode.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
     main.cpp \
     SourceNode.cpp \
     csvreader.cpp \
-    MainWindow.cpp \
-    TableWindow.cpp
+    TableWindow.cpp \
+    MainWindow.cpp
 
 HEADERS += \
     ClassificationNode.hpp \
@@ -47,22 +48,26 @@ HEADERS += \
     PartitionNode.hpp \
     PerceptronNode.hpp \
     SamplingNode.hpp \
+    SceneNode.hpp \
     SourceNode.hpp \
     StatisticsNode.hpp \
     Stream.hpp \ \
     csvreader.hpp \
-    MainWindow.hpp \
-    TableWindow.hpp
+    TableWindow.hpp \
+    MainWindow.hpp
+
 
 FORMS += \
     MainWindow.ui
 
 LIBS += -lmlpack -larmadillo -llapack -lblas
 
+RESOURCES += \
+    Resources.qrc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    Resources.qrc
+

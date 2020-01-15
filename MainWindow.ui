@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1578</width>
-    <height>861</height>
+    <height>903</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>360</x>
       <y>20</y>
       <width>1211</width>
-      <height>791</height>
+      <height>841</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -57,6 +57,15 @@
      </item>
      <item>
       <widget class="QGraphicsView" name="GlavniTok">
+       <property name="cursor" stdset="0">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAsNeeded</enum>
+       </property>
        <property name="dragMode">
         <enum>QGraphicsView::RubberBandDrag</enum>
        </property>
@@ -67,487 +76,500 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>11</x>
+      <x>10</x>
       <y>10</y>
       <width>351</width>
-      <height>791</height>
+      <height>841</height>
      </rect>
     </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QGroupBox" name="verticalGroupBox">
-     <property name="geometry">
-      <rect>
-       <x>-1</x>
-       <y>-1</y>
-       <width>351</width>
-       <height>791</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_5">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_1">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Algoritmi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_1">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>15</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Ulazni Cvorovi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="LISTA_Ulaz">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <item>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Algoritmi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Ulazni Podaci</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>255</red>
+           <green>0</green>
+           <blue>127</blue>
+          </color>
+         </brush>
         </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/csv_in.bmp</normaloff>:/icons/Resources/Icons/csv_in.bmp</iconset>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>15</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>30</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Preprocesiranje&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="LISTA_Preprocesiranje">
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <item>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Preprocesiranje&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Normalizacija</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="LISTA_Preprocesiranje">
-        <property name="dragEnabled">
-         <bool>true</bool>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>80</red>
+           <green>160</green>
+           <blue>182</blue>
+          </color>
+         </brush>
         </property>
-        <item>
-         <property name="text">
-          <string>Binarizacija</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>88</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Binarizacija Neprekidnih Atributa</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>80</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Normalizacija</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>80</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Filter</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>80</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Nedostajuce Vrednosti</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>80</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Elementi van Granica</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>80</red>
-            <green>160</green>
-            <blue>182</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_6">
+       </item>
+       <item>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Klasifikacija&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Particionisanje</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="LISTA_Klasifikacija">
-        <property name="tabKeyNavigation">
-         <bool>false</bool>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>80</red>
+           <green>160</green>
+           <blue>182</blue>
+          </color>
+         </brush>
         </property>
-        <property name="dragEnabled">
-         <bool>true</bool>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
         </property>
-        <item>
-         <property name="text">
-          <string>Stabla Odlucivanja</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>38</red>
-            <green>190</green>
-            <blue>35</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>K Najblizih Suseda</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>38</red>
-            <green>190</green>
-            <blue>35</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Neuralne Mreze</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>38</red>
-            <green>190</green>
-            <blue>35</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Metod Podrzavajucih Vektora (SVM)</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>38</red>
-            <green>190</green>
-            <blue>35</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_7">
+       </item>
+       <item>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Klasterovanje&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Statistike</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="LISTA_Klasterovanje">
-        <property name="dragEnabled">
-         <bool>true</bool>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>80</red>
+           <green>160</green>
+           <blue>182</blue>
+          </color>
+         </brush>
         </property>
-        <item>
-         <property name="text">
-          <string>K-Sredina</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>35</red>
-            <green>30</green>
-            <blue>184</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>DBSCAN</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>35</red>
-            <green>30</green>
-            <blue>184</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Hijerarhijsko Klasterovanje</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>35</red>
-            <green>30</green>
-            <blue>184</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
+       </item>
+       <item>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Linearna Regresija&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Filter</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="LISTA_LinReg">
-        <property name="dragEnabled">
-         <bool>true</bool>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>80</red>
+           <green>160</green>
+           <blue>182</blue>
+          </color>
+         </brush>
         </property>
-        <item>
-         <property name="text">
-          <string>Prosta Linearna Regresija</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>165</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Logisticka Regresija</string>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="NoBrush">
-           <color alpha="255">
-            <red>165</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </property>
-         <property name="icon">
-          <iconset resource="Resources.qrc">
-           <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>15</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="AddNodeButton">
+       </item>
+       <item>
         <property name="text">
-         <string>Add Node</string>
+         <string>Uzorkovanje</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ConnectButton">
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>80</red>
+           <green>160</green>
+           <blue>182</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</normaloff>:/icons/Resources/Icons/preprocesiranje_ikonica.bmp</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Klasifikacija&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="LISTA_Klasifikacija">
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <item>
         <property name="text">
-         <string>Connect</string>
+         <string>Stablo Odlucivanja</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="DisconnectButton">
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>38</red>
+           <green>190</green>
+           <blue>35</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
+        </property>
+       </item>
+       <item>
         <property name="text">
-         <string>Disconnect</string>
+         <string>K Najblizih Suseda</string>
         </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>38</red>
+           <green>190</green>
+           <blue>35</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Perceptron</string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>38</red>
+           <green>190</green>
+           <blue>35</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</normaloff>:/icons/Resources/Icons/klasifikacija_ikonica.bmp</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Klasterovanje&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="LISTA_Klasterovanje">
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>K-Sredina</string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>35</red>
+           <green>30</green>
+           <blue>184</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DBSCAN </string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>35</red>
+           <green>30</green>
+           <blue>184</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Hijerarhijsko Klasterovanje</string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>35</red>
+           <green>30</green>
+           <blue>184</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</normaloff>:/icons/Resources/Icons/klsterovanje_ikonica.bmp</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Linearna Regresija&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="LISTA_LinReg">
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="dragEnabled">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Prosta Linearna Regresija</string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>165</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Logisticka Regresija</string>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="NoBrush">
+          <color alpha="255">
+           <red>165</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="Resources.qrc">
+          <normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</normaloff>:/icons/Resources/Icons/linReg_ikonica.bmp</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>15</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="AddNodeButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Add Node</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ConnectButton">
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="DisconnectButton">
+       <property name="text">
+        <string>Disconnect</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -616,8 +638,333 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>RunStreamButton</tabstop>
+  <tabstop>GlavniTok</tabstop>
+ </tabstops>
  <resources>
   <include location="Resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>LISTA_Preprocesiranje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasifikacija</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>41</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>39</x>
+     <y>491</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Preprocesiranje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasterovanje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>60</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>53</x>
+     <y>620</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Preprocesiranje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_LinReg</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>72</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>750</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasifikacija</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Preprocesiranje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>94</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasifikacija</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasterovanje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>105</x>
+     <y>620</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasifikacija</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_LinReg</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>120</x>
+     <y>750</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasterovanje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasifikacija</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasterovanje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Preprocesiranje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasterovanje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_LinReg</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>750</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_LinReg</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasterovanje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>750</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>276</x>
+     <y>576</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_LinReg</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasifikacija</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>750</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>491</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_LinReg</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Preprocesiranje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>750</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Ulaz</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Preprocesiranje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>291</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Ulaz</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasifikacija</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Ulaz</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Klasterovanje</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>570</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Ulaz</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_LinReg</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>224</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>702</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_LinReg</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Ulaz</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>690</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>342</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasterovanje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Ulaz</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>161</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Klasifikacija</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Ulaz</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>418</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>120</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>LISTA_Preprocesiranje</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>LISTA_Ulaz</receiver>
+   <slot>clearSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>23</x>
+     <y>301</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>77</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
