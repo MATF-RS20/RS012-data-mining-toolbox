@@ -18,6 +18,8 @@ public:
     void run() override;
     
     bool IsTargetSelected() const;
+    
+    double RSS(arma::Col<double> values, arma::Col<double> predictions) const;
 
 
 protected:

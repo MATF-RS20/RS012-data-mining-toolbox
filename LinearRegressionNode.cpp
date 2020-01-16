@@ -45,6 +45,20 @@ void LinearRegressionNode::SetTargetColumn() {
     }
 }
 
+double LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions) const{
+    
+    int nRows = values.size();
+    double sum = 0;
+    
+    for(unsigned long i = 0; i < nRows; i++){
+    
+        sum += (values[i] - predictions[i])*(values[i] - predictions[i]);
+        
+    }
+
+    return sum;
+}
+
 void LinearRegressionNode::run(){
     
     if (!this->IsTargetSelected()){
@@ -71,6 +85,10 @@ void LinearRegressionNode::run(){
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
+        
+        double rss = RSS(data, predictions);
+        std::cout << rss << std::endl;
+        
     } else {
 
         arma::mat testData(dt.TestSize(), data.n_cols);
@@ -112,5 +130,8 @@ void LinearRegressionNode::run(){
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
+        
+        double rss = RSS(testTarget, predictions);
+        std::cout << rss << std::endl;
     }
 }
