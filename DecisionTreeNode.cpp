@@ -19,15 +19,18 @@ void DecisionTreeNode::run() {
     
     targetColumn = TransformToArma();
     
+    SetNumClasses(InputDataTable()->CategoricalValues()[targetColumnName].size());
+    
     DataTable dt = filter(targetColumnName);
     
     arma::mat data = dt.DataMatrix();
+    
     
     if (!dt.IsPartitioned()){
 
         data = trans(data);
         mlpack::tree::DecisionTree<> treeClassifier;
-        treeClassifier.Train(data, this->targetColumn, 3);
+        treeClassifier.Train(data, this->targetColumn, NumClasses());
 
         arma::Row<size_t> predictions;
         treeClassifier.Classify(data, predictions);
@@ -69,7 +72,7 @@ void DecisionTreeNode::run() {
         trainData = trans(trainData);
         testData = trans(testData);
         mlpack::tree::DecisionTree<> treeClassifier;
-        treeClassifier.Train(trainData, trainTarget, 3);
+        treeClassifier.Train(trainData, trainTarget, NumClasses());
 
         arma::Row<size_t> predictions;
         treeClassifier.Classify(testData, predictions);

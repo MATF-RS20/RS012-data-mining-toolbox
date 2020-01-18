@@ -9,6 +9,8 @@ public:
     arma::Row<size_t> Labels();
     arma::mat Centroids();
     double silhouette_shadow();
+    double SSC(size_t index, size_t label);
+    double distance(size_t i , size_t j);
 
 protected:
     arma::Row<size_t> labels;

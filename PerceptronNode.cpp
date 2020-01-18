@@ -15,14 +15,18 @@ void PerceptronNode::run() {
     }    
     targetColumn = TransformToArma();
     
+    SetNumClasses(InputDataTable()->CategoricalValues()[targetColumnName].size());
+    
     DataTable dt = filter(targetColumnName);
     arma::mat data = dt.DataMatrix();
+    
+    
     
     if(!dt.IsPartitioned()){
 
         data = trans(data);
-        mlpack::perceptron::Perceptron<> perceptronClassifier(data, this->targetColumn, 3);
-        perceptronClassifier.Train(data, this->targetColumn, 3);
+        mlpack::perceptron::Perceptron<> perceptronClassifier(data, this->targetColumn, NumClasses());
+        perceptronClassifier.Train(data, this->targetColumn);
 
         arma::Row<size_t> predictions(this->targetColumn.size());
         perceptronClassifier.Classify(data, predictions);
@@ -64,8 +68,8 @@ void PerceptronNode::run() {
         
         trainData = trans(trainData);
         testData = trans(testData);
-        mlpack::perceptron::Perceptron<> perceptronClassifier(trainData, trainTarget, 3);
-        perceptronClassifier.Train(trainData, trainTarget, 3);
+        mlpack::perceptron::Perceptron<> perceptronClassifier(trainData, trainTarget, NumClasses());
+        perceptronClassifier.Train(trainData, trainTarget);
         
         arma::Row<size_t> predictions(testTarget.size());
         perceptronClassifier.Classify(testData, predictions);
