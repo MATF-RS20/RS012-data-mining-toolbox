@@ -11,7 +11,7 @@
 #include <ConnectionLine.hpp>
 #include <SceneNode.hpp>
 
-
+#include <iostream>
 #include <Stream.hpp>
 #include <Node.hpp>
 #include <NormalizationNode.hpp>
@@ -22,7 +22,8 @@
 #include <SamplingNode.hpp>
 #include <PerceptronNode.hpp>
 #include <SourceNode.hpp>
-
+#include <FilterNode.hpp>
+#include <KMeansNode.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -50,6 +51,10 @@ private Q_SLOTS:
 
 
 
+
+    void on_DisconnectButton_clicked();
+
+    void on_ClearScene_clicked();
 
 private:
     void nacrtajCvor(QString nodeID);

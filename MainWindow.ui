@@ -51,7 +51,7 @@
         <string/>
        </property>
        <property name="text">
-        <string>Run Stream</string>
+        <string>Pokrenu Tok</string>
        </property>
       </widget>
      </item>
@@ -66,8 +66,17 @@
        <property name="horizontalScrollBarPolicy">
         <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
+       <property name="renderHints">
+        <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::TextAntialiasing</set>
+       </property>
        <property name="dragMode">
         <enum>QGraphicsView::RubberBandDrag</enum>
+       </property>
+       <property name="viewportUpdateMode">
+        <enum>QGraphicsView::BoundingRectViewportUpdate</enum>
+       </property>
+       <property name="rubberBandSelectionMode">
+        <enum>Qt::ContainsItemBoundingRect</enum>
        </property>
       </widget>
      </item>
@@ -551,21 +560,28 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Add Node</string>
+        <string>Dodaj Cvor</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="ConnectButton">
        <property name="text">
-        <string>Connect</string>
+        <string>Povezi</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="DisconnectButton">
        <property name="text">
-        <string>Disconnect</string>
+        <string>Obrisi vezu</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ClearScene">
+       <property name="text">
+        <string>Ocisti scenu</string>
        </property>
       </widget>
      </item>

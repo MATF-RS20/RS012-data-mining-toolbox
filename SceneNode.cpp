@@ -1,11 +1,29 @@
 #include "SceneNode.hpp"
 
 SceneNode::SceneNode(QString ID)
-    :pressed(false), selected(false), nodeID(ID)
+    : nodeID(ID)
 {
     setFlag(ItemIsMovable);
     setFlag(ItemIsSelectable);
+    setFlag(ItemIsFocusable);
 }
+
+QString SceneNode::getID()
+{
+    return nodeID;
+}
+
+SceneNode::Stanje SceneNode::GetNodeState()
+{
+    return s;
+}
+
+void SceneNode::ClearNodeState()
+{
+    s = Neoznacen;
+}
+
+
 
 QRectF SceneNode::boundingRect() const
 {
@@ -17,6 +35,9 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(option)
 
 
+    QPen olovka(Qt::black);
+    olovka.setWidth(2);
+
     if(isSelected()){
 
         QPen olovkaObod;
@@ -26,12 +47,10 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->setPen(olovkaObod);
         QRectF obod = boundingRect();
         painter->drawRect(obod);
+
+        olovka.setColor(Qt::yellow);
     }
 
-
-
-    QPen olovka(Qt::black);
-    olovka.setWidth(2);
 
     QBrush cetkica(Qt::cyan);
 
@@ -53,26 +72,60 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     painter->drawEllipse(10,10,50,50);
 
 
+
+    QCharRef s1 = nodeID[2];
+    QCharRef s2 = nodeID[3];
+
+    olovka.setWidth(10);
+    painter->setPen(olovka);
+
+    if(s2 == '_'){
+
+        QString nazivAlg;
+        nazivAlg.resize(1);
+        nazivAlg[0] = s1;
+        painter->drawText(40,25,nazivAlg);
+
+    }else{
+
+        QString nazivAlg;
+        nazivAlg.resize(2);
+        nazivAlg[0] = s1;
+        nazivAlg[1] = s2;
+        painter->drawText(31,25,nazivAlg);
+
+    }
+
+
+    olovka.setColor(Qt::black);
+    painter->setPen(olovka);
+
+    if(s == Oznacen_1)
+        painter->drawText(10,10, "1");
+    if(s == Oznacen_2)
+        painter->drawText(10,10, "2");
 }
 
-void SceneNode::mousePressEvent(QGraphicsSceneMouseEvent *event)
+
+void SceneNode::keyPressEvent(QKeyEvent *event)
 {
+    if(event->key() == Qt::Key_1){
+        s = Oznacen_1;
+        update();
+    }
 
-    setSelected(true);
-    pressed = true;
-    update();
-    QGraphicsItem::mousePressEvent(event);
+    if(event->key() == Qt::Key_2){
+        s = Oznacen_2;
+        update();
+    }
+
+    if(event->key() == Qt::Key_3){
+        s = Neoznacen;
+        update();
+    }
 }
 
-void SceneNode::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    pressed = false;
-    update();
-    QGraphicsItem::mouseReleaseEvent(event);
-}
 
 
-QString SceneNode::getID()
-{
-    return nodeID;
-}
+
+

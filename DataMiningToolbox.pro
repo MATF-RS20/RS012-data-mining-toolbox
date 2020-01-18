@@ -37,7 +37,7 @@ SOURCES += \
     main.cpp \
     SourceNode.cpp \
     csvreader.cpp \
-    TableWindow.cpp \
+ #  TableWindow.cpp \
     MainWindow.cpp
 
 HEADERS += \
@@ -61,7 +61,7 @@ HEADERS += \
     StatisticsNode.hpp \
     Stream.hpp \ \
     csvreader.hpp \
-    TableWindow.hpp \
+    #TableWindow.hpp \
     MainWindow.hpp
 
 

@@ -1,15 +1,28 @@
 #include "ConnectionLine.hpp"
 
-ConnectionLine::ConnectionLine(QGraphicsItem* cvor1, QGraphicsItem* cvor2)
+ConnectionLine::ConnectionLine(SceneNode* cvor1, SceneNode* cvor2)
     : pocetniCvor(cvor1), krajnjiCvor(cvor2)
 {
 
 }
 
+SceneNode *ConnectionLine::getPocetniCvor()
+{
+    return  pocetniCvor;
+}
+
+SceneNode *ConnectionLine::getKrajnjiCvor()
+{
+    return  krajnjiCvor;
+};
+
+
+
+
 QRectF ConnectionLine::boundingRect() const
 {
-    return QRectF(0, 0, 1, 1);
 
+    return  QRectF(0,0,1,1);
 }
 
 void ConnectionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -17,13 +30,24 @@ void ConnectionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(option)
 
     QPen olovka(Qt::black);
+
+    if(isSelected())
+        olovka.setColor(Qt::yellow);
+
     olovka.setWidth(6);
     painter->setPen(olovka);
 
-    QPointF pocetak(pocetniCvor->x(), pocetniCvor->y());
-    QPointF kraj(krajnjiCvor->x(), krajnjiCvor->y());
+    QPointF pocetak(pocetniCvor->x()+35, pocetniCvor->y()+35);
+    QPointF kraj(krajnjiCvor->x()+35, krajnjiCvor->y()+35);
+
+
 
     painter->drawLine(pocetak,kraj);
 
-};
+    painter->drawEllipse(kraj, 5, 5);
+    painter->drawEllipse(pocetak, 5, 5);
+
+
+}
+
 
