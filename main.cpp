@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     MainWindow w;
-    //TableWindow w1;
+    TableWindow w1;
 
     w.show();
-     /*
+     
     SourceNode sn("SN!");
 
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
@@ -33,23 +33,26 @@ int main(int argc, char *argv[])
     
    
     DecisionTreeNode dt("DT!");
+    
+    NormalizationNode nn("NN!");
 
     Stream s;
 
     s.add(&sn);
-
+    s.add(&nn);
     s.add(&dt);
    
-    s.connect_to(&sn, &dt);
+    s.connect_to(&sn, &nn);
+    s.connect_to(&nn, &dt);
   
     dt.setTarget("Species");
 
     s.RunStream(&dt);
-    */
     
     
-    //w1.view(dt);
-    //w1.show();
+    
+    w1.view(dt);
+    w1.show();
 
 
     return a.exec();

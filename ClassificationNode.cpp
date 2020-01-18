@@ -17,6 +17,10 @@ std::string ClassificationNode::TargetColumnName() const {
     return targetColumnName;
 }
 
+size_t ClassificationNode::NumClasses() const{
+    return numClasses;
+}
+
 arma::Row<size_t> ClassificationNode::TransformToArma(){
 
     
@@ -49,6 +53,10 @@ arma::Row<size_t> ClassificationNode::TransformToArma(){
 void ClassificationNode::setTarget(std::string targetName) {
     //TODO: check if targetName is in columnNames
     targetColumnName = targetName;
+}
+
+void ClassificationNode::SetNumClasses(const size_t& size){
+    numClasses = size;
 }
 
 double ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) const {
