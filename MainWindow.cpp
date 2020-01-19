@@ -320,29 +320,21 @@ void MainWindow::on_DisconnectButton_clicked()
 
     scena->removeItem(linijaZaBrisanje);
 
-
-
-    QString id1 = static_cast<SceneNode*>(cvor1)->getID();
     QString id2 = static_cast<SceneNode*>(cvor2)->getID();
 
     auto mapaCvorova = TokPodataka->MapOfNodes();
 
-    Node* prvi  = nullptr;
     Node* drugi = nullptr;
 
     //pronalazenje cvorova
     for(std::pair<Node*, Node*> e : mapaCvorova){
-
-        if(!e.first->NodeName().compare(id1.toStdString()))
-            prvi = e.first;
 
         if(!e.first->NodeName().compare(id2.toStdString()))
             drugi = e.first;
     }
 
 
-
-    TokPodataka->disconnect(prvi, drugi);
+    TokPodataka->disconnect(drugi);
 
 
     mapaCvorova = TokPodataka->MapOfNodes();
@@ -481,7 +473,7 @@ void MainWindow::on_DataViewButton_clicked()
 Node *MainWindow::pronadjiCvor(QString id)
 {
     auto mapaCvorova = TokPodataka->MapOfNodes();
-    Node* Cvor;
+    Node* Cvor = nullptr;
     for(std::pair<Node*, Node*> e : mapaCvorova){
 
         if(!e.first->NodeName().compare(id.toStdString()))

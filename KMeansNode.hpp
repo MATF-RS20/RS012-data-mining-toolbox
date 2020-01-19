@@ -13,6 +13,13 @@ public:
 
     };
     KMeansNode(std::string name);
+    KMeansNode(std::string name, size_t numClus);
+    KMeansNode(std::string name, distances d);
+    KMeansNode(std::string name, size_t numClus, size_t maxNumIter);
+    KMeansNode(std::string name, size_t numClus, distances d);
+    KMeansNode(std::string name, distances d, size_t maxNumIter);
+    KMeansNode(std::string name, size_t numClus, distances d, size_t maxNumIter);
+
 
     size_t NumberOfClusters();
     void SetNumberOfClusters(size_t number);

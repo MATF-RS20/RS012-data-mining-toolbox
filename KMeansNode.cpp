@@ -2,7 +2,16 @@
 
 #include "mlpack/methods/kmeans/kmeans.hpp"
 
-KMeansNode::KMeansNode(std::string name) : ClusteringNode(name) {}
+KMeansNode::KMeansNode(std::string name) : ClusteringNode(name), numberOfClusters(2),
+                                           distance(distances::EuclideanDistance), maxNumberOfIterations(1000) {}
+KMeansNode::KMeansNode(std::string name, size_t numCLus) : KMeansNode(name) { numberOfClusters = numCLus; }
+KMeansNode::KMeansNode(std::string name, distances d) : KMeansNode(name) { distance = d; }
+KMeansNode::KMeansNode(std::string name, size_t numCLus, size_t maxNumIter) : KMeansNode(name) { numberOfClusters = numCLus;
+                                                                                                 maxNumberOfIterations = maxNumIter; }
+KMeansNode::KMeansNode(std::string name, distances d, size_t maxNumIter) : KMeansNode(name) { distance = d;
+                                                                                              maxNumberOfIterations = maxNumIter;}
+KMeansNode::KMeansNode(std::string name, size_t numCLus, distances d, size_t maxNumIter) : ClusteringNode(name), numberOfClusters(numCLus),
+                                                                                           distance(d), maxNumberOfIterations(maxNumIter) {}
 
 size_t KMeansNode::NumberOfClusters() {
 
@@ -53,8 +62,11 @@ void KMeansNode::run() {
         mlpack::kmeans::KMeans<mlpack::metric::ChebyshevDistance> model(maxNumberOfIterations);
         model.Cluster(trans(inputDataTable->DataMatrix()), numberOfClusters, labels, centroids, false, false);
     }
+
     centroids = trans(centroids);
 
-    std::cout << centroids << std::endl;
+    DataTable dt(*InputDataTable());
+    setOutDataTable(dt);
 
+    silhouette_shadow();
 }

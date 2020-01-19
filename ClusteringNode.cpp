@@ -1,14 +1,32 @@
 #include "ClusteringNode.hpp"
 #include <limits>
 
-ClusteringNode::ClusteringNode(std::string name) : Node(name) {}
+ClusteringNode::ClusteringNode(std::string name) : Node(name), silhouetteScore(-2) {}
 
 arma::Row<size_t> ClusteringNode::Labels() {
-    return labels;
+    if(0.00001 < fabs(-2- silhouetteScore)) {
+        return labels;
+    } else {
+        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+        return nullptr;
+    }
 }
 
 arma::mat ClusteringNode::Centroids() {
-    return centroids;
+    if(0.00001 < fabs(-2- silhouetteScore)) {
+        return centroids;
+    } else {
+        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+        return nullptr;
+    }
+}
+
+double ClusteringNode::SilhouetteScore() {
+
+    if(0.00001 >= fabs(-2- silhouetteScore)) {
+        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+    }
+    return silhouetteScore;
 }
 
 double ClusteringNode::distance(size_t i, size_t j) {
@@ -17,7 +35,7 @@ double ClusteringNode::distance(size_t i, size_t j) {
     std::vector<size_t> indexes(matrix.n_cols);
     std::iota(indexes.begin(), indexes.end(), 0);
 
-    return  std::accumulate(indexes.begin(), indexes.end(), 0,
+    return  std::accumulate(indexes.begin(), indexes.end(), 0.0,
                             [matrix, i, j](double acc, size_t x){return acc+(matrix(i, x) - matrix(j, x))*(matrix(i, x) - matrix(j, x));});
 }
 
@@ -26,19 +44,19 @@ double ClusteringNode::SSC(size_t index, size_t label) {
     std::vector<size_t> indexes(labels.n_cols);
     std::iota(indexes.begin(), indexes.end(), 0);
 
-    return std::accumulate(indexes.begin(), indexes.end(), 0,
+    return std::accumulate(indexes.begin(), indexes.end(), 0.0,
                     [index, label, this](double acc, size_t x){if(label == labels(x)) return acc+distance(x, index);
                                                         else return acc;});
 }
 
-double ClusteringNode::silhouette_shadow() {
+void ClusteringNode::silhouette_shadow() {
 
     std::map<size_t, unsigned long> sizesOfClusters;
     std::set<size_t> setLabel(labels.begin(), labels.end());
 
     for(auto l : setLabel) {
-        sizesOfClusters[l] = std::accumulate(labels.begin(), labels.end(), 0,
-                                             [l](unsigned long acc, size_t x){if (x == l) return ++acc; else return acc;});
+        sizesOfClusters[l] = std::accumulate(labels.begin(), labels.end(), static_cast<size_t>(0),
+                                             [l](size_t acc, size_t x){if (x == l) return ++acc; else return acc;});
     }
 
     double s = 0;
@@ -49,7 +67,7 @@ double ClusteringNode::silhouette_shadow() {
 
             if(l != labels[i]) {
 
-                double tmp = SSC(i, labels[l])/ sizesOfClusters[l];
+                double tmp = SSC(i, labels(l)) /sizesOfClusters[l];
                 if(tmp < minNeighbour) {
 
                     minNeighbour = tmp;
@@ -60,5 +78,5 @@ double ClusteringNode::silhouette_shadow() {
         s += (minNeighbour - a)/std::max(minNeighbour, a);
     }
 
-    return s/labels.n_cols;
+    silhouetteScore = s/labels.n_cols;
 }
