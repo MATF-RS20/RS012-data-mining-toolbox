@@ -20,43 +20,47 @@
 int main(int argc, char *argv[])
 {
 
-    QApplication a(argc, argv);
+    //QApplication a(argc, argv);
 
-    MainWindow w;
+    //MainWindow w;
     //TableWindow w1;
 
-    w.show();
+    //w.show();
      
-    /*
+    
     SourceNode sn("SN!");
 
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.read();
     
    
-    DecisionTreeNode dt("DT!");
+    LinearRegressionNode dt("DT!");
     
     NormalizationNode nn("NN!");
+    
+    PartitionNode pn("PN!");
 
     Stream s;
 
     s.add(&sn);
     s.add(&nn);
+    s.add(&pn);
     s.add(&dt);
    
     s.connect_to(&sn, &nn);
-    s.connect_to(&nn, &dt);
+    s.connect_to(&nn, &pn);
+    s.connect_to(&pn, &dt);
   
-    dt.setTarget("Species");
+    dt.setTarget("Sepal_Length");
 
     s.RunStream(&dt);
     
     
     
-    w1.view(dt);
-    w1.show();
-    */
+    //w1.view(dt);
+    //w1.show();
+    
 
-    return a.exec();
-    //return 0;
+    //return a.exec();
+    return 0;
 }

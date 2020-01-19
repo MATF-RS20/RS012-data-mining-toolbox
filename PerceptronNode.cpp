@@ -26,17 +26,20 @@ void PerceptronNode::run() {
 
         data = trans(data);
         mlpack::perceptron::Perceptron<> perceptronClassifier(data, this->targetColumn, NumClasses());
-        perceptronClassifier.Train(data, this->targetColumn, 3);
+        perceptronClassifier.Train(data, this->targetColumn);
 
         arma::Row<size_t> predictions(this->targetColumn.size());
         perceptronClassifier.Classify(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double precision = ClassificationNode::Precision(targetColumn, predictions);
-        std::cout << precision << std::endl;
+        ClassificationNode::Precision(targetColumn, predictions);
+        std::cout << GetPrecision() << std::endl;
         
-        ClassificationNode::ConfussionMatrix(targetColumn, predictions);
+        ClassificationNode::ConfusionMatrix(targetColumn, predictions);
+        std::cout << GetConfusionMatrix() << std::endl;
+        
+        SetClassPredictions(predictions);
         
     } else {
         
@@ -69,17 +72,23 @@ void PerceptronNode::run() {
         trainData = trans(trainData);
         testData = trans(testData);
         mlpack::perceptron::Perceptron<> perceptronClassifier(trainData, trainTarget, NumClasses());
-        perceptronClassifier.Train(trainData, trainTarget, 3);
+        perceptronClassifier.Train(trainData, trainTarget);
         
         arma::Row<size_t> predictions(testTarget.size());
         perceptronClassifier.Classify(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double precision = ClassificationNode::Precision(testTarget, predictions);
-        std::cout << precision << std::endl;
+        ClassificationNode::Precision(testTarget, predictions);
+        std::cout << GetPrecision() << std::endl;
         
-        ClassificationNode::ConfussionMatrix(testTarget, predictions);
+        ClassificationNode::ConfusionMatrix(testTarget, predictions);
+        std::cout << GetConfusionMatrix() << std::endl;
+        
+        arma::Row<size_t> allPredictions;
+        data = trans(data);
+        perceptronClassifier.Classify(data, allPredictions);
+        SetClassPredictions(allPredictions);
     }
         
     DataTable dataTable = *InputDataTable();
