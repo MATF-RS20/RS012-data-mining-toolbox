@@ -24,42 +24,44 @@ int main(int argc, char *argv[])
     w.show();
 
      
-    
+    /*
     SourceNode sn("SN!");
 
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.read();
     
-   
+    DBSCANNode db("asdf", 0.5, 3);
+    */
+
+
    /* LinearRegressionNode dt("DT!");
     
     NormalizationNode nn("NN!");
     
     PartitionNode pn("PN!");*/
 
+
+
     /*
-    StatisticsNode st("ST!");
+    NormalizationNode nn("NN!");
 
     Stream s;
 
     s.add(&sn);
-    s.add(&st);
-    s.connect_to(&sn, &st);
-
+    s.add(&db);
     s.add(&nn);
-    s.add(&pn);
-    s.add(&dt);
-   
-    s.connect_to(&sn, &nn);
-    s.connect_to(&nn, &pn);
-    s.connect_to(&pn, &dt);
-  
-    dt.setTarget("Sepal_Length");
 
-    s.RunStream(&st);
-    std::cout << st.GetStatistics() << std::endl;
+    s.connect_to(&sn, &nn);
+    s.connect_to(&nn, &db);
+
+    s.RunStream(&db);
+
+    std::cout << db.SilhouetteScore() << std::endl;
+
+    std::cout << db.Centroids() << std::endl;
+    std::cout << db.Labels() << std::endl;
     */
-    
+
 
     return a.exec();
     //return 0;

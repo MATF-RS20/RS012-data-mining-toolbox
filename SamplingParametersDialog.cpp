@@ -1,20 +1,20 @@
-#include "PartitionParametersDialog.hpp"
-#include "ui_PartitionParametersDialog.h"
+#include "SamplingParametersDialog.hpp"
+#include "ui_SamplingParametersDialog.h"
 
-PartitionParametersDialog::PartitionParametersDialog( PartitionNode* cvor, QWidget *parent) :
+SamplingParametersDialog::SamplingParametersDialog(SamplingNode* cvor, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::PartitionParametersDialog),
-    prtCvor(cvor)
+    ui(new Ui::SamplingParametersDialog),
+    smplN(cvor)
 {
     ui->setupUi(this);
 }
 
-PartitionParametersDialog::~PartitionParametersDialog()
+SamplingParametersDialog::~SamplingParametersDialog()
 {
     delete ui;
 }
 
-void PartitionParametersDialog::on_pushButton_clicked()
+void SamplingParametersDialog::on_Odabir_clicked()
 {
     QString unos = ui->Unos->text();
     if(unos.isEmpty()){
@@ -39,7 +39,7 @@ void PartitionParametersDialog::on_pushButton_clicked()
     }
 
 
-    prtCvor->SetTestSizeRatio(unos_d);
+    smplN->SetSampleSizeRatio(unos_d);
 
     this->close();
 }

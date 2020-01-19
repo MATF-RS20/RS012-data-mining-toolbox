@@ -28,6 +28,10 @@
 #include <TableDialog.hpp>
 #include <SourceParametersDialog.hpp>
 #include <PartitionParametersDialog.hpp>
+#include <SamplingParametersDialog.hpp>
+#include <FilterParametersDialog.hpp>
+#include <KMeansParametersDialog.hpp>
+#include <DecisionTreeParametersDialog.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -76,6 +80,9 @@ private:
     void podesiParametre_Particionisanje(Node* cvor);
     void podesiParametre_Filter(Node* cvor);
     void podesiParametre_KSredina(Node* cvor);
+    void podesiParametre_StabloOdlucivanja(Node* cvor);
+    void podesiParametre_Perceptron(Node* cvor);
+    void podesiParametre_LinearnaRegresija(Node* cvor);
 
     Ui::MainWindow *ui;
     QGraphicsScene *scena; //scena koja se iscrtava

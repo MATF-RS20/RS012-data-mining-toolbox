@@ -37,7 +37,7 @@ void TableDialog::view(Node* node)
     ui->Tabelica->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->Tabelica->setShowGrid(false);
     ui->Tabelica->setStyleSheet("QTableView {selection-background-color: red;}");
-    ui->Tabelica->setGeometry(QApplication::desktop()->screenGeometry());
+   // ui->Tabelica->setGeometry(QApplication::desktop()->screenGeometry());
 
     unsigned long k = 0;
     for(unsigned long j = 0; j < columnNames.size(); j++){

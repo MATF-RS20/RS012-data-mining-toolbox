@@ -559,7 +559,27 @@ void MainWindow::on_SetParameters_clicked()
         if(nodeID[2] == 'K' && nodeID[3] == 'S'){
             podesiParametre_KSredina(Cvor);
         }
-    }
+
+    }else if(nodeID[0] == 'K'){
+
+        if(nodeID[2] == 'S' && nodeID[3] == 'O'){
+            podesiParametre_StabloOdlucivanja(Cvor);
+        }
+
+        if(nodeID[2] == 'P'){
+            podesiParametre_Perceptron(Cvor);
+        }
+
+
+    }else if(nodeID[0] == 'R'){
+
+        if(nodeID[2] == 'L'){
+            podesiParametre_LinearnaRegresija(Cvor);
+        }
+
+
+    }else
+        return;
 
 }
 
@@ -573,8 +593,10 @@ void MainWindow::podesiParametre_Ulazni(Node *cvor)
 
 void MainWindow::podesiParametre_Uzorkovanje(Node *cvor)
 {
-    //TODO
-    return;
+    SamplingNode* sm = dynamic_cast<SamplingNode*>(cvor);
+    SamplingParametersDialog smD(sm);
+    smD.setModal(true);
+    smD.exec();
 }
 
 void MainWindow::podesiParametre_Particionisanje(Node *cvor)
@@ -587,12 +609,34 @@ void MainWindow::podesiParametre_Particionisanje(Node *cvor)
 
 void MainWindow::podesiParametre_Filter(Node *cvor)
 {
-    //TODO
-    return;
+    FilterNode* fil = dynamic_cast<FilterNode*>(cvor);
+    FilterParametersDialog filD(fil);
+    filD.setModal(true);
+    filD.exec();
 }
 
 void MainWindow::podesiParametre_KSredina(Node *cvor)
 {
-    //TODO
-    return;
+    KMeansNode* km = dynamic_cast<KMeansNode*>(cvor);
+    KMeansParametersDialog kmD(km);
+    kmD.setModal(true);
+    kmD.exec();
+}
+
+void MainWindow::podesiParametre_StabloOdlucivanja(Node *cvor)
+{
+    DecisionTreeNode* dt = dynamic_cast<DecisionTreeNode*>(cvor);
+    DecisionTreeParametersDialog dtD(dt);
+    dtD.setModal(true);
+    dtD.exec();
+}
+
+void MainWindow::podesiParametre_Perceptron(Node *cvor)
+{
+
+}
+
+void MainWindow::podesiParametre_LinearnaRegresija(Node *cvor)
+{
+
 }
