@@ -26,7 +26,7 @@ void PerceptronNode::run() {
 
         data = trans(data);
         mlpack::perceptron::Perceptron<> perceptronClassifier(data, this->targetColumn, NumClasses());
-        perceptronClassifier.Train(data, this->targetColumn);
+        perceptronClassifier.Train(data, this->targetColumn, 3);
 
         arma::Row<size_t> predictions(this->targetColumn.size());
         perceptronClassifier.Classify(data, predictions);
@@ -72,7 +72,7 @@ void PerceptronNode::run() {
         trainData = trans(trainData);
         testData = trans(testData);
         mlpack::perceptron::Perceptron<> perceptronClassifier(trainData, trainTarget, NumClasses());
-        perceptronClassifier.Train(trainData, trainTarget);
+        perceptronClassifier.Train(trainData, trainTarget, 3);
         
         arma::Row<size_t> predictions(testTarget.size());
         perceptronClassifier.Classify(testData, predictions);

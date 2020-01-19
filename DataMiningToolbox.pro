@@ -34,10 +34,10 @@ SOURCES += \
     SceneNode.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
+    TableDialog.cpp \
     main.cpp \
     SourceNode.cpp \
     csvreader.cpp \
- #  TableWindow.cpp \
     MainWindow.cpp
 
 HEADERS += \
@@ -60,13 +60,14 @@ HEADERS += \
     SourceNode.hpp \
     StatisticsNode.hpp \
     Stream.hpp \ \
+    TableDialog.hpp \
     csvreader.hpp \
-    #TableWindow.hpp \
     MainWindow.hpp
 
 
 FORMS += \
-    MainWindow.ui
+    MainWindow.ui \
+    TableDialog.ui
 
 LIBS += -lmlpack -larmadillo -llapack -lblas
 

@@ -25,6 +25,9 @@
 #include <FilterNode.hpp>
 #include <KMeansNode.hpp>
 
+#include <TableDialog.hpp>
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -56,7 +59,10 @@ private Q_SLOTS:
 
     void on_ClearScene_clicked();
 
+    void on_DataViewButton_clicked();
+
 private:
+    Node* pronadjiCvor(QString ID);
     void nacrtajCvor(QString nodeID);
     void dodajCvorUTok(QString nodeID);
     QString generisiID(QString nazivAlgoritma);

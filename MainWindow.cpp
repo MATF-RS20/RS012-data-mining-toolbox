@@ -459,7 +459,39 @@ QString MainWindow::generisiID(QString nazivAlgoritma)
 
 }
 
+void MainWindow::on_DataViewButton_clicked()
+{
+    auto selektovaniCvorovi = scena->selectedItems();
 
+
+    if(selektovaniCvorovi.size() > 1 or selektovaniCvorovi.size() < 1)
+        return;
+
+    //kast iz QgraphicsItem u SceneNode
+    auto cvor_S = static_cast<SceneNode*>(selektovaniCvorovi[0]);
+
+    QString id = static_cast<SceneNode*>(cvor_S)->getID();
+
+    Node* Cvor = pronadjiCvor(id);
+
+    TableDialog td;
+    td.setModal(true);
+    td.view(Cvor);
+    td.exec();
+}
+
+Node *MainWindow::pronadjiCvor(QString id)
+{
+    auto mapaCvorova = TokPodataka->MapOfNodes();
+    Node* Cvor;
+    for(std::pair<Node*, Node*> e : mapaCvorova){
+
+        if(!e.first->NodeName().compare(id.toStdString()))
+            Cvor = e.first;
+    }
+
+    return Cvor;
+}
 
 
 
@@ -489,4 +521,6 @@ void MainWindow::on_LISTA_Ulaz_clicked(const QModelIndex &index)
     Q_UNUSED(index)
     izabranaLista = "Ulaz";
 }
+
+
 

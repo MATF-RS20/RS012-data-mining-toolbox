@@ -1,5 +1,4 @@
 #include "MainWindow.hpp"
-#include "TableWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
@@ -20,12 +19,10 @@
 int main(int argc, char *argv[])
 {
 
-    //QApplication a(argc, argv);
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-    //MainWindow w;
-    //TableWindow w1;
-
-    //w.show();
      
     
     SourceNode sn("SN!");
@@ -47,7 +44,8 @@ int main(int argc, char *argv[])
     s.add(&sn);
     s.add(&st);
     s.connect_to(&sn, &st);
-   /* s.add(&nn);
+
+    /* s.add(&nn);
     s.add(&pn);
     s.add(&dt);
    
@@ -61,11 +59,7 @@ int main(int argc, char *argv[])
     std::cout << st.GetStatistics() << std::endl;
     
     
-    
-    //w1.view(dt);
-    //w1.show();
-    
 
-    //return a.exec();
-    return 0;
+    return a.exec();
+    //return 0;
 }
