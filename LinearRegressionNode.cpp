@@ -142,6 +142,9 @@ void LinearRegressionNode::run(){
         SetTargetPredictions(allPredictions);
         std::cout << TargetPredictions() << std::endl;
     }
+
+    DataTable dataTable = *InputDataTable();
+    this->setOutDataTable(dataTable);
 }
 
 arma::Col<double> LinearRegressionNode::TargetPredictions() const{
