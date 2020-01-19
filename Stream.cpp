@@ -9,7 +9,7 @@ Stream::Stream(){}
 Stream::~Stream(){
 
     for (auto pair : mapOfNodes){
-        disconnect(pair.second, pair.first);
+        disconnect(pair.first);
     }
     for (auto iter = mapOfNodes.begin(); iter != mapOfNodes.end(); iter++){
           mapOfNodes.erase(iter);
@@ -34,13 +34,13 @@ void Stream::connect_to(Node *node1, Node *node2){
 }
 
 // TODO: change disconnect function so it disconnects node 2 from all nodes it has connections to
-void Stream::disconnect(Node *node1, Node *node2){
+void Stream::disconnect(Node *node2){
     mapOfNodes[node2] = nullptr;
     node2->setInputDataTable(nullptr);
 }
 
 void Stream::RunStream(Node *targetNode){
-    if(SourceNode* v = dynamic_cast<SourceNode*>(targetNode)) {
+    if(dynamic_cast<SourceNode*>(targetNode)) {
     } else {
         RunStream(mapOfNodes[targetNode]);
     }

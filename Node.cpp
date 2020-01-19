@@ -34,11 +34,11 @@ void Node::setOutDataTable(DataTable outDataTable)
 std::vector<std::string> Node::unbinarize(std::string columnName) const {
     
     std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
-    unsigned colIndex = 0;
+    size_t colIndex = 0;
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     auto colNames = InputDataTable()->ColumnNames();
     
-    for(auto i = 0; i < colNames.size(); i++) {
+    for(size_t i = 0; i < colNames.size(); i++) {
         if(0 == colNames[i].compare(columnName)) {
             break;
         }

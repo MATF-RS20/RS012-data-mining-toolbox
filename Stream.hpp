@@ -24,7 +24,7 @@ public:
     void connect_to(Node* node1, Node* node2);
 
     // disconnects nodes
-    void disconnect(Node* node1, Node* node2);
+    void disconnect(Node* node2);
 
     // performs a recursive call of run method from "targetNode" to a source node
     void RunStream(Node* targetNode);

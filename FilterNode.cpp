@@ -47,11 +47,9 @@ void FilterNode::run() {
                 catCol.erase(colNames[i]);
                 while(numOfCol > 0) {
 
-                    //std::cout << matrix.n_cols << std::endl;
                     matrix.shed_col(i-numOfFiltered);
                     numOfCol--;
                 }
-                //std::cout << std::endl;
             } else {
 
                 matrix.shed_col(i +catColSum);
