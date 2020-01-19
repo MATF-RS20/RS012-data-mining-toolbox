@@ -1,4 +1,5 @@
 #include "StatisticsNode.hpp"
+#include <string.h>
 
 StatisticsNode::StatisticsNode(std::string name) : Node(name){}
 
@@ -10,8 +11,11 @@ void StatisticsNode::run() {
     std::map<std::string, std::set<std::string>> mapOfCategories = InputDataTable()->CategoricalValues();
 
     unsigned long k = 0;
+    std::string result = "";
     for (unsigned long j = 0; j < columns.size(); j++){
-        std::cout << "Column name: " << columns[j] << std::endl;
+        result += "Column name: ";
+        result += columns[j];
+        result += "\n";
         if (mapOfCategories.find(columns[j]) == mapOfCategories.end()){
 
             double minimum_value = data(0, k);
@@ -35,8 +39,15 @@ void StatisticsNode::run() {
             }
             variance_value /= data.n_rows;
 
-            std::cout << "Min: " << minimum_value << " Max: " << maximum_value
-                      << " Mean: " << mean_value << " Var: " << variance_value << std::endl;
+            result += "Min: ";
+            result += std::to_string(minimum_value);
+            result += " Max: ";
+            result += std::to_string(maximum_value);
+            result += " Mean: ";
+            result += std::to_string(mean_value);
+            result += " Var: ";
+            result += std::to_string(variance_value);
+            result += "\n";
             k++;
         } else {
             //TODO
@@ -44,8 +55,13 @@ void StatisticsNode::run() {
         }
     }
 
+    statistics = result;
     DataTable dt = *InputDataTable();
     this->setOutDataTable(dt);
 
+}
+
+std::string StatisticsNode::GetStatistics() const{
+    return statistics;
 }
 

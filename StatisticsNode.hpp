@@ -10,6 +10,12 @@ public:
     StatisticsNode(std::string name);
 
     void run() override;
+    
+    std::string GetStatistics() const;
+    
+private:
+    
+    std::string statistics;
 
 };
 

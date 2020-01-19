@@ -34,16 +34,20 @@ int main(int argc, char *argv[])
     sn.read();
     
    
-    LinearRegressionNode dt("DT!");
+   /* LinearRegressionNode dt("DT!");
     
     NormalizationNode nn("NN!");
     
-    PartitionNode pn("PN!");
+    PartitionNode pn("PN!");*/
+   
+    StatisticsNode st("ST!");
 
     Stream s;
 
     s.add(&sn);
-    s.add(&nn);
+    s.add(&st);
+    s.connect_to(&sn, &st);
+   /* s.add(&nn);
     s.add(&pn);
     s.add(&dt);
    
@@ -51,9 +55,10 @@ int main(int argc, char *argv[])
     s.connect_to(&nn, &pn);
     s.connect_to(&pn, &dt);
   
-    dt.setTarget("Sepal_Length");
+    dt.setTarget("Sepal_Length");*/
 
-    s.RunStream(&dt);
+    s.RunStream(&st);
+    std::cout << st.GetStatistics() << std::endl;
     
     
     
