@@ -1,5 +1,4 @@
 #include "MainWindow.hpp"
-#include "TableWindow.hpp"
 #include "DataTable.hpp"
 #include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
@@ -21,10 +20,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-
     MainWindow w;
-    //TableWindow w1;
-
     w.show();
      
     /*
@@ -51,10 +47,6 @@ int main(int argc, char *argv[])
 
     s.RunStream(&dt);
     
-    
-    
-    w1.view(dt);
-    w1.show();
     */
 
     return a.exec();

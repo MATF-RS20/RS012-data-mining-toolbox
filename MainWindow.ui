@@ -56,6 +56,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="DataViewButton">
+       <property name="text">
+        <string>Pregled Podataka</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QGraphicsView" name="GlavniTok">
        <property name="cursor" stdset="0">
         <cursorShape>ArrowCursor</cursorShape>
