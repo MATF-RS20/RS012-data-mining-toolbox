@@ -33,10 +33,13 @@ void PerceptronNode::run() {
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double precision = ClassificationNode::Precision(targetColumn, predictions);
-        std::cout << precision << std::endl;
+        ClassificationNode::Precision(targetColumn, predictions);
+        std::cout << GetPrecision() << std::endl;
         
-        ClassificationNode::ConfussionMatrix(targetColumn, predictions);
+        ClassificationNode::ConfusionMatrix(targetColumn, predictions);
+        std::cout << GetConfusionMatrix() << std::endl;
+        
+        SetClassPredictions(predictions);
         
     } else {
         
@@ -76,10 +79,16 @@ void PerceptronNode::run() {
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double precision = ClassificationNode::Precision(testTarget, predictions);
-        std::cout << precision << std::endl;
+        ClassificationNode::Precision(testTarget, predictions);
+        std::cout << GetPrecision() << std::endl;
         
-        ClassificationNode::ConfussionMatrix(testTarget, predictions);
+        ClassificationNode::ConfusionMatrix(testTarget, predictions);
+        std::cout << GetConfusionMatrix() << std::endl;
+        
+        arma::Row<size_t> allPredictions;
+        data = trans(data);
+        perceptronClassifier.Classify(data, allPredictions);
+        SetClassPredictions(allPredictions);
     }
         
     DataTable dataTable = *InputDataTable();

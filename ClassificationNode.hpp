@@ -21,15 +21,25 @@ public:
     arma::Row<size_t> TransformToArma();
     void setTarget(std::string targetName);
     void SetNumClasses(const size_t& size);
+    void SetClassPredictions(const arma::Row<size_t> predictions);
     
-    double Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) const;
-    void ConfussionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions) const;
+    void Precision(arma::Row<size_t> values, arma::Row<size_t> predictions);
+    void ConfusionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions);
+    
+    std::string GetPrecision() const;
+    std::string GetConfusionMatrix() const;
+    arma::Row<size_t> ClassPredictions() const;
 
 protected:
 
     std::string targetColumnName;
     arma::Row<size_t> targetColumn;
     size_t numClasses;
+    
+    std::string precision;
+    std::string confusionMatrix;
+    
+    arma::Row<size_t> classPredictions;
 
 };
 

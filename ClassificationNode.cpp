@@ -1,5 +1,6 @@
 #include <ClassificationNode.hpp>
 #include <algorithm>
+#include <string.h>
 
 ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
     targetColumnName = "";
@@ -59,7 +60,7 @@ void ClassificationNode::SetNumClasses(const size_t& size){
     numClasses = size;
 }
 
-double ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) const {
+void ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) {
     
     int nRows = values.size();
     int nTrue = 0;
@@ -70,29 +71,32 @@ double ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t>
     }
     
     if (nRows == 0){
-        return 0.0;
+        precision = "Precision: 0.0\n";
+        return;
     }
     
-    double precision = static_cast<double>(nTrue)/nRows;
-    return precision;
+    double prec = static_cast<double>(nTrue)/nRows;
     
+    precision = "Precision: " + std::to_string(prec) + "\n";  
     
 }
 
-void ClassificationNode::ConfussionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions) const{
+void ClassificationNode::ConfusionMatrix(arma::Row<size_t> values, arma::Row<size_t> predictions) {
     
     auto it = std::max_element(std::begin(predictions), std::end(predictions));
     size_t maximum = *it;
     unsigned long nRows = values.size();
     
     int nMatch;
-    std::cout << "T-P ";
+    std::string result = "T-P ";
     for(size_t pLabel = 0; pLabel <= maximum; pLabel++){
-        std::cout << pLabel << " ";
+        result += std::to_string(pLabel);
+        result += " ";
     }
-    std::cout << std::endl;
+    result += "\n";
     for(size_t tLabel = 0; tLabel <= maximum; tLabel++){
-        std::cout << tLabel << " ";
+        result += std::to_string(tLabel);
+        result += " ";
         for (size_t pLabel = 0; pLabel <= maximum; pLabel++){
             nMatch = 0;
             for (unsigned long i = 0; i < nRows; i++){
@@ -100,9 +104,34 @@ void ClassificationNode::ConfussionMatrix(arma::Row<size_t> values, arma::Row<si
                     nMatch++;
                 }
             }
-            std::cout << nMatch << " ";
+            result += std::to_string(nMatch);
+            result += " ";
         }
-        std::cout << std::endl;
+        result += "\n";
     }
     
+    confusionMatrix = result;
+    
 }
+
+std::string ClassificationNode::GetPrecision() const{
+    return precision;
+}
+    
+std::string ClassificationNode::GetConfusionMatrix() const {
+    return confusionMatrix;
+}
+
+void ClassificationNode::SetClassPredictions(const arma::Row<size_t> predictions){
+    classPredictions = predictions;
+}
+
+arma::Row<size_t> ClassificationNode::ClassPredictions() const{
+    return classPredictions;
+}
+    
+
+
+
+
+

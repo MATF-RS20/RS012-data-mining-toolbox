@@ -45,7 +45,7 @@ void LinearRegressionNode::SetTargetColumn() {
     }
 }
 
-double LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions) const{
+void LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions){
     
     int nRows = values.size();
     double sum = 0;
@@ -56,7 +56,7 @@ double LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> pre
         
     }
 
-    return sum;
+    SetRssScore(sum);
 }
 
 void LinearRegressionNode::run(){
@@ -77,17 +77,19 @@ void LinearRegressionNode::run(){
         data = trans(data);
         mlpack::regression::LinearRegression lr(data, targetColumn);
 
-        arma::vec parameters = lr.Parameters();
+        SetParams(lr.Parameters());
         std::cout << "Parameters: " << std::endl;
-        std::cout << parameters << std::endl;
+        std::cout << Params() << std::endl;
 
         arma::Row<double> predictions;
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double rss = RSS(data, predictions);
-        std::cout << rss << std::endl;
+        RSS(targetColumn, predictions);
+        std::cout << RssScore() << std::endl;
+        
+        SetTargetPredictions(predictions);
         
     } else {
 
@@ -122,16 +124,49 @@ void LinearRegressionNode::run(){
         
         mlpack::regression::LinearRegression lr(trainData, trainTarget);
 
-        arma::vec parameters = lr.Parameters();
-        std::cout << "Paramtetes: " << std::endl;
-        std::cout << parameters << std::endl;
+        SetParams(lr.Parameters());
+        std::cout << "Parameters: " << std::endl;
+        std::cout << Params() << std::endl;
         
         arma::Row<double> predictions;
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
         
-        double rss = RSS(testTarget, predictions);
-        std::cout << rss << std::endl;
+        RSS(testTarget, predictions);
+        std::cout << RssScore() << std::endl;
+        
+        arma::Row<double> allPredictions;
+        data = trans(data);
+        lr.Predict(data, allPredictions);
+        SetTargetPredictions(allPredictions);
+        std::cout << TargetPredictions() << std::endl;
     }
 }
+
+arma::Col<double> LinearRegressionNode::TargetPredictions() const{
+    return targetPredictions;
+}
+    
+void LinearRegressionNode::SetTargetPredictions(const arma::Col<double> predictions){
+    targetPredictions = predictions;
+}
+
+double LinearRegressionNode::RssScore() const{
+    return rssScore;
+}
+
+void LinearRegressionNode::SetRssScore(const double& score){
+    rssScore = score;
+}
+    
+arma::vec LinearRegressionNode::Params() const{
+    return params;
+}
+
+void LinearRegressionNode::SetParams(const arma::vec& parameters){
+    params = parameters;
+}
+
+
+

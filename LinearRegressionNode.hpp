@@ -19,12 +19,24 @@ public:
     
     bool IsTargetSelected() const;
     
-    double RSS(arma::Col<double> values, arma::Col<double> predictions) const;
+    void RSS(arma::Col<double> values, arma::Col<double> predictions);
+    
+    arma::Col<double> TargetPredictions() const;
+    void SetTargetPredictions(const arma::Col<double> predictions);
+    
+    double RssScore() const;
+    void SetRssScore(const double& score);
+    
+    arma::vec Params() const;
+    void SetParams(const arma::vec& parameters);
 
 
 protected:
     std::string targetColumnName;
     arma::Col<double> targetColumn;
+    arma::Col<double> targetPredictions;
+    double rssScore;
+    arma::vec params;
 };
 
 #endif // LINEARREGRESSIONNODE_HPP

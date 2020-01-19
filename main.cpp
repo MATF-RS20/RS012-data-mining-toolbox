@@ -22,32 +22,43 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+
      
-    /*
+    
     SourceNode sn("SN!");
 
     sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
     sn.read();
     
    
-    DecisionTreeNode dt("DT!");
+   /* LinearRegressionNode dt("DT!");
     
     NormalizationNode nn("NN!");
+    
+    PartitionNode pn("PN!");*/
+   
+    StatisticsNode st("ST!");
 
     Stream s;
 
     s.add(&sn);
-    s.add(&nn);
+    s.add(&st);
+    s.connect_to(&sn, &st);
+
+    /* s.add(&nn);
+    s.add(&pn);
     s.add(&dt);
    
     s.connect_to(&sn, &nn);
-    s.connect_to(&nn, &dt);
+    s.connect_to(&nn, &pn);
+    s.connect_to(&pn, &dt);
   
-    dt.setTarget("Species");
+    dt.setTarget("Sepal_Length");*/
 
-    s.RunStream(&dt);
+    s.RunStream(&st);
+    std::cout << st.GetStatistics() << std::endl;
     
-    */
+    
 
     return a.exec();
     //return 0;
