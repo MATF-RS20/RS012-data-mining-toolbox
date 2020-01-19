@@ -1,17 +1,16 @@
 #include "DataTable.hpp"
 
-#include <iostream>
-#include <vector>
-
+//Constructor
 DataTable::DataTable(){
     isPartitioned = 0;
     testSize = 0;
 }
 
+//Destructor
 DataTable::~DataTable(){}
 
-//TODO: Check if this is necessary! Added for copy constructor of class Stream, so it can deep copy instances of class Node.
-//But this has nothing to do with copy constructor of Stream class. Check if this has anything to do with copy construcotr of class Node.
+
+//Copy constructor
 DataTable::DataTable(const DataTable& dt)
     : dataMatrix(dt.DataMatrix()),
       columnNames(dt.ColumnNames()),
@@ -20,6 +19,8 @@ DataTable::DataTable(const DataTable& dt)
       isPartitioned(dt.IsPartitioned()),
       testSize(dt.TestSize()){}
 
+      
+//Getters
 arma::mat DataTable::DataMatrix() const {
     return dataMatrix;
 }
@@ -40,16 +41,14 @@ bool DataTable::IsPartitioned() const {
     return isPartitioned;
 }
 
+unsigned long DataTable::TestSize() const {
+    return testSize;
+}
+
+
+//Setters
 void DataTable::SetDataMatrix(const arma::mat& matrix){
     dataMatrix = matrix;
-}
-
-void DataTable::addKey(const std::string& keyName) {
-    columnNames.emplace_back(keyName);
-}
-
-void DataTable::addCategoricalValues(unsigned columnIndex, std::set<std::string> setOfValues) {
-    categoricalValues[columnNames[columnIndex]] = setOfValues;
 }
 
 void DataTable::SetCategoricalValues(const std::map<std::string, std::set<std::string>> & catVal){
@@ -60,7 +59,6 @@ void DataTable::SetColumnNames(const std::vector<std::string>& colNames){
     columnNames = colNames;
 }
 
-/************************************************************************/
 void DataTable::SetPartition(const std::vector<bool>& vector){
     partition = vector;
 }
@@ -73,8 +71,13 @@ void DataTable::SetTestSize(const unsigned long & size){
     testSize = size;
 }
 
-unsigned long DataTable::TestSize() const {
-    return testSize;
+
+//Adding a key (that means column name) into a vector of column names
+void DataTable::addKey(const std::string& keyName) {
+    columnNames.emplace_back(keyName);
 }
 
-/*************************************************************************/
+//Adding a set of values for a categorical column with given index into categoricalValues
+void DataTable::addCategoricalValues(unsigned columnIndex, std::set<std::string> setOfValues) {
+    categoricalValues[columnNames[columnIndex]] = setOfValues;
+}

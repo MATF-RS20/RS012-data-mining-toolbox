@@ -2,6 +2,9 @@
 #define SOURCENODE_HPP
 
 #include "Node.hpp"
+#include "csvreader.hpp"
+#include <boost/algorithm/string.hpp>
+#include <string>
 #include <list>
 #include <armadillo>
 
@@ -10,15 +13,26 @@ class SourceNode : public Node{
 
 public:
 
+    //Constructor
     SourceNode(std::string name);
+    
+    //Copy constructor
     SourceNode(const SourceNode& sn);
+    
+    //Setter for name of the file from which we read
     void setFilename(std::string fName);
+    
     void read();
 
+    //Run function, specific for this node
     void run() override;
 
 private:
+    
+    //Name of the file
     std::string filename;
+    
+    //Indicator of whether the file with the set file name is read or not
     bool isRead;
 };
 

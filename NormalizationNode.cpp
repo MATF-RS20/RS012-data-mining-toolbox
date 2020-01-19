@@ -6,6 +6,8 @@ void NormalizationNode::run() {
 
     arma::mat data = this->InputDataTable()->DataMatrix();
 
+    //Find max and min value for every column, and then transform every value with this expression:
+        //(value - min)/(max - min)
     for(unsigned long j = 0; j < data.n_cols; j++){
         double min_value = data(0, j);
         double max_value = data(0, j);

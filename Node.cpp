@@ -1,7 +1,9 @@
 #include "Node.hpp"
 
+//Constructor
 Node::Node(std::string name) : nodeName(name){}
 
+//Getters
 const DataTable* Node::InputDataTable() const{
     return inputDataTable;
 }
@@ -10,16 +12,16 @@ DataTable Node::OutputDataTable() const {
     return outputDataTable;
 }
 
-//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da se pozove konstruktor Node klase u konstruktoru kopije klase SourceNode
 std::string Node::NodeName() const {
     return nodeName;
 }
 
-//TODO: Proveriti da li je ovo neophodno! Dodato u pokusaju da proradi destruktor Stream klase
+//TODO: DELETE!!!
 DataTable * Node::RefOutputDataTable(){
     return &outputDataTable;
 }
 
+//Setters
 void Node::setInputDataTable(DataTable* inDataTable)
 {
     inputDataTable = inDataTable;
@@ -30,14 +32,16 @@ void Node::setOutDataTable(DataTable outDataTable)
     outputDataTable = outDataTable;
 }
 
-
+//Retriving original column with given column name, from binarized columns in data matrix
 std::vector<std::string> Node::unbinarize(std::string columnName) const {
     
+    //Alocating resulting vector
     std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
     size_t colIndex = 0;
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     auto colNames = InputDataTable()->ColumnNames();
     
+    //Geting index of column with given name
     for(size_t i = 0; i < colNames.size(); i++) {
         if(0 == colNames[i].compare(columnName)) {
             break;
@@ -50,6 +54,8 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
         }
     }
 
+    //For every tuple in data, for every value in the set of categories for the given column, if the adequate binarized column
+    //field equals 1, then the class for that tuple is that category.
     for(unsigned i = 0; i < InputDataTable()->DataMatrix().n_rows; i++) {
         unsigned tmp = colIndex;
         for(auto c : map_tmp.at(columnName)) {
@@ -66,10 +72,13 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
     return result;
 }
 
+//Making an arma::mat without a column with name given, which is binarized
 arma::mat Node::filterBinarisedCol(std::string colName) {
     std::vector<std::string> colNames = inputDataTable->ColumnNames();
     const std::map<std::string, std::set<std::string>> map_tmp = InputDataTable()->CategoricalValues();
     unsigned index = 0;
+    
+    //Finding index of the first binarized column, with given column name
     for(unsigned i = 0; i != colNames.size(); i++) {
         if(0 == colNames[i].compare(colName)) {
             break;
@@ -82,8 +91,10 @@ arma::mat Node::filterBinarisedCol(std::string colName) {
         }
     }
 
+    //Number of binarized columns with given column name
     unsigned numberOfCol = map_tmp.at(colName).size();
 
+    //Sheding those columns with indexes between index and numberOfCol
     arma::mat result = inputDataTable->DataMatrix();
     for(unsigned i = index+numberOfCol -1; i > index; i--) {
         result.shed_col(i);
@@ -93,9 +104,12 @@ arma::mat Node::filterBinarisedCol(std::string colName) {
     return result;
 }
 
+//Making a data table without the column with given column name
 DataTable Node::filter(std::string colName) {
     
     std::vector<std::string> vectorOfNames = inputDataTable->ColumnNames();
+    
+    //Finding index of the column with the given column name
     unsigned long i = 0;
     for(; i < vectorOfNames.size(); i++){
         if (vectorOfNames[i].compare(colName) == 0){
@@ -106,8 +120,11 @@ DataTable Node::filter(std::string colName) {
         std::cout << "Invalid column name" << std::endl;
         return *inputDataTable;
     }
+    
     arma::mat dataMatrix;
     auto catVal = this->inputDataTable->CategoricalValues();
+    
+    //If the column is in the map categoricalValues, then we call filterBinarisedCol, else just shed the column with that index.
     if (catVal.find(colName) != catVal.end()){
         dataMatrix = this->filterBinarisedCol(colName);
         catVal.erase(colName);
@@ -115,6 +132,8 @@ DataTable Node::filter(std::string colName) {
         dataMatrix = inputDataTable->DataMatrix();
         dataMatrix.shed_col(i);
     }
+    
+    //Setting parameters for the new data table
     vectorOfNames.erase(vectorOfNames.begin()+i);
     DataTable dt = DataTable();
     dt.SetDataMatrix(dataMatrix);

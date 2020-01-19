@@ -6,6 +6,10 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 
+//Class for reading from csv file:
+//    -Constructor opens and destructor closes the file.
+//    -Method read returns vector of lines from file.
+
 class csvReader
 {
 public:
