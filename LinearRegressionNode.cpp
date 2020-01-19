@@ -47,7 +47,7 @@ void LinearRegressionNode::SetTargetColumn() {
 
 void LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions){
     
-    int nRows = values.size();
+    size_t nRows = values.size();
     double sum = 0;
     
     for(unsigned long i = 0; i < nRows; i++){
@@ -81,7 +81,7 @@ void LinearRegressionNode::run(){
         std::cout << "Parameters: " << std::endl;
         std::cout << Params() << std::endl;
 
-        arma::Row<double> predictions;
+        arma::Col<double> predictions;
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -128,7 +128,7 @@ void LinearRegressionNode::run(){
         std::cout << "Parameters: " << std::endl;
         std::cout << Params() << std::endl;
         
-        arma::Row<double> predictions;
+        arma::Col<double> predictions;
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -136,7 +136,7 @@ void LinearRegressionNode::run(){
         RSS(testTarget, predictions);
         std::cout << RssScore() << std::endl;
         
-        arma::Row<double> allPredictions;
+        arma::Col<double> allPredictions;
         data = trans(data);
         lr.Predict(data, allPredictions);
         SetTargetPredictions(allPredictions);

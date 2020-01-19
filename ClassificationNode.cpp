@@ -62,7 +62,7 @@ void ClassificationNode::SetNumClasses(const size_t& size){
 
 void ClassificationNode::Precision(arma::Row<size_t> values, arma::Row<size_t> predictions) {
     
-    int nRows = values.size();
+    size_t nRows = values.size();
     int nTrue = 0;
     for(unsigned long i = 0; i < nRows; i++){
         if (values[i] == predictions[i]){
