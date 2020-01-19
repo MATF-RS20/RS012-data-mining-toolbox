@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
     NormalizationNode nn("NN!");
     
     PartitionNode pn("PN!");*/
-   
+
+    /*
     StatisticsNode st("ST!");
 
     Stream s;
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
     s.add(&st);
     s.connect_to(&sn, &st);
 
-    /* s.add(&nn);
+    s.add(&nn);
     s.add(&pn);
     s.add(&dt);
    
@@ -53,11 +54,11 @@ int main(int argc, char *argv[])
     s.connect_to(&nn, &pn);
     s.connect_to(&pn, &dt);
   
-    dt.setTarget("Sepal_Length");*/
+    dt.setTarget("Sepal_Length");
 
     s.RunStream(&st);
     std::cout << st.GetStatistics() << std::endl;
-    
+    */
     
 
     return a.exec();

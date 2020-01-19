@@ -26,7 +26,8 @@
 #include <KMeansNode.hpp>
 
 #include <TableDialog.hpp>
-
+#include <SourceParametersDialog.hpp>
+#include <PartitionParametersDialog.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,7 +50,7 @@ private Q_SLOTS:
     void on_LISTA_Ulaz_clicked(const QModelIndex &index);
 
     void on_AddNodeButton_clicked();
-    void on_RunStreamButton_clicked(); //TODO (implementirati...)
+    void on_RunStreamButton_clicked();
     void on_ConnectButton_clicked();
 
 
@@ -61,16 +62,25 @@ private Q_SLOTS:
 
     void on_DataViewButton_clicked();
 
+
+    void on_SetParameters_clicked();
+
 private:
-    Node* pronadjiCvor(QString ID);
     void nacrtajCvor(QString nodeID);
     void dodajCvorUTok(QString nodeID);
     QString generisiID(QString nazivAlgoritma);
+    Node* pronadjiCvor(QString ID);
+
+    void podesiParametre_Ulazni(Node* cvor);
+    void podesiParametre_Uzorkovanje(Node* cvor);
+    void podesiParametre_Particionisanje(Node* cvor);
+    void podesiParametre_Filter(Node* cvor);
+    void podesiParametre_KSredina(Node* cvor);
 
     Ui::MainWindow *ui;
     QGraphicsScene *scena; //scena koja se iscrtava
     Stream *TokPodataka;   //glavni tok podataka
-    QString izabranaLista;
+    QString izabranaLista; //odabrana lista algoritama
 
     int broj_cvorova;
 };

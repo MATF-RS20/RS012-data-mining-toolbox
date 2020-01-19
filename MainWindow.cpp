@@ -96,8 +96,6 @@ void MainWindow::dodajCvorUTok(QString nodeID){
 
         if(nodeID[2] == 'P'){            
             auto sn = new SourceNode(nodeID.toStdString());
-            sn->setFilename("../RS012-data-mining-toolbox/iris.csv");
-            sn->read();
             TokPodataka->add(sn);
         }
 
@@ -494,7 +492,6 @@ Node *MainWindow::pronadjiCvor(QString id)
 }
 
 
-
 void MainWindow::on_LISTA_Preprocesiranje_clicked(const QModelIndex &index)
 {
     Q_UNUSED(index)
@@ -524,3 +521,86 @@ void MainWindow::on_LISTA_Ulaz_clicked(const QModelIndex &index)
 
 
 
+
+
+
+void MainWindow::on_SetParameters_clicked()
+{
+    auto selektovaniCvorovi = scena->selectedItems();
+
+    if(selektovaniCvorovi.size() > 1 or selektovaniCvorovi.size() < 1)
+        return;
+
+    auto cvor_S = static_cast<SceneNode*>(selektovaniCvorovi[0]);
+
+    QString nodeID = static_cast<SceneNode*>(cvor_S)->getID();
+
+    Node* Cvor = pronadjiCvor(nodeID);
+
+
+
+
+    if(nodeID[0] == 'U'){
+
+        if(nodeID[2] == 'P'){
+            podesiParametre_Ulazni(Cvor);
+        }
+
+
+    }else if(nodeID[0] == 'P'){
+
+        if(nodeID[2] == 'U'){
+           podesiParametre_Uzorkovanje(Cvor);
+        }
+
+        if(nodeID[2] == 'P'){
+            podesiParametre_Particionisanje(Cvor);
+        }
+
+        if(nodeID[2] == 'F'){
+            podesiParametre_Filter(Cvor);
+        }
+
+
+    }else if(nodeID[0] == 'C'){
+
+        if(nodeID[2] == 'K' && nodeID[3] == 'S'){
+            podesiParametre_KSredina(Cvor);
+        }
+    }
+
+}
+
+void MainWindow::podesiParametre_Ulazni(Node *cvor)
+{
+    SourceNode* Src = dynamic_cast<SourceNode*>(cvor);
+    SourceParametersDialog spD(Src);
+    spD.setModal(true);
+    spD.exec();
+}
+
+void MainWindow::podesiParametre_Uzorkovanje(Node *cvor)
+{
+    //TODO
+    return;
+}
+
+void MainWindow::podesiParametre_Particionisanje(Node *cvor)
+{
+    PartitionNode* Prt = dynamic_cast<PartitionNode*>(cvor);
+    PartitionParametersDialog prtD(Prt);
+    prtD.setModal(true);
+    prtD.exec();
+}
+
+void MainWindow::podesiParametre_Filter(Node *cvor)
+{
+    //TODO
+    return;
+}
+
+void MainWindow::podesiParametre_KSredina(Node *cvor)
+{
+    //TODO
+    return;
+}

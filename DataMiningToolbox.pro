@@ -28,10 +28,12 @@ SOURCES += \
     LinearSVMNode.cpp \
     Node.cpp \
     NormalizationNode.cpp \
+    PartitionParametersDialog.cpp \
     PerceptronNode.cpp \
     PartitionNode.cpp \
     SamplingNode.cpp \
     SceneNode.cpp \
+    SourceParametersDialog.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
     TableDialog.cpp \
@@ -54,10 +56,12 @@ HEADERS += \
     Node.hpp \
     NormalizationNode.hpp \
     PartitionNode.hpp \
+    PartitionParametersDialog.hpp \
     PerceptronNode.hpp \
     SamplingNode.hpp \
     SceneNode.hpp \
     SourceNode.hpp \
+    SourceParametersDialog.hpp \
     StatisticsNode.hpp \
     Stream.hpp \ \
     TableDialog.hpp \
@@ -67,6 +71,8 @@ HEADERS += \
 
 FORMS += \
     MainWindow.ui \
+    PartitionParametersDialog.ui \
+    SourceParametersDialog.ui \
     TableDialog.ui
 
 LIBS += -lmlpack -larmadillo -llapack -lblas
