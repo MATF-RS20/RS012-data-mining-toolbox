@@ -28,12 +28,14 @@ SOURCES += \
     KMeansNode.cpp \
     KMeansParametersDialog.cpp \
     LinearRegressionNode.cpp \
+    LinearRegressionParametersDialog.cpp \
     LinearSVMNode.cpp \
     Node.cpp \
     NormalizationNode.cpp \
     PartitionParametersDialog.cpp \
     PerceptronNode.cpp \
     PartitionNode.cpp \
+    PerceptronParametersDialog.cpp \
     SamplingNode.cpp \
     SamplingParametersDialog.cpp \
     SceneNode.cpp \
@@ -59,12 +61,14 @@ HEADERS += \
     KMeansNode.hpp \
     KMeansParametersDialog.hpp \
     LinearRegressionNode.hpp \
+    LinearRegressionParametersDialog.hpp \
     LinearSVMNode.hpp \
     Node.hpp \
     NormalizationNode.hpp \
     PartitionNode.hpp \
     PartitionParametersDialog.hpp \
     PerceptronNode.hpp \
+    PerceptronParametersDialog.hpp \
     SamplingNode.hpp \
     SamplingParametersDialog.hpp \
     SceneNode.hpp \
@@ -81,8 +85,10 @@ FORMS += \
     DecisionTreeParametersDialog.ui \
     FilterParametersDialog.ui \
     KMeansParametersDialog.ui \
+    LinearRegressionParametersDialog.ui \
     MainWindow.ui \
     PartitionParametersDialog.ui \
+    PerceptronParametersDialog.ui \
     SamplingParametersDialog.ui \
     SourceParametersDialog.ui \
     TableDialog.ui

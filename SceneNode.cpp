@@ -34,10 +34,12 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
     Q_UNUSED(option)
 
+    //fja za iscrtavanje cvora na sceni
 
     QPen olovka(Qt::black);
     olovka.setWidth(2);
 
+    //ukoliko je cvor selektovan iscrtacamo i njegove granice
     if(isSelected()){
 
         QPen olovkaObod;
@@ -54,25 +56,27 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     QBrush cetkica(Qt::cyan);
 
+    //bojimo cvor razlicitim bojama u zavisnosti od grup algoritama kojoj cvor pripada
     if(nodeID[0] == 'P')
-        cetkica.setColor(Qt::darkCyan);
+        cetkica.setColor(Qt::darkCyan); //preprocesiranj
     else if(nodeID[0] == 'K')
-        cetkica.setColor(Qt::darkGreen);
+        cetkica.setColor(Qt::darkGreen); //klasifikacija
     else if(nodeID[0] == 'C')
-        cetkica.setColor(Qt::darkBlue);
+        cetkica.setColor(Qt::darkBlue); //klasterovanje
     else if(nodeID[0] == 'R')
-        cetkica.setColor(Qt::darkRed);
+        cetkica.setColor(Qt::darkRed); //regresija
     else if(nodeID[0] == 'U')
-        cetkica.setColor(Qt::magenta);
+        cetkica.setColor(Qt::magenta); //ulazni podaci
 
 
     painter->setPen(olovka);
     painter->setBrush(cetkica);
 
+    //crtamo cvor
     painter->drawEllipse(10,10,50,50);
 
 
-
+    //ispisujemo naziv algoritma koji cvor predstavlja
     QCharRef s1 = nodeID[2];
     QCharRef s2 = nodeID[3];
 
@@ -96,7 +100,7 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     }
 
-
+    //ispisujemo stanje cvora
     olovka.setColor(Qt::black);
     painter->setPen(olovka);
 
@@ -109,17 +113,19 @@ void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 void SceneNode::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_1){
+    //fja registruje pritiske na tastere i u zavisnoti od njih menja stanje cvora
+
+    if(event->key() == Qt::Key_1){ //pritisnut taster 1
         s = Oznacen_1;
         update();
     }
 
-    if(event->key() == Qt::Key_2){
+    if(event->key() == Qt::Key_2){ //pritisnut taster 2
         s = Oznacen_2;
         update();
     }
 
-    if(event->key() == Qt::Key_3){
+    if(event->key() == Qt::Key_3){ //pritisnut taster 3
         s = Neoznacen;
         update();
     }

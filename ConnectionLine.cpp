@@ -29,6 +29,8 @@ void ConnectionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 {
     Q_UNUSED(option)
 
+    //fja iscrtava liniju od pocetnog ka krajnjem cvoru
+
     QPen olovka(Qt::black);
 
     if(isSelected())

@@ -32,6 +32,9 @@
 #include <FilterParametersDialog.hpp>
 #include <KMeansParametersDialog.hpp>
 #include <DecisionTreeParametersDialog.hpp>
+#include <PerceptronParametersDialog.hpp>
+#include <LinearRegressionParametersDialog.hpp>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
