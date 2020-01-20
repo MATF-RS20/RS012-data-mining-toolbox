@@ -90,9 +90,12 @@ void PerceptronNode::run() {
         perceptronClassifier.Classify(data, allPredictions);
         SetClassPredictions(allPredictions);
     }
+    
+    std::string result = GetPrecision();
+    result += GetConfusionMatrix();
+    setOutputMessage(result);
         
     DataTable dataTable = *InputDataTable();
-        this->setOutDataTable(dataTable);
-        
-        
+    this->setOutDataTable(dataTable);
+                
     }

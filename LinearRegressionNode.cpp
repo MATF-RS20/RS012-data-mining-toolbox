@@ -142,6 +142,18 @@ void LinearRegressionNode::run(){
         SetTargetPredictions(allPredictions);
         std::cout << TargetPredictions() << std::endl;
     }
+    
+    std::string result = "Paramteres:";
+    arma::vec parameters = Params();
+    for (unsigned long i = 0; i < parameters.size(); i++){
+        result += " ";
+        result += std::to_string(parameters[i]);
+    }
+    result += "\n";
+    result += "RSS: ";
+    result += std::to_string(RssScore());
+    result += "\n";
+    setOutputMessage(result);
 
     DataTable dataTable = *InputDataTable();
     this->setOutDataTable(dataTable);
