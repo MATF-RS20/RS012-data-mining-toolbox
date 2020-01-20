@@ -23,4 +23,10 @@ void DBSCANNode::run() {
 
     mlpack::dbscan::DBSCAN<> model(eps, minPoints);
     model.Cluster(inputDataTable->DataMatrix(), labels, centroids);
+
+    silhouette_shadow();
+
+    std::cout << "~~~~~~" << std::endl;
+    //std::cout << db.Labels() << std::endl;
+
 }

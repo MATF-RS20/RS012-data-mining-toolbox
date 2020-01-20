@@ -1,30 +1,38 @@
 #include "ClusteringNode.hpp"
 #include <limits>
 
-ClusteringNode::ClusteringNode(std::string name) : Node(name), silhouetteScore(-2) {}
+ClusteringNode::ClusteringNode(std::string name)
+    : Node(name), silhouetteScore(-2)
+{}
 
 arma::Row<size_t> ClusteringNode::Labels() {
+    /*
     if(0.00001 < fabs(-2- silhouetteScore)) {
         return labels;
     } else {
-        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+        std::cout << "1) Klasterovanje mora biti pokrenuto!" << std::endl;
         return nullptr;
     }
+    */
+    return  labels;
 }
 
 arma::mat ClusteringNode::Centroids() {
+    /*
     if(0.00001 < fabs(-2- silhouetteScore)) {
         return centroids;
     } else {
-        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+        std::cout << "2) Klasterovanje mora biti pokrenuto!" << std::endl;
         return nullptr;
     }
+    */
+    return  centroids;
 }
 
 double ClusteringNode::SilhouetteScore() {
 
     if(0.00001 >= fabs(-2- silhouetteScore)) {
-        std::cout << "Klasterovanje mora biti pokrenuto!" << std::endl;
+        std::cout << "3) Klasterovanje mora biti pokrenuto!" << std::endl;
     }
     return silhouetteScore;
 }
@@ -55,8 +63,14 @@ void ClusteringNode::silhouette_shadow() {
     std::set<size_t> setLabel(labels.begin(), labels.end());
 
     for(auto l : setLabel) {
+
+
         sizesOfClusters[l] = std::accumulate(labels.begin(), labels.end(), static_cast<size_t>(0),
                                              [l](size_t acc, size_t x){if (x == l) return ++acc; else return acc;});
+        if(sizesOfClusters[l] == 0){
+            silhouetteScore = 0;
+               return;
+        }
     }
 
     double s = 0;

@@ -22,16 +22,22 @@ SOURCES += \
     ConnectionLine.cpp \
     DataTable.cpp \
     DecisionTreeNode.cpp \
+    DecisionTreeParametersDialog.cpp \
     FilterNode.cpp \
+    FilterParametersDialog.cpp \
     KMeansNode.cpp \
+    KMeansParametersDialog.cpp \
     LinearRegressionNode.cpp \
     LinearSVMNode.cpp \
     Node.cpp \
     NormalizationNode.cpp \
+    PartitionParametersDialog.cpp \
     PerceptronNode.cpp \
     PartitionNode.cpp \
     SamplingNode.cpp \
+    SamplingParametersDialog.cpp \
     SceneNode.cpp \
+    SourceParametersDialog.cpp \
     StatisticsNode.cpp \
     Stream.cpp \
     TableDialog.cpp \
@@ -47,17 +53,23 @@ HEADERS += \
     ConnectionLine.hpp \
     DataTable.hpp \
     DecisionTreeNode.hpp \
+    DecisionTreeParametersDialog.hpp \
     FilterNode.hpp \
+    FilterParametersDialog.hpp \
     KMeansNode.hpp \
+    KMeansParametersDialog.hpp \
     LinearRegressionNode.hpp \
     LinearSVMNode.hpp \
     Node.hpp \
     NormalizationNode.hpp \
     PartitionNode.hpp \
+    PartitionParametersDialog.hpp \
     PerceptronNode.hpp \
     SamplingNode.hpp \
+    SamplingParametersDialog.hpp \
     SceneNode.hpp \
     SourceNode.hpp \
+    SourceParametersDialog.hpp \
     StatisticsNode.hpp \
     Stream.hpp \ \
     TableDialog.hpp \
@@ -66,7 +78,13 @@ HEADERS += \
 
 
 FORMS += \
+    DecisionTreeParametersDialog.ui \
+    FilterParametersDialog.ui \
+    KMeansParametersDialog.ui \
     MainWindow.ui \
+    PartitionParametersDialog.ui \
+    SamplingParametersDialog.ui \
+    SourceParametersDialog.ui \
     TableDialog.ui
 
 LIBS += -lmlpack -larmadillo -llapack -lblas
