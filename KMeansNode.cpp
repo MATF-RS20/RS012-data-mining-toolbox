@@ -1,26 +1,22 @@
 #include "KMeansNode.hpp"
 
-#include "mlpack/methods/kmeans/kmeans.hpp"
-
+//Constructors
 KMeansNode::KMeansNode(std::string name) : ClusteringNode(name), numberOfClusters(2),
                                            distance(distances::EuclideanDistance), maxNumberOfIterations(1000) {}
 KMeansNode::KMeansNode(std::string name, size_t numCLus) : KMeansNode(name) { numberOfClusters = numCLus; }
+
 KMeansNode::KMeansNode(std::string name, distances d) : KMeansNode(name) { distance = d; }
+
 KMeansNode::KMeansNode(std::string name, size_t numCLus, size_t maxNumIter) : KMeansNode(name) { numberOfClusters = numCLus;
                                                                                                  maxNumberOfIterations = maxNumIter; }
 KMeansNode::KMeansNode(std::string name, distances d, size_t maxNumIter) : KMeansNode(name) { distance = d;
                                                                                               maxNumberOfIterations = maxNumIter;}
 KMeansNode::KMeansNode(std::string name, size_t numCLus, distances d, size_t maxNumIter) : ClusteringNode(name), numberOfClusters(numCLus),
                                                                                            distance(d), maxNumberOfIterations(maxNumIter) {}
-
+//Getters
 size_t KMeansNode::NumberOfClusters() {
 
     return  numberOfClusters;
-}
-
-void KMeansNode::SetNumberOfClusters(size_t number) {
-
-    numberOfClusters = number;
 }
 
 KMeansNode::distances KMeansNode::Distance() {
@@ -28,14 +24,20 @@ KMeansNode::distances KMeansNode::Distance() {
     return distance;
 }
 
-void KMeansNode::SetDistance(distances dist) {
-
-    distance = dist;
-}
-
 size_t KMeansNode::MaxNumberOfIterations() {
 
     return  maxNumberOfIterations;
+}
+
+//Setters
+void KMeansNode::SetNumberOfClusters(size_t number) {
+
+    numberOfClusters = number;
+}
+
+void KMeansNode::SetDistance(distances dist) {
+
+    distance = dist;
 }
 
 void KMeansNode::SetMaxNumberOfIterations(size_t number) {
@@ -43,8 +45,10 @@ void KMeansNode::SetMaxNumberOfIterations(size_t number) {
     maxNumberOfIterations = number;
 }
 
+
 void KMeansNode::run() {
 
+    //Make a model for adequate distance and cluster the data
     if(distances::EuclideanDistance == distance) {
 
         mlpack::kmeans::KMeans<mlpack::metric::EuclideanDistance> model(maxNumberOfIterations);
@@ -65,8 +69,10 @@ void KMeansNode::run() {
 
     centroids = trans(centroids);
     
+    //Estimate results
     silhouette_shadow();
     
+    //Set output
     std::string result = "Centroids:\n";
     for (unsigned long i = 0; i < centroids.n_rows; i++){
         result += std::to_string(i+1);

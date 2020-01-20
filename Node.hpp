@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include "DataTable.hpp"
+#include <vector>
 
 //Node is an abstract class that represents all the nodes in GUI. It has an abstract function run, that is specific for every 
 //subclass since every node that we will have in GUI has its own purpose. Since stream in GUI consists of nodes that are connected
@@ -28,8 +29,8 @@ public:
     void setOutDataTable(DataTable outDataTable);
     void setOutputMessage(std::string message);
 
-    //Methods needed for classification:
-    //for getting original "unbinarized" target categorical column that containes class, 
+
+    //Reversing binarization of the target column
     std::vector<std::string> unbinarize(std::string columnName) const;
     //and removing it from data
     arma::mat filterBinarisedCol(std::string colName);

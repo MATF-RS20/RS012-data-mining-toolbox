@@ -2,9 +2,10 @@
 #define LINEARREGRESSIONNODE_HPP
 
 #include "Node.hpp"
+#include <mlpack/methods/linear_regression/linear_regression.hpp>
 
 
-// Classification node that we use for testing for the time being
+// Node for Linear Regression
 class LinearRegressionNode : public Node{
 
 public:
@@ -13,29 +14,37 @@ public:
 
     ~LinearRegressionNode() override;
 
+    //Getters
+    arma::Col<double> TargetPredictions() const;
+    double RssScore() const;
+    arma::vec Params() const;
+
+    //Setters
     void setTarget(std::string targetName);
     void SetTargetColumn();
-    void run() override;
+    void SetTargetPredictions(const arma::Col<double> predictions);
+    void SetRssScore(const double& score);
+    void SetParams(const arma::vec& parameters);
     
+    //Checking if target is selected
     bool IsTargetSelected() const;
     
+    //Calculating rssScore
     void RSS(arma::Col<double> values, arma::Col<double> predictions);
-    
-    arma::Col<double> TargetPredictions() const;
-    void SetTargetPredictions(const arma::Col<double> predictions);
-    
-    double RssScore() const;
-    void SetRssScore(const double& score);
-    
-    arma::vec Params() const;
-    void SetParams(const arma::vec& parameters);
 
+
+
+    void run() override;
 
 protected:
+    //Target
     std::string targetColumnName;
     arma::Col<double> targetColumn;
+    //Predictions
     arma::Col<double> targetPredictions;
+    //Paramater that estimates the quality of the result model
     double rssScore;
+    //Parameters
     arma::vec params;
 };
 

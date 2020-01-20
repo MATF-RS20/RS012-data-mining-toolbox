@@ -52,10 +52,9 @@ void FilterNode::run() {
                 catCol.erase(colNames[i]);
                 //Shed column with index i, numOfCol times (arma::mat shed_cols(i), all indexes after i will decrement)
                 //i-numOfFiltered because of the above reason (if we already sheded a column)
-                //TODO: CHECK!!! i-numOfFiltered+catColSum !!!
                 while(numOfCol > 0) {
 
-                    matrix.shed_col(i-numOfFiltered);
+                    matrix.shed_col(i+catColSum-numOfFiltered);
                     numOfCol--;
                 }
             //Otherwise, just shed i+catColSum (add the number of categorical binarized columns that we didnt filter)

@@ -2,9 +2,11 @@
 #define KMEANS_HPP
 
 #include "ClusteringNode.hpp"
+#include "mlpack/methods/kmeans/kmeans.hpp"
 
 class KMeansNode : public ClusteringNode {
 public:
+    //Set of values for parameter distance
     enum class distances {
         ManhattanDistance,
         EuclideanDistance,
@@ -12,6 +14,8 @@ public:
         ChebyshevDistance
 
     };
+
+    //Constructors
     KMeansNode(std::string name);
     KMeansNode(std::string name, size_t numClus);
     KMeansNode(std::string name, distances d);
@@ -20,19 +24,20 @@ public:
     KMeansNode(std::string name, distances d, size_t maxNumIter);
     KMeansNode(std::string name, size_t numClus, distances d, size_t maxNumIter);
 
-
+    //Getters
     size_t NumberOfClusters();
-    void SetNumberOfClusters(size_t number);
-
     distances Distance();
-    void SetDistance(distances dist);
-
     size_t MaxNumberOfIterations();
+
+    //Setters
+    void SetNumberOfClusters(size_t number);
+    void SetDistance(distances dist);
     void SetMaxNumberOfIterations(size_t number);
 
     void run() override;
 
 private:
+    //Parameters
     size_t numberOfClusters;
     distances distance;
     size_t maxNumberOfIterations;

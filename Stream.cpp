@@ -1,5 +1,4 @@
 #include "Stream.hpp"
-#include <SourceNode.hpp>
 
 #include <iostream>
 

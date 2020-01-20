@@ -65,10 +65,10 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
     //For every tuple in data, for every value in the set of categories for the given column, if the adequate binarized column
     //field equals 1, then the class for that tuple is that category.
     for(unsigned i = 0; i < InputDataTable()->DataMatrix().n_rows; i++) {
-        unsigned tmp = colIndex;
+        unsigned long tmp = colIndex;
         for(auto c : map_tmp.at(columnName)) {
             //std::transform(OutputDataTable().DataMatrix().begin_col(colIndex), OutputDataTable().DataMatrix().end_col(colIndex), result.begin(), [c](double x){if (fabs(x-1) < 0.00001) return c;});
-            if(InputDataTable()->DataMatrix()(i, colIndex)) {
+            if(InputDataTable()->DataMatrix()(i, colIndex) > 0) {
                 result[i] = c;
                 break;
             }

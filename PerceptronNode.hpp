@@ -2,6 +2,9 @@
 #define PERCEPTRONNODE_HPP
 
 #include "ClassificationNode.hpp"
+#include <mlpack/methods/perceptron/perceptron.hpp>
+#include <string>
+
 
 class PerceptronNode : public ClassificationNode{
 

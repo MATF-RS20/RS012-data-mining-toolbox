@@ -3,10 +3,11 @@
 
 #include <map>
 #include <list>
+#include <SourceNode.hpp>
 #include "Node.hpp"
 
-// class that contains nodes and their connections
-class Stream{
+// Class that contains nodes and their connections.
+class Stream {
 
 public:
 

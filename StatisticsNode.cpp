@@ -1,5 +1,4 @@
 #include "StatisticsNode.hpp"
-#include <string.h>
 
 StatisticsNode::StatisticsNode(std::string name) : Node(name){}
 
@@ -13,6 +12,7 @@ void StatisticsNode::run() {
     unsigned long k = 0;
     std::string result = "";
     for (unsigned long j = 0; j < columns.size(); j++){
+        //Putting a column name in the reulting string
         result += "Column name: ";
         result += columns[j];
         result += "\n";
@@ -22,6 +22,7 @@ void StatisticsNode::run() {
             double maximum_value = data(0, k);
             double mean_value = 0;
 
+            //Finding min, max and mean for the values in that column
             for(unsigned long i = 0; i < data.n_rows; i++) {
                 if (minimum_value > data(i, k)){
                     minimum_value = data(i, k);
@@ -32,6 +33,7 @@ void StatisticsNode::run() {
             }
             mean_value /= data.n_rows;
 
+            //Finding variance for the values in that column
             double variance_value = 0;
 
             for(unsigned long i = 0; i < data.n_rows; i++) {
@@ -39,6 +41,7 @@ void StatisticsNode::run() {
             }
             variance_value /= data.n_rows;
 
+            //Puting all those values in the resulting string
             result += "Min: ";
             result += std::to_string(minimum_value);
             result += " Max: ";
@@ -55,6 +58,7 @@ void StatisticsNode::run() {
         }
     }
 
+    //Setting output message and outputDataTable
     statistics = result;
     setOutputMessage(result);
     DataTable dt = *InputDataTable();
@@ -62,7 +66,7 @@ void StatisticsNode::run() {
 
 }
 
+//Getter
 std::string StatisticsNode::GetStatistics() const{
     return statistics;
 }
-

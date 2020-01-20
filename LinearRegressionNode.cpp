@@ -1,19 +1,42 @@
 #include "LinearRegressionNode.hpp"
 
-#include <mlpack/methods/linear_regression/linear_regression.hpp>
-
 LinearRegressionNode::LinearRegressionNode(std::string name)
     :Node(name){}
 
 LinearRegressionNode::~LinearRegressionNode(){}
 
+//Checking if target is selected
 bool LinearRegressionNode::IsTargetSelected() const{
     return !(targetColumnName.compare("") == 0);
 }
 
+//Getters
+arma::Col<double> LinearRegressionNode::TargetPredictions() const{
+    return targetPredictions;
+}
+
+arma::vec LinearRegressionNode::Params() const{
+    return params;
+}
+
+double LinearRegressionNode::RssScore() const{
+    return rssScore;
+}
+
+//Setters
+void LinearRegressionNode::SetTargetPredictions(const arma::Col<double> predictions){
+    targetPredictions = predictions;
+}
+void LinearRegressionNode::SetRssScore(const double& score){
+    rssScore = score;
+}
+
+void LinearRegressionNode::SetParams(const arma::vec& parameters){
+    params = parameters;
+}
+
 void LinearRegressionNode::setTarget(std::string targetName) {
     targetColumnName = targetName;
-
 }
 
 void LinearRegressionNode::SetTargetColumn() {
@@ -21,6 +44,7 @@ void LinearRegressionNode::SetTargetColumn() {
     std::vector<std::string> columns = inputDataTable->ColumnNames();
     std::map<std::string, std::set<std::string>> map = inputDataTable->CategoricalValues();
     size_t index = 0;
+    //Finding the column with targetColumnName
     for(unsigned i = 0; i < columns.size(); i++) {
         if(0 == columns[i].compare(targetColumnName)) {
             if(map.find(targetColumnName) != map.end()) {
@@ -35,6 +59,7 @@ void LinearRegressionNode::SetTargetColumn() {
             break;
         }
 
+        //If the column we just passed was categorical, we increase index by the number of values of that column in order to skip binarized columns
         if(map.find(columns[i]) != map.end()) {
 
             index += map.at(columns[i]).size();
@@ -45,6 +70,7 @@ void LinearRegressionNode::SetTargetColumn() {
     }
 }
 
+//Calculating rssScore (sum(trueValue(i) - predictedValue(i))^2/numberOfTuples)
 void LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions){
     
     size_t nRows = values.size();
@@ -61,6 +87,7 @@ void LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predi
 
 void LinearRegressionNode::run(){
     
+    //Checking to see of targetColumnName is selected
     if (!this->IsTargetSelected()){
         std::cout << "Target variable not selected" << std::endl;
         DataTable dt = *InputDataTable();
@@ -68,20 +95,26 @@ void LinearRegressionNode::run(){
         return;
     }
     
+    //Select targetColumn
     this->SetTargetColumn();
+    //Filter targetColumn from data
     DataTable dt = filter(targetColumnName);
     arma::mat data = dt.DataMatrix();
     
+    //If not partitioned
     if (!dt.IsPartitioned()){
 
+        //Make a model from whole data
         data = trans(data);
         mlpack::regression::LinearRegression lr(data, targetColumn);
 
+        //Get and set parameters of regressioin
         SetParams(lr.Parameters());
         std::cout << "Parameters: " << std::endl;
         std::cout << Params() << std::endl;
 
-        arma::Row<double> predictions;
+        //Calculate predictions and rrsScore
+        arma::Col<double> predictions;
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -91,8 +124,10 @@ void LinearRegressionNode::run(){
         
         SetTargetPredictions(predictions);
         
-    } else {
+    } //If there is partition
+    else {
 
+        //Split data into test and train data and predictions
         arma::mat testData(dt.TestSize(), data.n_cols);
         arma::mat trainData(data.n_rows - dt.TestSize(), data.n_cols);
         
@@ -101,6 +136,7 @@ void LinearRegressionNode::run(){
         
         std::vector<bool> partition = dt.Partition();
         
+        //Fill test and train sets
         unsigned long train_index = 0;
         unsigned long test_index = 0;
         for(unsigned long i = 0; i < data.n_rows; i++){
@@ -122,13 +158,16 @@ void LinearRegressionNode::run(){
         trainData = trans(trainData);
         testData = trans(testData);
         
+        //Make model from train data
         mlpack::regression::LinearRegression lr(trainData, trainTarget);
 
+        //Get and set parameters
         SetParams(lr.Parameters());
         std::cout << "Parameters: " << std::endl;
         std::cout << Params() << std::endl;
         
-        arma::Row<double> predictions;
+        //Calculate predictions and rssScore from test data
+        arma::Col<double> predictions;
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -136,13 +175,15 @@ void LinearRegressionNode::run(){
         RSS(testTarget, predictions);
         std::cout << RssScore() << std::endl;
         
-        arma::Row<double> allPredictions;
+        //Calculate predictions and rssScore from whole data
+        arma::Col<double> allPredictions;
         data = trans(data);
         lr.Predict(data, allPredictions);
         SetTargetPredictions(allPredictions);
         std::cout << TargetPredictions() << std::endl;
     }
     
+    //Set output
     std::string result = "Paramteres:";
     arma::vec parameters = Params();
     for (unsigned long i = 0; i < parameters.size(); i++){
@@ -158,30 +199,3 @@ void LinearRegressionNode::run(){
     DataTable dataTable = *InputDataTable();
     this->setOutDataTable(dataTable);
 }
-
-arma::Col<double> LinearRegressionNode::TargetPredictions() const{
-    return targetPredictions;
-}
-    
-void LinearRegressionNode::SetTargetPredictions(const arma::Col<double> predictions){
-    targetPredictions = predictions;
-}
-
-double LinearRegressionNode::RssScore() const{
-    return rssScore;
-}
-
-void LinearRegressionNode::SetRssScore(const double& score){
-    rssScore = score;
-}
-    
-arma::vec LinearRegressionNode::Params() const{
-    return params;
-}
-
-void LinearRegressionNode::SetParams(const arma::vec& parameters){
-    params = parameters;
-}
-
-
-
