@@ -21,6 +21,10 @@ DataTable * Node::RefOutputDataTable(){
     return &outputDataTable;
 }
 
+std::string Node::OutputMessage() const{
+    return outputMessage;
+}
+
 //Setters
 void Node::setInputDataTable(DataTable* inDataTable)
 {
@@ -30,6 +34,10 @@ void Node::setInputDataTable(DataTable* inDataTable)
 void Node::setOutDataTable(DataTable outDataTable)
 {
     outputDataTable = outDataTable;
+}
+
+void Node::setOutputMessage(std::string message){
+    outputMessage = message;
 }
 
 //Retriving original column with given column name, from binarized columns in data matrix

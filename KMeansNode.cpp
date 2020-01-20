@@ -64,9 +64,25 @@ void KMeansNode::run() {
     }
 
     centroids = trans(centroids);
+    
+    silhouette_shadow();
+    
+    std::string result = "Centroids:\n";
+    for (unsigned long i = 0; i < centroids.n_rows; i++){
+        result += std::to_string(i+1);
+        result += ". ";
+        for (unsigned long j = 0; j < centroids.n_cols; j++){
+            result += std::to_string(centroids(i, j));
+            result += " ";
+        }
+        result += "\n";
+    }
+    result += "Silhouette score: ";
+    result += std::to_string(SilhouetteScore());
+    result += "\n";
+    setOutputMessage(result);
 
     DataTable dt(*InputDataTable());
     setOutDataTable(dt);
-
-    silhouette_shadow();
+    
 }

@@ -21,10 +21,12 @@ public:
     std::string NodeName() const;
     //TODO: DELETE!!!
     DataTable* RefOutputDataTable();
+    std::string OutputMessage() const;
 
     //Setters
     void setInputDataTable(DataTable* inDataTable);
     void setOutDataTable(DataTable outDataTable);
+    void setOutputMessage(std::string message);
 
     //Methods needed for classification:
     //for getting original "unbinarized" target categorical column that containes class, 
@@ -44,8 +46,8 @@ protected:
     //output of Node is contained in outputDataTable
     DataTable outputDataTable;
     std::string nodeName;
-
-
+    //message that contains results of a concrete node
+    std::string outputMessage;
 
 };
 

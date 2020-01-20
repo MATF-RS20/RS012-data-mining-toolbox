@@ -56,6 +56,7 @@ void StatisticsNode::run() {
     }
 
     statistics = result;
+    setOutputMessage(result);
     DataTable dt = *InputDataTable();
     this->setOutDataTable(dt);
 

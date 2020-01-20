@@ -96,6 +96,10 @@ void DecisionTreeNode::run() {
         
     }
     
+    std::string result = GetPrecision();
+    result += GetConfusionMatrix();
+    setOutputMessage(result);
+    
     DataTable dataTable = *InputDataTable();
     this->setOutDataTable(dataTable);
 }
