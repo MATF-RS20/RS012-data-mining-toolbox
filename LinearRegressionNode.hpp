@@ -15,14 +15,14 @@ public:
     ~LinearRegressionNode() override;
 
     //Getters
-    arma::Col<double> TargetPredictions() const;
+    arma::Row<double> TargetPredictions() const;
     double RssScore() const;
     arma::vec Params() const;
 
     //Setters
     void setTarget(std::string targetName);
     void SetTargetColumn();
-    void SetTargetPredictions(const arma::Col<double> predictions);
+    void SetTargetPredictions(const arma::Row<double> predictions);
     void SetRssScore(const double& score);
     void SetParams(const arma::vec& parameters);
     
@@ -30,7 +30,7 @@ public:
     bool IsTargetSelected() const;
     
     //Calculating rssScore
-    void RSS(arma::Col<double> values, arma::Col<double> predictions);
+    void RSS(arma::Row<double> values, arma::Row<double> predictions);
 
 
 
@@ -39,9 +39,9 @@ public:
 protected:
     //Target
     std::string targetColumnName;
-    arma::Col<double> targetColumn;
+    arma::Row<double> targetColumn;
     //Predictions
-    arma::Col<double> targetPredictions;
+    arma::Row<double> targetPredictions;
     //Paramater that estimates the quality of the result model
     double rssScore;
     //Parameters

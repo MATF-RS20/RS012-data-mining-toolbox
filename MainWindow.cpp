@@ -31,8 +31,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_AddNodeButton_clicked()
 {
-
-
     QString nazivAlgoritma;
 
     //dohvatanje naziva algoritma iz odabrane liste algoritama
@@ -178,8 +176,6 @@ void MainWindow::on_ConnectButton_clicked()
         return;
 
 
-
-
     //kastujemo u selektovane cvorove u SceneNode da bismo izvukli njihov ID
     auto tmp1 = static_cast<SceneNode*>(selektovaniCvorovi[0]);
     auto tmp2 = static_cast<SceneNode*>(selektovaniCvorovi[1]);
@@ -215,9 +211,7 @@ void MainWindow::on_ConnectButton_clicked()
 
     //izvlacimo ID-jeve cvorova
     QString id1 = static_cast<SceneNode*>(cvor1)->getID();
-    QString id2 = static_cast<SceneNode*>(cvor2)->getID();
-
-    //-------------------------
+    QString id2 = static_cast<SceneNode*>(cvor2)->getID();    
 
     auto mapaCvorova = TokPodataka->MapOfNodes();
 
@@ -235,11 +229,10 @@ void MainWindow::on_ConnectButton_clicked()
     }
 
 
-
     //vezivaje cvorova i unutar TokaPodataka
     TokPodataka->connect_to(prvi, drugi);
 
-
+    /*
     mapaCvorova = TokPodataka->MapOfNodes();
 
     for(std::pair<Node*, Node*> e : mapaCvorova){
@@ -249,6 +242,7 @@ void MainWindow::on_ConnectButton_clicked()
         else
             std::cout << e.first->NodeName() << ":" << e.second->NodeName() << std::endl;
     }
+    */
 
 }
 
@@ -282,13 +276,9 @@ void MainWindow::on_DisconnectButton_clicked()
 
     auto selektovaniCvorovi = scena->selectedItems();
 
-
     //osiguravamo se da su odabrana dva cvora
     if(selektovaniCvorovi.size() > 2 or selektovaniCvorovi.size() < 2)
         return;
-
-
-
 
     auto tmp1 = static_cast<SceneNode*>(selektovaniCvorovi[0]);
     auto tmp2 = static_cast<SceneNode*>(selektovaniCvorovi[1]);
@@ -353,6 +343,7 @@ void MainWindow::on_DisconnectButton_clicked()
 
 
     //ispis mape radi provere
+    /*
     mapaCvorova = TokPodataka->MapOfNodes();
 
     for(std::pair<Node*, Node*> e : mapaCvorova){
@@ -362,8 +353,7 @@ void MainWindow::on_DisconnectButton_clicked()
         else
             std::cout << e.first->NodeName() << ":" << e.second->NodeName() << std::endl;
     }
-
-
+    */
 }
 
 void MainWindow::on_ClearScene_clicked()
@@ -386,76 +376,76 @@ QString MainWindow::generisiID(QString nazivAlgoritma)
 
     if(!nazivAlgoritma.compare("Ulazni Podaci")){
 
-        nodeName = nodeName.append("U_");
-        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("U_"); //ulaz
+        nodeName = nodeName.append("P_"); //podaci
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
     }else if(!nazivAlgoritma.compare("Particionisanje")){
 
-        nodeName = nodeName.append("P_");
-        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("P_"); //perprocesiranje
+        nodeName = nodeName.append("P_"); //particionisanje
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
 
     }else if(!nazivAlgoritma.compare("Normalizacija")){
 
-        nodeName = nodeName.append("P_");
-        nodeName = nodeName.append("N_");
+        nodeName = nodeName.append("P_"); //preprocesiranje
+        nodeName = nodeName.append("N_"); //normalizacija
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
 
     }else if(!nazivAlgoritma.compare("Uzorkovanje")){
 
-        nodeName = nodeName.append("P_");
-        nodeName = nodeName.append("U_");
+        nodeName = nodeName.append("P_"); //preprocesiranje
+        nodeName = nodeName.append("U_"); //uzorkovanje
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
     }else if(!nazivAlgoritma.compare("Filter")){
 
-        nodeName = nodeName.append("P_");
-        nodeName = nodeName.append("F_");
+        nodeName = nodeName.append("P_"); //preprocesiranje
+        nodeName = nodeName.append("F_"); //filter
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
 
     }else if(!nazivAlgoritma.compare("Statistike")){
 
-        nodeName = nodeName.append("P_");
-        nodeName = nodeName.append("S_");
+        nodeName = nodeName.append("P_"); //preprocesiranje
+        nodeName = nodeName.append("S_"); //statistike
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
 
     }else if(!nazivAlgoritma.compare("Stablo Odlucivanja")){
 
-        nodeName = nodeName.append("K_");
-        nodeName = nodeName.append("SO_");
+        nodeName = nodeName.append("K_");  //klasifikacija
+        nodeName = nodeName.append("SO_"); //stablo odlucivanja
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
 
     }else if(!nazivAlgoritma.compare("Perceptron")){
 
-        nodeName = nodeName.append("K_");
-        nodeName = nodeName.append("P_");
+        nodeName = nodeName.append("K_"); //klasifikacija
+        nodeName = nodeName.append("P_"); //perceptron
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
     }else if(!nazivAlgoritma.compare("K-Sredina")){
 
-        nodeName = nodeName.append("C_");
-        nodeName = nodeName.append("KS_");
+        nodeName = nodeName.append("C_");  //klasterovanje
+        nodeName = nodeName.append("KS_"); //K-Sredina
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
     }else if(!nazivAlgoritma.compare("Prosta Linearna Regresija")){
 
-        nodeName = nodeName.append("R_");
-        nodeName = nodeName.append("L_");
+        nodeName = nodeName.append("R_"); //regresija
+        nodeName = nodeName.append("L_"); //prosta lin. regresija
         broj_cvorova++;
         nodeName = nodeName.append(QString::number(broj_cvorova));
 
@@ -463,11 +453,9 @@ QString MainWindow::generisiID(QString nazivAlgoritma)
     }else
         return "";
 
-    std::cout << nodeName.toStdString() << std::endl;
+    //std::cout << nodeName.toStdString() << std::endl;
+
     return nodeName;
-
-
-
 }
 
 void MainWindow::on_DataViewButton_clicked()
@@ -535,10 +523,6 @@ void MainWindow::on_LISTA_Ulaz_clicked(const QModelIndex &index)
     Q_UNUSED(index)
     izabranaLista = "Ulaz";
 }
-
-
-
-
 
 
 void MainWindow::on_SetParameters_clicked()

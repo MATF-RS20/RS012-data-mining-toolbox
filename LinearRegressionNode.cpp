@@ -11,7 +11,7 @@ bool LinearRegressionNode::IsTargetSelected() const{
 }
 
 //Getters
-arma::Col<double> LinearRegressionNode::TargetPredictions() const{
+arma::Row<double> LinearRegressionNode::TargetPredictions() const{
     return targetPredictions;
 }
 
@@ -24,7 +24,7 @@ double LinearRegressionNode::RssScore() const{
 }
 
 //Setters
-void LinearRegressionNode::SetTargetPredictions(const arma::Col<double> predictions){
+void LinearRegressionNode::SetTargetPredictions(const arma::Row<double> predictions){
     targetPredictions = predictions;
 }
 void LinearRegressionNode::SetRssScore(const double& score){
@@ -71,7 +71,7 @@ void LinearRegressionNode::SetTargetColumn() {
 }
 
 //Calculating rssScore (sum(trueValue(i) - predictedValue(i))^2/numberOfTuples)
-void LinearRegressionNode::RSS(arma::Col<double> values, arma::Col<double> predictions){
+void LinearRegressionNode::RSS(arma::Row<double> values, arma::Row<double> predictions){
     
     size_t nRows = values.size();
     double sum = 0;
@@ -114,7 +114,7 @@ void LinearRegressionNode::run(){
         std::cout << Params() << std::endl;
 
         //Calculate predictions and rrsScore
-        arma::Col<double> predictions;
+        arma::Row<double> predictions;
         lr.Predict(data, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -167,7 +167,7 @@ void LinearRegressionNode::run(){
         std::cout << Params() << std::endl;
         
         //Calculate predictions and rssScore from test data
-        arma::Col<double> predictions;
+        arma::Row<double> predictions;
         lr.Predict(testData, predictions);
         std::cout << "Predictions: " << std::endl;
         std::cout << predictions << std::endl;
@@ -176,7 +176,7 @@ void LinearRegressionNode::run(){
         std::cout << RssScore() << std::endl;
         
         //Calculate predictions and rssScore from whole data
-        arma::Col<double> allPredictions;
+        arma::Row<double> allPredictions;
         data = trans(data);
         lr.Predict(data, allPredictions);
         SetTargetPredictions(allPredictions);

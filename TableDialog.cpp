@@ -22,7 +22,6 @@ void TableDialog::view(Node* node)
     std::vector<std::string> columnNames = dataInfo.ColumnNames();
     std::map<std::string, std::set<std::string>> mapOfCategories = dataInfo.CategoricalValues();
     unsigned long nRows = dataInfo.DataMatrix().n_rows;
-    unsigned long nCols = dataInfo.DataMatrix().n_cols;
     bool hasOneMoreColumn = false;
     std::vector<std::string> lastColumn(nRows);
     std::string lastColumnName;
@@ -35,18 +34,13 @@ void TableDialog::view(Node* node)
             lastColumnName = "DT predictions";
             auto dt = dynamic_cast<DecisionTreeNode*>(node);
             arma::Row<size_t> predictions = dt->ClassPredictions();
-            /*std::string targetColumnName = dt->TargetColumnName();
-            lastColumn = node->unbinarize(targetColumnName);*/
             std::vector<std::string> vectorOfNames(mapOfCategories[dt->TargetColumnName()].size());
             unsigned long vecIndex = 0;
             for(auto c : mapOfCategories[dt->TargetColumnName()]){
                 vectorOfNames[vecIndex] = c;
                 vecIndex++;
             }
-            for(auto v : vectorOfNames){
-                std::cout << v << std::endl;
-            }
-            std::cout << vectorOfNames.size() << std::endl;
+
             for (unsigned long i = 0; i < predictions.size(); i++){
 
                 lastColumn[i] = vectorOfNames[predictions[i]];
@@ -55,11 +49,9 @@ void TableDialog::view(Node* node)
 
         if(nodeType[2] == 'P'){
             hasOneMoreColumn = true;
-            lastColumnName = "Perceptron predictions";
+            lastColumnName = "Per. predictions";
             auto prcn = dynamic_cast<PerceptronNode*>(node);
             arma::Row<size_t> predictions = prcn->ClassPredictions();
-            /*std::string targetColumnName = dt->TargetColumnName();
-            lastColumn = node->unbinarize(targetColumnName);*/
             for (unsigned long i = 0; i < predictions.size(); i++){
                 lastColumn[i] = std::to_string(predictions[i]);
             }
@@ -80,9 +72,9 @@ void TableDialog::view(Node* node)
     } else if(nodeType[0] == 'R'){
         if(nodeType[2] == 'L'){
             hasOneMoreColumn = true;
-            lastColumnName = "Regression predictions";
+            lastColumnName = "Reg. predictions";
             auto lrn = dynamic_cast<LinearRegressionNode*>(node);
-            arma::Col<double> predictions = lrn->TargetPredictions();
+            arma::Row<double> predictions = lrn->TargetPredictions();
             for(unsigned long i = 0; i < nRows; i++){
                 lastColumn[i] = std::to_string(predictions(i));
             }
@@ -90,7 +82,7 @@ void TableDialog::view(Node* node)
 
     }
 
-    int numOfColumns = columnNames.size();
+    int numOfColumns = static_cast<int>(columnNames.size());
     if (hasOneMoreColumn){
         if (numOfColumns != 0){
             numOfColumns++;
@@ -99,7 +91,7 @@ void TableDialog::view(Node* node)
         }
     }
 
-    ui->Tabelica->setRowCount(nRows);
+    ui->Tabelica->setRowCount(static_cast<int>(nRows));
     ui->Tabelica->setColumnCount(numOfColumns);
 
     for(unsigned long j = 0; j < columnNames.size(); j++){
@@ -118,7 +110,7 @@ void TableDialog::view(Node* node)
     ui->Tabelica->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->Tabelica->setShowGrid(false);
     ui->Tabelica->setStyleSheet("QTableView {selection-background-color: red;}");
-   // ui->Tabelica->setGeometry(QApplication::desktop()->screenGeometry());
+    //ui->Tabelica->setGeometry(QApplication::desktop()->screenGeometry());
 
     unsigned long k = 0;
     for(unsigned long j = 0; j < columnNames.size(); j++){
@@ -126,14 +118,14 @@ void TableDialog::view(Node* node)
             for(unsigned long i = 0; i < nRows; i++){
                 std::string field = std::to_string(matrix(i, k));
                 QString qstr = QString::fromStdString(field);
-                ui->Tabelica->setItem(i, j, new QTableWidgetItem(qstr));
+                ui->Tabelica->setItem(static_cast<int>(i), static_cast<int>(j), new QTableWidgetItem(qstr));
             }
             k++;
         } else {
             auto column = node->unbinarize(columnNames[j]);
             for(unsigned long i = 0; i < nRows; i++){
                 QString qstr = QString::fromStdString(column[i]);
-                ui->Tabelica->setItem(i, j, new QTableWidgetItem(qstr));
+                ui->Tabelica->setItem(static_cast<int>(i), static_cast<int>(j), new QTableWidgetItem(qstr));
             }
             k += mapOfCategories[columnNames[j]].size();
         }
@@ -141,7 +133,7 @@ void TableDialog::view(Node* node)
     if(hasOneMoreColumn){
         for(unsigned long i = 0; i < lastColumn.size(); i++){
             QString qstr = QString::fromStdString(lastColumn[i]);
-            ui->Tabelica->setItem(i, columnNames.size(), new QTableWidgetItem(qstr));
+            ui->Tabelica->setItem(static_cast<int>(i), static_cast<int>(columnNames.size()), new QTableWidgetItem(qstr));
         }
     }
 
