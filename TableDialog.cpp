@@ -145,4 +145,8 @@ void TableDialog::view(Node* node)
         }
     }
 
+
+    QString ispis = QString::fromStdString(node->OutputMessage());
+    ui->Ispis->setText(ispis);
+
 }

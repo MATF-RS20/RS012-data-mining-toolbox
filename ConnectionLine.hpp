@@ -23,11 +23,12 @@ public:
                const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
-    SceneNode* getPocetniCvor();
-    SceneNode* getKrajnjiCvor();
+    SceneNode* getPocetniCvor(); //fja vraca pocetni cvor
+    SceneNode* getKrajnjiCvor(); //fja vraca krajnji cvor
 
 
 private:
+    //pamtimo pocetni i krajnji cvor veze
     SceneNode* pocetniCvor;
     SceneNode* krajnjiCvor;
 };

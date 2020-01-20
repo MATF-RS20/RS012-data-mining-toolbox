@@ -70,27 +70,33 @@ void MainWindow::on_AddNodeButton_clicked()
         return;
     }
 
-
+    //generisanje jedinsvenog ID-a cvora
     auto nodeID = generisiID(nazivAlgoritma);
 
+    //crtanje cvora na sceni
     nacrtajCvor(nodeID);
 
+    //dodavanje cvor u tok podataka
     dodajCvorUTok(nodeID);
 
 }
 
 void MainWindow::nacrtajCvor(QString nodeID){
 
-
+    //pravimo cvor
     SceneNode *sn = new SceneNode(nodeID);
 
+    //dodajemo ga na scenu
     scena->addItem(sn);
 
+    //postavljano scenu
     ui->GlavniTok->setScene(scena);
 }
 
 void MainWindow::dodajCvorUTok(QString nodeID){
 
+    //fja particionise ID cvora i na osnovu toga dodaje objekat odgovarajuce
+    //klase u tok podataka
 
     if(nodeID[0] == 'U'){
 
@@ -167,20 +173,22 @@ void MainWindow::on_ConnectButton_clicked()
 
     auto selektovaniCvorovi = scena->selectedItems();
 
-
+    //provera da li su selektovana tacno 2 cvora
     if(selektovaniCvorovi.size() > 2 or selektovaniCvorovi.size() < 2)
         return;
 
 
 
 
-
+    //kastujemo u selektovane cvorove u SceneNode da bismo izvukli njihov ID
     auto tmp1 = static_cast<SceneNode*>(selektovaniCvorovi[0]);
     auto tmp2 = static_cast<SceneNode*>(selektovaniCvorovi[1]);
 
     SceneNode* cvor1;
     SceneNode* cvor2;
 
+    //u zavisnosti od oznake cvora postavjaju se vrednosti promenljivih cvor1 i cvor2
+    //videti klasu SceneNode za detaljnije objasnjenje oznake
     if(tmp1->GetNodeState() == SceneNode::Oznacen_1 && tmp2->GetNodeState() == SceneNode::Oznacen_2){
 
         cvor1 = static_cast<SceneNode*>(selektovaniCvorovi[0]);
@@ -195,16 +203,17 @@ void MainWindow::on_ConnectButton_clicked()
         return;
     }
 
+    //brisemo oznaku
     cvor1->ClearNodeState();
     cvor2->ClearNodeState();
 
-
+    //pravimo liniju tj vezi izmedju odabranih cvorova na sceni
     ConnectionLine* l = new ConnectionLine(cvor1, cvor2);
     scena->addItem(l);
 
     ui->GlavniTok->setScene(scena);
 
-
+    //izvlacimo ID-jeve cvorova
     QString id1 = static_cast<SceneNode*>(cvor1)->getID();
     QString id2 = static_cast<SceneNode*>(cvor2)->getID();
 
@@ -215,7 +224,7 @@ void MainWindow::on_ConnectButton_clicked()
     Node* prvi  = nullptr;
     Node* drugi = nullptr;
 
-    //pronalazenje cvorova
+    //pronalazenje cvorova u toku podataka
     for(std::pair<Node*, Node*> e : mapaCvorova){
 
         if(!e.first->NodeName().compare(id1.toStdString()))
@@ -227,7 +236,7 @@ void MainWindow::on_ConnectButton_clicked()
 
 
 
-
+    //vezivaje cvorova i unutar TokaPodataka
     TokPodataka->connect_to(prvi, drugi);
 
 
@@ -245,7 +254,7 @@ void MainWindow::on_ConnectButton_clicked()
 
 void MainWindow::on_RunStreamButton_clicked()
 {
-
+    //dohvatanje cvora odabranog cvora sa scene
     auto odabranCvor = scena->selectedItems();
     if(odabranCvor.size() != 1)
         return;
@@ -253,7 +262,7 @@ void MainWindow::on_RunStreamButton_clicked()
     auto cvorSaScene = odabranCvor[0];
     QString ID = static_cast<SceneNode*>(cvorSaScene)->getID();
 
-
+    //pronalazenje cvora u toku podataka
     Node* cvorIzMape = nullptr;
     auto mapaCvorova = TokPodataka->MapOfNodes();
     for(std::pair<Node*, Node*> e : mapaCvorova){
@@ -262,15 +271,19 @@ void MainWindow::on_RunStreamButton_clicked()
             cvorIzMape = e.first;
     }
 
+    //pozivanje f-je za pokretanje toka
     TokPodataka->RunStream(cvorIzMape);
 }
 
 void MainWindow::on_DisconnectButton_clicked()
 {
 
+    //analogno fji za povezivanje cvorova
 
     auto selektovaniCvorovi = scena->selectedItems();
 
+
+    //osiguravamo se da su odabrana dva cvora
     if(selektovaniCvorovi.size() > 2 or selektovaniCvorovi.size() < 2)
         return;
 
@@ -283,6 +296,7 @@ void MainWindow::on_DisconnectButton_clicked()
     SceneNode* cvor1;
     SceneNode* cvor2;
 
+    //proveravamo oznake
     if(tmp1->GetNodeState() == SceneNode::Oznacen_1 && tmp2->GetNodeState() == SceneNode::Oznacen_2){
 
         cvor1 = static_cast<SceneNode*>(selektovaniCvorovi[0]);
@@ -301,7 +315,7 @@ void MainWindow::on_DisconnectButton_clicked()
     cvor2->ClearNodeState();
 
 
-
+    //dohvatamo odgovarajucu liniju koja povezuje ta dva cvora i brisemo je
     auto sviElementi = scena->items();
 
     ConnectionLine* nekaLinija;
@@ -317,26 +331,28 @@ void MainWindow::on_DisconnectButton_clicked()
         }
     }
 
-
+    //brisanje linije
     scena->removeItem(linijaZaBrisanje);
 
+    //dohvatamo id drugog cvora
     QString id2 = static_cast<SceneNode*>(cvor2)->getID();
 
     auto mapaCvorova = TokPodataka->MapOfNodes();
 
     Node* drugi = nullptr;
 
-    //pronalazenje cvorova
+    //pronalazenje drugog cvorova u toku podataka
     for(std::pair<Node*, Node*> e : mapaCvorova){
 
         if(!e.first->NodeName().compare(id2.toStdString()))
             drugi = e.first;
     }
 
-
+    //brisanje veze i iz toka podataka
     TokPodataka->disconnect(drugi);
 
 
+    //ispis mape radi provere
     mapaCvorova = TokPodataka->MapOfNodes();
 
     for(std::pair<Node*, Node*> e : mapaCvorova){
@@ -352,12 +368,17 @@ void MainWindow::on_DisconnectButton_clicked()
 
 void MainWindow::on_ClearScene_clicked()
 {
+    //uklanjamo sve cvorove sa scene, kao i iz toka podataka
     scena->clear();
     TokPodataka = new Stream();
 }
 
 QString MainWindow::generisiID(QString nazivAlgoritma)
 {
+    //generisanje jedinstvenog ID-a za svaki cvor
+    //na osnovu njega se pravi veza izmedju cvorova na sceni i cvorova u glavnom toku podataka
+    //jer je taj ID jedinstven i za cvorove u glavnom toku a isti kao ID njihovOG odogovarajucEG cvora na sceni
+
     //pri generisanju jedinstvenog ID-a za cvorove brine se i o ukupnom broju cvorova
     //f-ja uvecava ukupan broj cvorova
 
@@ -451,19 +472,23 @@ QString MainWindow::generisiID(QString nazivAlgoritma)
 
 void MainWindow::on_DataViewButton_clicked()
 {
+
+    //za odabrani cvor fja ispisuje rezultate u prozor TableDialog
+
     auto selektovaniCvorovi = scena->selectedItems();
 
 
     if(selektovaniCvorovi.size() > 1 or selektovaniCvorovi.size() < 1)
         return;
 
-    //kast iz QgraphicsItem u SceneNode
+    //kast iz QGraphicsItem u SceneNode
     auto cvor_S = static_cast<SceneNode*>(selektovaniCvorovi[0]);
 
     QString id = static_cast<SceneNode*>(cvor_S)->getID();
 
     Node* Cvor = pronadjiCvor(id);
 
+    //pravljenje prozora i ispis rezultata cvora
     TableDialog td;
     td.setModal(true);
     td.view(Cvor);
@@ -483,7 +508,7 @@ Node *MainWindow::pronadjiCvor(QString id)
     return Cvor;
 }
 
-
+//slede f-je za detektovanje odabrane liste algoritama
 void MainWindow::on_LISTA_Preprocesiranje_clicked(const QModelIndex &index)
 {
     Q_UNUSED(index)
@@ -518,6 +543,10 @@ void MainWindow::on_LISTA_Ulaz_clicked(const QModelIndex &index)
 
 void MainWindow::on_SetParameters_clicked()
 {
+    //fja se poziva na pritisak dugmeta za postavljanje parametara cvora
+
+
+    //dohvatanje odabranog cvora na sceni
     auto selektovaniCvorovi = scena->selectedItems();
 
     if(selektovaniCvorovi.size() > 1 or selektovaniCvorovi.size() < 1)
@@ -527,10 +556,12 @@ void MainWindow::on_SetParameters_clicked()
 
     QString nodeID = static_cast<SceneNode*>(cvor_S)->getID();
 
+    //pronalazenje odgovarajuceg cvora u glanom toku podataka
     Node* Cvor = pronadjiCvor(nodeID);
 
 
-
+    //pozivanje odgovarajuce fje za postavljanje parametara u zavisnosti od tipa odabranog cvora
+    //svaka fja otvara poseban prozor za unos podataka
 
     if(nodeID[0] == 'U'){
 
@@ -583,6 +614,8 @@ void MainWindow::on_SetParameters_clicked()
 
 }
 
+//u nastavku slede fje za otvaranje prozora u kojima korisnik moze postaviti parametre za odabrane cvorova
+
 void MainWindow::podesiParametre_Ulazni(Node *cvor)
 {
     SourceNode* Src = dynamic_cast<SourceNode*>(cvor);
@@ -633,10 +666,17 @@ void MainWindow::podesiParametre_StabloOdlucivanja(Node *cvor)
 
 void MainWindow::podesiParametre_Perceptron(Node *cvor)
 {
-
+    PerceptronNode* pr = dynamic_cast<PerceptronNode*>(cvor);
+    PerceptronParametersDialog prD(pr);
+    prD.setModal(true);
+    prD.exec();
 }
 
 void MainWindow::podesiParametre_LinearnaRegresija(Node *cvor)
 {
+    LinearRegressionNode* ln = dynamic_cast<LinearRegressionNode*>(cvor);
+    LinearRegressionParametersDialog linD(ln);
+    linD.setModal(true);
+    linD.exec();
 
 }
