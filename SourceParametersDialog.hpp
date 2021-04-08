@@ -21,9 +21,8 @@ public:
     ~SourceParametersDialog();
 
 private slots:
-    void on_OdaberiCvor_clicked();
-
     void on_Potvrdi_clicked();
+    void on_OdaberiFajl_clicked();
 
 private:
     Ui::SourceParametersDialog *ui;

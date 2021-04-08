@@ -14,7 +14,7 @@ SourceParametersDialog::~SourceParametersDialog()
     delete ui;
 }
 
-void SourceParametersDialog::on_OdaberiCvor_clicked()
+void SourceParametersDialog::on_OdaberiFajl_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(
                 this,
@@ -26,6 +26,7 @@ void SourceParametersDialog::on_OdaberiCvor_clicked()
     ui->NazivFajla->setText(fileName);
 }
 
+
 void SourceParametersDialog::on_Potvrdi_clicked()
 {
     QString nazivFjla = ui->NazivFajla->toPlainText();
@@ -33,3 +34,5 @@ void SourceParametersDialog::on_Potvrdi_clicked()
     UlazniCvor->read();
     this->close();
 }
+
+
