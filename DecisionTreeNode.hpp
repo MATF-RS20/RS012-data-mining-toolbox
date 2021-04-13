@@ -5,30 +5,27 @@
 #include <mlpack/methods/decision_tree/decision_tree.hpp>
 #include <string>
 
-
-//Class representing Decision Tree
-class DecisionTreeNode : public ClassificationNode{
+// Class representing Decision Tree
+class DecisionTreeNode : public ClassificationNode {
 
 public:
+  // Constructor
+  DecisionTreeNode(std::string name);
 
-    //Constructor
-    DecisionTreeNode(std::string name);
+  // Getters
+  int MaximumDepth() const;
+  int MinimumLeafSize() const;
 
-    //Getters
-    int MaximumDepth() const;
-    int MinimumLeafSize() const;
+  // Setters
+  void SetMaximumDepth(int depth);
+  void SetMinimumLeafSize(int size);
 
-    //Setters
-    void SetMaximumDepth(int depth);
-    void SetMinimumLeafSize(int size);
-
-    void run() override;
+  void run() override;
 
 private:
-
-    //Parameters
-    int maximumDepth;
-    int minimumLeafSize;
+  // Parameters
+  int maximumDepth;
+  int minimumLeafSize;
 };
 
 #endif // DECISIONTREENODE_H

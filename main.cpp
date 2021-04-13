@@ -1,68 +1,62 @@
-#include "MainWindow.hpp"
+#include "DBSCANNode.hpp"
 #include "DataTable.hpp"
-#include "LinearRegressionNode.hpp"
 #include "DecisionTreeNode.hpp"
-#include "SourceNode.hpp"
-#include "Stream.hpp"
-#include "StatisticsNode.hpp"
-#include "SamplingNode.hpp"
+#include "FilterNode.hpp"
+#include "KMeansNode.hpp"
+#include "LinearRegressionNode.hpp"
+#include "MainWindow.hpp"
 #include "NormalizationNode.hpp"
 #include "PerceptronNode.hpp"
-#include "KMeansNode.hpp"
-#include "DBSCANNode.hpp"
-#include "FilterNode.hpp"
+#include "SamplingNode.hpp"
+#include "SourceNode.hpp"
+#include "StatisticsNode.hpp"
+#include "Stream.hpp"
 
 #include <iostream>
 
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+  QApplication a(argc, argv);
+  MainWindow w;
+  w.show();
 
-     
-    /*
-    SourceNode sn("SN!");
+  /*
+  SourceNode sn("SN!");
 
-    sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
-    sn.read();
-    
-    DBSCANNode db("asdf", 0.5, 3);
-    */
+  sn.setFilename("../RS012-data-mining-toolbox/iris.csv");
+  sn.read();
 
+  DBSCANNode db("asdf", 0.5, 3);
+  */
 
-   /* LinearRegressionNode dt("DT!");
-    
-    NormalizationNode nn("NN!");
-    
-    PartitionNode pn("PN!");*/
+  /* LinearRegressionNode dt("DT!");
 
+   NormalizationNode nn("NN!");
 
+   PartitionNode pn("PN!");*/
 
-    /*
-    NormalizationNode nn("NN!");
+  /*
+  NormalizationNode nn("NN!");
 
-    Stream s;
+  Stream s;
 
-    s.add(&sn);
-    s.add(&db);
-    s.add(&nn);
+  s.add(&sn);
+  s.add(&db);
+  s.add(&nn);
 
-    s.connect_to(&sn, &nn);
-    s.connect_to(&nn, &db);
+  s.connect_to(&sn, &nn);
+  s.connect_to(&nn, &db);
 
-    s.RunStream(&db);
+  s.RunStream(&db);
 
-    std::cout << db.SilhouetteScore() << std::endl;
+  std::cout << db.SilhouetteScore() << std::endl;
 
-    std::cout << db.Centroids() << std::endl;
-    std::cout << db.Labels() << std::endl;
-    */
+  std::cout << db.Centroids() << std::endl;
+  std::cout << db.Labels() << std::endl;
+  */
 
-
-    return a.exec();
-    //return 0;
+  return a.exec();
+  // return 0;
 }

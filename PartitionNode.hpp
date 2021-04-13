@@ -3,30 +3,27 @@
 
 #include "Node.hpp"
 #include <algorithm>
-#include <stdlib.h>    
-#include <time.h> 
+#include <stdlib.h>
+#include <time.h>
 
-//Partitions data to train and test set
+// Partitions data to train and test set
 class PartitionNode : public Node {
 
 public:
+  // Constructor
+  PartitionNode(std::string name);
 
-    //Constructor
-    PartitionNode(std::string name);
-    
-    //Getter
-    double TestSizeRatio() const;
+  // Getter
+  double TestSizeRatio() const;
 
-    //Setter
-    void SetTestSizeRatio(const double &size);
+  // Setter
+  void SetTestSizeRatio(const double &size);
 
-    void run() override;
-
+  void run() override;
 
 private:
-
-    //Ratio of size of test set
-    double testSizeRatio;
+  // Ratio of size of test set
+  double testSizeRatio;
 };
 
 #endif // PARTITIONNODE_H
