@@ -1,5 +1,9 @@
 #include "PartitionNode.hpp"
 
+
+#include <random>
+
+
 //Constructor
 PartitionNode::PartitionNode(std::string name):Node(name){
     testSizeRatio = 0.3;
@@ -22,7 +26,7 @@ void PartitionNode::run(){
     std::vector<bool> partition(rowSize);
 
     //Finding size of test set
-    unsigned long testSize = static_cast<unsigned long>(static_cast<double>(rowSize)*testSizeRatio);
+    auto testSize = static_cast<unsigned long>(static_cast<double>(rowSize)*testSizeRatio);
     //int trainingSize = rowSize - testSize;
     //Inserting adequate number of true/false values (true is for test)
     for(unsigned long i = 0; i < testSize; i++){
@@ -33,8 +37,8 @@ void PartitionNode::run(){
     }
     
     //Shuffling the vector in order to get random sets
-    srand(time(0));
-    std::random_shuffle(partition.begin(), partition.end());
+    srand(time(nullptr));
+    std::shuffle(partition.begin(), partition.end(), std::mt19937(std::random_device()()));
 
     DataTable dt = *InputDataTable();
     

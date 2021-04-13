@@ -1,6 +1,6 @@
 #include <ClassificationNode.hpp>
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 //Constructor
 ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
@@ -8,7 +8,7 @@ ClassificationNode::ClassificationNode(std::string name) : Node::Node(name){
 }
 
 bool ClassificationNode::IsVariableSelected(){
-    return !(targetColumnName.compare("") == 0);
+    return !(targetColumnName == "");
 }
 
 

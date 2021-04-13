@@ -82,7 +82,7 @@ void MainWindow::on_AddNodeButton_clicked()
 void MainWindow::nacrtajCvor(QString nodeID){
 
     //pravimo cvor
-    SceneNode *sn = new SceneNode(nodeID);
+    auto *sn = new SceneNode(nodeID);
 
     //dodajemo ga na scenu
     scena->addItem(sn);
@@ -204,7 +204,7 @@ void MainWindow::on_ConnectButton_clicked()
     cvor2->ClearNodeState();
 
     //pravimo liniju tj vezi izmedju odabranih cvorova na sceni
-    ConnectionLine* l = new ConnectionLine(cvor1, cvor2);
+    auto* l = new ConnectionLine(cvor1, cvor2);
     scena->addItem(l);
 
     ui->GlavniTok->setScene(scena);
@@ -602,7 +602,7 @@ void MainWindow::on_SetParameters_clicked()
 
 void MainWindow::podesiParametre_Ulazni(Node *cvor)
 {
-    SourceNode* Src = dynamic_cast<SourceNode*>(cvor);
+    auto* Src = dynamic_cast<SourceNode*>(cvor);
     SourceParametersDialog spD(Src);
     spD.setModal(true);
     spD.exec();
@@ -610,7 +610,7 @@ void MainWindow::podesiParametre_Ulazni(Node *cvor)
 
 void MainWindow::podesiParametre_Uzorkovanje(Node *cvor)
 {
-    SamplingNode* sm = dynamic_cast<SamplingNode*>(cvor);
+    auto* sm = dynamic_cast<SamplingNode*>(cvor);
     SamplingParametersDialog smD(sm);
     smD.setModal(true);
     smD.exec();
@@ -618,7 +618,7 @@ void MainWindow::podesiParametre_Uzorkovanje(Node *cvor)
 
 void MainWindow::podesiParametre_Particionisanje(Node *cvor)
 {
-    PartitionNode* Prt = dynamic_cast<PartitionNode*>(cvor);
+    auto* Prt = dynamic_cast<PartitionNode*>(cvor);
     PartitionParametersDialog prtD(Prt);
     prtD.setModal(true);
     prtD.exec();
@@ -626,7 +626,7 @@ void MainWindow::podesiParametre_Particionisanje(Node *cvor)
 
 void MainWindow::podesiParametre_Filter(Node *cvor)
 {
-    FilterNode* fil = dynamic_cast<FilterNode*>(cvor);
+    auto* fil = dynamic_cast<FilterNode*>(cvor);
     FilterParametersDialog filD(fil);
     filD.setModal(true);
     filD.exec();
@@ -634,7 +634,7 @@ void MainWindow::podesiParametre_Filter(Node *cvor)
 
 void MainWindow::podesiParametre_KSredina(Node *cvor)
 {
-    KMeansNode* km = dynamic_cast<KMeansNode*>(cvor);
+    auto* km = dynamic_cast<KMeansNode*>(cvor);
     KMeansParametersDialog kmD(km);
     kmD.setModal(true);
     kmD.exec();
@@ -642,7 +642,7 @@ void MainWindow::podesiParametre_KSredina(Node *cvor)
 
 void MainWindow::podesiParametre_StabloOdlucivanja(Node *cvor)
 {
-    DecisionTreeNode* dt = dynamic_cast<DecisionTreeNode*>(cvor);
+    auto* dt = dynamic_cast<DecisionTreeNode*>(cvor);
     DecisionTreeParametersDialog dtD(dt);
     dtD.setModal(true);
     dtD.exec();
@@ -650,7 +650,7 @@ void MainWindow::podesiParametre_StabloOdlucivanja(Node *cvor)
 
 void MainWindow::podesiParametre_Perceptron(Node *cvor)
 {
-    PerceptronNode* pr = dynamic_cast<PerceptronNode*>(cvor);
+    auto* pr = dynamic_cast<PerceptronNode*>(cvor);
     PerceptronParametersDialog prD(pr);
     prD.setModal(true);
     prD.exec();
@@ -658,7 +658,7 @@ void MainWindow::podesiParametre_Perceptron(Node *cvor)
 
 void MainWindow::podesiParametre_LinearnaRegresija(Node *cvor)
 {
-    LinearRegressionNode* ln = dynamic_cast<LinearRegressionNode*>(cvor);
+    auto* ln = dynamic_cast<LinearRegressionNode*>(cvor);
     LinearRegressionParametersDialog linD(ln);
     linD.setModal(true);
     linD.exec();

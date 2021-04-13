@@ -1,7 +1,11 @@
 #include "SceneNode.hpp"
 
+
+#include <utility>
+
+
 SceneNode::SceneNode(QString ID)
-    : nodeID(ID)
+    : nodeID(std::move(ID))
 {
     setFlag(ItemIsMovable);
     setFlag(ItemIsSelectable);
@@ -27,7 +31,7 @@ void SceneNode::ClearNodeState()
 
 QRectF SceneNode::boundingRect() const
 {
-    return QRectF(10,10,50,50);
+    return {10,10,50,50};
 }
 
 void SceneNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -22,7 +22,7 @@ SceneNode *ConnectionLine::getKrajnjiCvor()
 QRectF ConnectionLine::boundingRect() const
 {
 
-    return  QRectF(0,0,1,1);
+    return  {0,0,1,1};
 }
 
 void ConnectionLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

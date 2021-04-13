@@ -94,8 +94,8 @@ void TableDialog::view(Node* node)
     ui->Tabelica->setRowCount(static_cast<int>(nRows));
     ui->Tabelica->setColumnCount(numOfColumns);
 
-    for(unsigned long j = 0; j < columnNames.size(); j++){
-        QString qstr = QString::fromStdString(columnNames[j]);
+    for(auto & columnName : columnNames){
+        QString qstr = QString::fromStdString(columnName);
         TableHeader<<qstr;
     }
     if(hasOneMoreColumn){

@@ -21,7 +21,7 @@ void FilterNode::RemoveColName(std::string colName) {
 
     for(auto iter = columnNames.begin(); iter != columnNames.end(); iter++) {
 
-        if(0 == colName.compare(*iter)) {
+        if(*iter == colName) {
 
             columnNames.erase(iter);
             break;

@@ -3,11 +3,11 @@
 LinearRegressionNode::LinearRegressionNode(std::string name)
     :Node(name){}
 
-LinearRegressionNode::~LinearRegressionNode(){}
+LinearRegressionNode::~LinearRegressionNode()= default;
 
 //Checking if target is selected
 bool LinearRegressionNode::IsTargetSelected() const{
-    return !(targetColumnName.compare("") == 0);
+    return !(targetColumnName == "");
 }
 
 //Getters
@@ -45,8 +45,8 @@ void LinearRegressionNode::SetTargetColumn() {
     std::map<std::string, std::set<std::string>> map = inputDataTable->CategoricalValues();
     size_t index = 0;
     //Finding the column with targetColumnName
-    for(unsigned i = 0; i < columns.size(); i++) {
-        if(0 == columns[i].compare(targetColumnName)) {
+    for(auto & column : columns) {
+        if(targetColumnName == column) {
             if(map.find(targetColumnName) != map.end()) {
                 std::cout << "Greska! Izabrana kolona sa kategorickom vrednoscu!" << std::endl;
                 return;
@@ -60,9 +60,9 @@ void LinearRegressionNode::SetTargetColumn() {
         }
 
         //If the column we just passed was categorical, we increase index by the number of values of that column in order to skip binarized columns
-        if(map.find(columns[i]) != map.end()) {
+        if(map.find(column) != map.end()) {
 
-            index += map.at(columns[i]).size();
+            index += map.at(column).size();
         } else {
 
              index++;

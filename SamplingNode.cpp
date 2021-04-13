@@ -1,5 +1,9 @@
 #include "SamplingNode.hpp"  
 
+
+#include <random>
+
+
 //Constructor
 SamplingNode::SamplingNode(std::string name):Node(name){
     sampleSizeRatio = 0.3;
@@ -23,7 +27,7 @@ void SamplingNode::run(){
 
     //Setting n (sample size) elements of vector to true indicating that sample size elements will be taken
     // for sample. Setting the rest of elements to false.
-    unsigned long sampleSize = static_cast<unsigned long>(static_cast<double>(rowSize)*SampleSizeRatio());
+    auto sampleSize = static_cast<unsigned long>(static_cast<double>(rowSize)*SampleSizeRatio());
     for(unsigned long i = 0; i < sampleSize; i++){
         sample[i] = true;
     }
@@ -32,8 +36,8 @@ void SamplingNode::run(){
     }
     
     //Shuffling the vector to obtain a random sample
-    srand(time(0));
-    std::random_shuffle(sample.begin(), sample.end());
+    srand(time(nullptr));
+    std::shuffle(sample.begin(), sample.end(), std::mt19937(std::random_device()()));
 
     //Making new data matrix by sampling from the current one using the vector for sampling
     unsigned long colSize = InputDataTable()->DataMatrix().n_cols;

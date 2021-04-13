@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Stream::Stream(){}
+Stream::Stream()= default;
 
 // TODO: fix destructor
 Stream::~Stream(){

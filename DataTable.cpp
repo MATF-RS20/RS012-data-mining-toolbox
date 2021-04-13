@@ -2,12 +2,12 @@
 
 //Constructor
 DataTable::DataTable(){
-    isPartitioned = 0;
+    isPartitioned = false;
     testSize = 0;
 }
 
 //Destructor
-DataTable::~DataTable(){}
+DataTable::~DataTable()= default;
 
 
 //Copy constructor

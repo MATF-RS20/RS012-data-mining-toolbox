@@ -10,13 +10,13 @@ void StatisticsNode::run() {
     std::map<std::string, std::set<std::string>> mapOfCategories = InputDataTable()->CategoricalValues();
 
     unsigned long k = 0;
-    std::string result = "";
-    for (unsigned long j = 0; j < columns.size(); j++){
+    std::string result;
+    for (auto & column : columns){
         //Putting a column name in the reulting string
         result += "Column name: ";
-        result += columns[j];
+        result += column;
         result += "\n";
-        if (mapOfCategories.find(columns[j]) == mapOfCategories.end()){
+        if (mapOfCategories.find(column) == mapOfCategories.end()){
 
             double minimum_value = data(0, k);
             double maximum_value = data(0, k);
@@ -54,7 +54,7 @@ void StatisticsNode::run() {
             k++;
         } else {
             //TODO
-            k += mapOfCategories[columns[j]].size();
+            k += mapOfCategories[column].size();
         }
     }
 

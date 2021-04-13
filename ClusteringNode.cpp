@@ -56,7 +56,7 @@ double ClusteringNode::SSC(size_t index, size_t label) {
 
     return std::accumulate(indexes.begin(), indexes.end(), 0.0,
                     [index, label, this](double acc, size_t x){if(label == labels(x)) return acc+distance(x, index);
-                                                        else return acc;});
+                                                        return acc;});
 }
 
 //Estimating the result of clustering. Caclulates the sum((Ai - Bi)/max(Ai, Bi))/n where Ai =SSC(i, label(i))/sizeOfCluster,
@@ -73,7 +73,7 @@ void ClusteringNode::silhouette_shadow() {
 
 
         sizesOfClusters[l] = std::accumulate(labels.begin(), labels.end(), static_cast<size_t>(0),
-                                             [l](size_t acc, size_t x){if (x == l) return ++acc; else return acc;});
+                                             [l](size_t acc, size_t x){if (x == l) return ++acc; return acc;});
         check *= sizesOfClusters[l];
     }
     if(0 == check) {

@@ -1,7 +1,11 @@
 #include "Node.hpp"
 
+
+#include <utility>
+
+
 //Constructor
-Node::Node(std::string name) : nodeName(name){}
+Node::Node(std::string name) : nodeName(std::move(name)){}
 
 //Getters
 const DataTable* Node::InputDataTable() const{
@@ -50,15 +54,20 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
     auto colNames = InputDataTable()->ColumnNames();
     
     //Geting index of column with given name
-    for(size_t i = 0; i < colNames.size(); i++) {
-        if(0 == colNames[i].compare(columnName)) {
+    for(auto & colName : colNames) {
+        if(columnName == colName) {
             break;
         }
-        else if(map_tmp.find(colNames[i]) != map_tmp.end()) {
-            colIndex += map_tmp.at(colNames[i]).size();
+        if(map_tmp.find(colName) != map_tmp.end()) {
+
+            colIndex += map_tmp.at(colName).size();
+
         }
+
         else {
+
             colIndex++;
+
         }
     }
 
@@ -88,14 +97,19 @@ arma::mat Node::filterBinarisedCol(std::string colName) {
     
     //Finding index of the first binarized column, with given column name
     for(unsigned i = 0; i != colNames.size(); i++) {
-        if(0 == colNames[i].compare(colName)) {
+        if(colName == colNames[i]) {
             break;
         }
-        else if(map_tmp.find(colNames[i]) != map_tmp.end()) {
+        if(map_tmp.find(colNames[i]) != map_tmp.end()) {
+
             index += map_tmp.at(colNames[i]).size();
+
         }
+
         else {
+
             index++;
+
         }
     }
 
@@ -120,7 +134,7 @@ DataTable Node::filter(std::string colName) {
     //Finding index of the column with the given column name
     unsigned long i = 0;
     for(; i < vectorOfNames.size(); i++){
-        if (vectorOfNames[i].compare(colName) == 0){
+        if (vectorOfNames[i] == colName){
             break;
         }
     }

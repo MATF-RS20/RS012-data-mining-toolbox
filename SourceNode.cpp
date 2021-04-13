@@ -16,7 +16,7 @@ SourceNode::SourceNode(const SourceNode& sn) : Node(sn.NodeName()) {
 //Setter for filename
 void SourceNode::setFilename(std::string fName)
 {
-    if (filename.compare(fName) != 0){
+    if (filename != fName){
         isRead = false;
         filename = fName;
     }
@@ -24,12 +24,12 @@ void SourceNode::setFilename(std::string fName)
 
 //A helper function, used in read()
 double helper (std::string value, std::string comparingValue) {
-    if(0 == value.compare(comparingValue)) {
+    if(comparingValue == value) {
         return 1;
     }
-    else {
-        return 0;
-    }
+            return 0;
+
+   
 }
 
 //A helper function, used in read()
@@ -69,12 +69,12 @@ void SourceNode::read(){
     for(unsigned i = 0; i < rows[0].size(); i++) {
         std::vector<std::string> catCol;
         std::vector<double> numCol;
-        for(unsigned j = 0; j < rows.size(); j++) {
-            catCol.push_back(rows[j][i]);
+        for(auto & row : rows) {
+            catCol.push_back(row[i]);
             if(!isCategorical) {
-                isCategorical = !isDouble(rows[j][i]);
+                isCategorical = !isDouble(row[i]);
                 if(!isCategorical) {
-                    numCol.push_back(std::stod(rows[j][i]));
+                    numCol.push_back(std::stod(row[i]));
                 }
             }
         }

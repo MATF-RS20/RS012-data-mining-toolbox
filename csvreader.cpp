@@ -33,10 +33,10 @@ std::vector<std::vector<std::string>> csvReader::read() {
     }
 
     //Spliting csv data and triming results. Puting results in splitRows.
-    for(unsigned i = 0; i < rows.size(); i++) {
+    for(auto & row : rows) {
         std::vector<std::string> tmp;
         //Split
-        boost::split(tmp, rows[i], boost::is_any_of(","));
+        boost::split(tmp, row, boost::is_any_of(","));
         //Trim
         std::transform(tmp.begin(), tmp.end(), tmp.begin(), [](std::string x){return x.erase(x.find_last_not_of(" \n\r\t")+1);});
         std::transform(tmp.begin(), tmp.end(), tmp.begin(), [](std::string x){return x.erase(0, x.find_first_not_of(" \n\r\t"));});
