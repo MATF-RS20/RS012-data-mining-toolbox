@@ -120,6 +120,7 @@ add_executable(DataMiningToolbox
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 #specifikujemo gde se nalaze .hpp fajlovi
 target_include_directories(DataMiningToolbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

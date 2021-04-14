@@ -130,8 +130,8 @@ void LinearRegressionNode::run() {
     arma::mat testData(dt.TestSize(), data.n_cols);
     arma::mat trainData(data.n_rows - dt.TestSize(), data.n_cols);
 
-    arma::Col<double> testTarget(dt.TestSize());
-    arma::Col<double> trainTarget(data.n_rows - dt.TestSize());
+    arma::Row<double> testTarget(dt.TestSize());
+    arma::Row<double> trainTarget(data.n_rows - dt.TestSize());
 
     std::vector<bool> partition = dt.Partition();
 
