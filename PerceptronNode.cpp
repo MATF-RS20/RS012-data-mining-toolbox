@@ -102,6 +102,7 @@ void PerceptronNode::run() {
 
     // Getting predictions from whole data
     arma::Row<size_t> allPredictions;
+    allPredictions.set_size(data.n_rows);
     data = trans(data);
     perceptronClassifier.Classify(data, allPredictions);
     SetClassPredictions(allPredictions);
