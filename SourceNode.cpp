@@ -20,6 +20,9 @@ void SourceNode::setFilename(std::string fName) {
   }
 }
 
+// Getter for filename
+std::string SourceNode::getFileName(){return filename;}
+
 // A helper function, used in read()
 double helper(std::string value, std::string comparingValue) {
   if (comparingValue == value) {

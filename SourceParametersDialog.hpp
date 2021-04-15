@@ -3,6 +3,7 @@
 
 #include <Node.hpp>
 #include <QDialog>
+#include <QMessageBox>
 #include <QFileDialog>
 #include <QString>
 #include <SourceNode.hpp>

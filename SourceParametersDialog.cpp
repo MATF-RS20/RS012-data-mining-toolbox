@@ -18,7 +18,12 @@ void SourceParametersDialog::on_OdaberiFajl_clicked() {
 
 void SourceParametersDialog::on_Potvrdi_clicked() {
   QString nazivFjla = ui->NazivFajla->toPlainText();
+  if(nazivFjla.isEmpty() or nazivFjla.trimmed() == ""){
+        QMessageBox::information(
+            this, "Greska!", "Odabrati datoteku!");
+        return;
+  }     
   UlazniCvor->setFilename(nazivFjla.toStdString());
-  UlazniCvor->read();
+  UlazniCvor->read();  
   this->close();
 }

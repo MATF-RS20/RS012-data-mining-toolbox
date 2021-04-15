@@ -9,6 +9,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <SceneNode.hpp>
 
 #include <DecisionTreeNode.hpp>

@@ -20,6 +20,9 @@ public:
 
   // Setter for name of the file from which we read
   void setFilename(std::string fName);
+  
+  // Getter for name of the file from which we read
+  std::string getFileName();
 
   void read();
 

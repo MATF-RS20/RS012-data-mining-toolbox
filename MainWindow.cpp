@@ -246,7 +246,22 @@ void MainWindow::on_RunStreamButton_clicked() {
     if (!e.first->NodeName().compare(ID.toStdString()))
       cvorIzMape = e.first;
   }
+  
+  //pronalazimo ulazni cvor i proveravamo da li ima ulazne podatke
+  SourceNode* ulazniCvor = nullptr;
+  std::string namePrefix = "U_P";
+  for (std::pair<Node *, Node *> e : mapaCvorova) {
 
+    if (!e.first->NodeName().compare(0, namePrefix.length(), namePrefix))
+      ulazniCvor = dynamic_cast<SourceNode *>(e.first);
+  }
+    
+  if(ulazniCvor->getFileName().empty() or ulazniCvor->getFileName() == ""){
+      QMessageBox::information(
+            this, "Greska!", "Ulazni cvor nema podatke!");
+      return;
+  }
+    
   // pozivanje f-je za pokretanje toka
   TokPodataka->RunStream(cvorIzMape);
 }
