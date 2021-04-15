@@ -122,6 +122,10 @@ add_executable(DataMiningToolbox
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
+#opcije za generisanje gcov izvestaja
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs")
+
 #specifikujemo gde se nalaze .hpp fajlovi
 target_include_directories(DataMiningToolbox PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
