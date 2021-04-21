@@ -38,7 +38,7 @@ bool isDouble(const std::string &s) {
 
   try {
     std::stod(s);
-  } catch (std::invalid_argument) {
+  } catch (std::invalid_argument &) {
     return false;
   }
   return true;

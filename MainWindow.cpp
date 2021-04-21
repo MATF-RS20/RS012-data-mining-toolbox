@@ -259,7 +259,8 @@ void MainWindow::on_RunStreamButton_clicked() {
       ulazniCvor = dynamic_cast<SourceNode *>(e.first);
   }
 
-  if (ulazniCvor->getFileName().empty() or ulazniCvor->getFileName() == "") {
+  if (ulazniCvor != nullptr and
+      (ulazniCvor->getFileName().empty() or ulazniCvor->getFileName() == "")) {
     QMessageBox::information(this, "Greska!", "Ulazni cvor nema podatke!");
     return;
   }
