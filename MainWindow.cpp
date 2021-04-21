@@ -1,4 +1,7 @@
 #include "MainWindow.hpp"
+
+#include <utility>
+
 #include "ui_MainWindow.h"
 
 // Konstruktor Glavnog Prozora
@@ -71,7 +74,7 @@ void MainWindow::on_AddNodeButton_clicked() {
 void MainWindow::nacrtajCvor(QString nodeID) {
 
   // pravimo cvor
-  auto *sn = new SceneNode(nodeID);
+  auto *sn = new SceneNode(std::move(nodeID));
 
   // dodajemo ga na scenu
   scena->addItem(sn);
@@ -159,8 +162,8 @@ void MainWindow::on_ConnectButton_clicked() {
     return;
 
   // kastujemo u selektovane cvorove u SceneNode da bismo izvukli njihov ID
-  auto tmp1 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
-  auto tmp2 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
+  auto tmp1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
+  auto tmp2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
 
   SceneNode *cvor1;
   SceneNode *cvor2;
@@ -170,14 +173,14 @@ void MainWindow::on_ConnectButton_clicked() {
   if (tmp1->GetNodeState() == SceneNode::Oznacen_1 &&
       tmp2->GetNodeState() == SceneNode::Oznacen_2) {
 
-    cvor1 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
-    cvor2 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
+    cvor1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
+    cvor2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
 
   } else if (tmp1->GetNodeState() == SceneNode::Oznacen_2 &&
              tmp2->GetNodeState() == SceneNode::Oznacen_1) {
 
-    cvor1 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
-    cvor2 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
+    cvor1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
+    cvor2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
   } else {
     std::cout << "Los Odabir Cvorova!" << std::endl;
     return;
@@ -236,7 +239,7 @@ void MainWindow::on_RunStreamButton_clicked() {
     return;
 
   auto cvorSaScene = odabranCvor[0];
-  QString ID = static_cast<SceneNode *>(cvorSaScene)->getID();
+  QString ID = dynamic_cast<SceneNode *>(cvorSaScene)->getID();
 
   // pronalazenje cvora u toku podataka
   Node *cvorIzMape = nullptr;
@@ -246,22 +249,21 @@ void MainWindow::on_RunStreamButton_clicked() {
     if (!e.first->NodeName().compare(ID.toStdString()))
       cvorIzMape = e.first;
   }
-  
-  //pronalazimo ulazni cvor i proveravamo da li ima ulazne podatke
-  SourceNode* ulazniCvor = nullptr;
+
+  // pronalazimo ulazni cvor i proveravamo da li ima ulazne podatke
+  SourceNode *ulazniCvor = nullptr;
   std::string namePrefix = "U_P";
   for (std::pair<Node *, Node *> e : mapaCvorova) {
 
     if (!e.first->NodeName().compare(0, namePrefix.length(), namePrefix))
       ulazniCvor = dynamic_cast<SourceNode *>(e.first);
   }
-    
-  if(ulazniCvor->getFileName().empty() or ulazniCvor->getFileName() == ""){
-      QMessageBox::information(
-            this, "Greska!", "Ulazni cvor nema podatke!");
-      return;
+
+  if (ulazniCvor->getFileName().empty() or ulazniCvor->getFileName() == "") {
+    QMessageBox::information(this, "Greska!", "Ulazni cvor nema podatke!");
+    return;
   }
-    
+
   // pozivanje f-je za pokretanje toka
   TokPodataka->RunStream(cvorIzMape);
 }
@@ -276,8 +278,8 @@ void MainWindow::on_DisconnectButton_clicked() {
   if (selektovaniCvorovi.size() > 2 or selektovaniCvorovi.size() < 2)
     return;
 
-  auto tmp1 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
-  auto tmp2 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
+  auto tmp1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
+  auto tmp2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
 
   SceneNode *cvor1;
   SceneNode *cvor2;
@@ -286,14 +288,14 @@ void MainWindow::on_DisconnectButton_clicked() {
   if (tmp1->GetNodeState() == SceneNode::Oznacen_1 &&
       tmp2->GetNodeState() == SceneNode::Oznacen_2) {
 
-    cvor1 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
-    cvor2 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
+    cvor1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
+    cvor2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
 
   } else if (tmp1->GetNodeState() == SceneNode::Oznacen_2 &&
              tmp2->GetNodeState() == SceneNode::Oznacen_1) {
 
-    cvor1 = static_cast<SceneNode *>(selektovaniCvorovi[1]);
-    cvor2 = static_cast<SceneNode *>(selektovaniCvorovi[0]);
+    cvor1 = dynamic_cast<SceneNode *>(selektovaniCvorovi[1]);
+    cvor2 = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
   } else {
     std::cout << "Los Odabir Cvorova!" << std::endl;
     return;
@@ -360,7 +362,7 @@ void MainWindow::on_ClearScene_clicked() {
   TokPodataka = new Stream();
 }
 
-QString MainWindow::generisiID(QString nazivAlgoritma) {
+QString MainWindow::generisiID(const QString &nazivAlgoritma) {
   // generisanje jedinstvenog ID-a za svaki cvor
   // na osnovu njega se pravi veza izmedju cvorova na sceni i cvorova u glavnom
   // toku podataka jer je taj ID jedinstven i za cvorove u glavnom toku a isti
@@ -459,7 +461,7 @@ void MainWindow::on_DataViewButton_clicked() {
     return;
 
   // kast iz QGraphicsItem u SceneNode
-  auto cvor_S = static_cast<SceneNode *>(selektovaniCvorovi[0]);
+  auto cvor_S = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
 
   QString id = static_cast<SceneNode *>(cvor_S)->getID();
 
@@ -472,7 +474,7 @@ void MainWindow::on_DataViewButton_clicked() {
   td.exec();
 }
 
-Node *MainWindow::pronadjiCvor(QString id) {
+Node *MainWindow::pronadjiCvor(const QString &id) {
   auto mapaCvorova = TokPodataka->MapOfNodes();
   Node *Cvor = nullptr;
   for (std::pair<Node *, Node *> e : mapaCvorova) {
@@ -515,7 +517,7 @@ void MainWindow::on_SetParameters_clicked() {
   if (selektovaniCvorovi.size() > 1 or selektovaniCvorovi.size() < 1)
     return;
 
-  auto cvor_S = static_cast<SceneNode *>(selektovaniCvorovi[0]);
+  auto cvor_S = dynamic_cast<SceneNode *>(selektovaniCvorovi[0]);
 
   QString nodeID = static_cast<SceneNode *>(cvor_S)->getID();
 

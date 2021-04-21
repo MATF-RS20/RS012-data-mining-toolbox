@@ -15,7 +15,7 @@ class Node {
 
 public:
   // Constructor and destructor
-  Node(std::string name);
+  explicit Node(std::string name);
   virtual ~Node() = default;
 
   // Getters
@@ -28,15 +28,15 @@ public:
 
   // Setters
   void setInputDataTable(DataTable *inDataTable);
-  void setOutDataTable(DataTable outDataTable);
+  void setOutDataTable(const DataTable &outDataTable);
   void setOutputMessage(std::string message);
 
   // Reversing binarization of the target column
-  std::vector<std::string> unbinarize(std::string columnName) const;
+  std::vector<std::string> unbinarize(const std::string &columnName) const;
   // and removing it from data
-  arma::mat filterBinarisedCol(std::string colName);
+  arma::mat filterBinarisedCol(const std::string &colName);
   // Method needed for linear regression: removing target column from data
-  DataTable filter(std::string colName);
+  DataTable filter(const std::string &colName);
 
   // run is an action that a Node can do (preform clustering/classification,
   // normalize, standardize...)

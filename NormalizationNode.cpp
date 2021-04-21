@@ -1,6 +1,9 @@
 #include "NormalizationNode.hpp"
 
-NormalizationNode::NormalizationNode(std::string name) : Node(name) {}
+#include <utility>
+
+NormalizationNode::NormalizationNode(std::string name)
+    : Node(std::move(name)) {}
 
 void NormalizationNode::run() {
 

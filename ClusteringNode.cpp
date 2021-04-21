@@ -1,7 +1,9 @@
 #include "ClusteringNode.hpp"
 
+#include <utility>
+
 ClusteringNode::ClusteringNode(std::string name)
-    : Node(name), silhouetteScore(-2) {}
+    : Node(std::move(name)), silhouetteScore(-2) {}
 
 // Getters
 arma::Row<size_t> ClusteringNode::Labels() {

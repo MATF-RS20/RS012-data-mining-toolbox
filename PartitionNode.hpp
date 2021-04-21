@@ -3,15 +3,15 @@
 
 #include "Node.hpp"
 #include <algorithm>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 // Partitions data to train and test set
 class PartitionNode : public Node {
 
 public:
   // Constructor
-  PartitionNode(std::string name);
+  explicit PartitionNode(std::string name);
 
   // Getter
   double TestSizeRatio() const;

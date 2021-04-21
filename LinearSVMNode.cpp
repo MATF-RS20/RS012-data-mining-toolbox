@@ -1,6 +1,9 @@
 #include "LinearSVMNode.hpp"
 
-LinearSVMNode::LinearSVMNode(std::string name) : ClassificationNode(name) {}
+#include <utility>
+
+LinearSVMNode::LinearSVMNode(std::string name)
+    : ClassificationNode(std::move(name)) {}
 
 double LinearSVMNode::Lambda() const { return lambda; }
 double LinearSVMNode::Delta() const { return delta; }

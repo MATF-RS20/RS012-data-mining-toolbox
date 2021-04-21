@@ -22,15 +22,17 @@ void Node::setInputDataTable(DataTable *inDataTable) {
   inputDataTable = inDataTable;
 }
 
-void Node::setOutDataTable(DataTable outDataTable) {
+void Node::setOutDataTable(const DataTable &outDataTable) {
   outputDataTable = outDataTable;
 }
 
-void Node::setOutputMessage(std::string message) { outputMessage = message; }
+void Node::setOutputMessage(std::string message) {
+  outputMessage = std::move(message);
+}
 
 // Retriving original column with given column name, from binarized columns in
 // data matrix
-std::vector<std::string> Node::unbinarize(std::string columnName) const {
+std::vector<std::string> Node::unbinarize(const std::string &columnName) const {
 
   // Alocating resulting vector
   std::vector<std::string> result(InputDataTable()->DataMatrix().n_rows);
@@ -61,7 +63,7 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
   // class for that tuple is that category.
   for (unsigned i = 0; i < InputDataTable()->DataMatrix().n_rows; i++) {
     unsigned long tmp = colIndex;
-    for (auto c : map_tmp.at(columnName)) {
+    for (const auto &c : map_tmp.at(columnName)) {
       // std::transform(OutputDataTable().DataMatrix().begin_col(colIndex),
       // OutputDataTable().DataMatrix().end_col(colIndex), result.begin(),
       // [c](double x){if (fabs(x-1) < 0.00001) return c;});
@@ -78,7 +80,7 @@ std::vector<std::string> Node::unbinarize(std::string columnName) const {
 }
 
 // Making an arma::mat without a column with name given, which is binarized
-arma::mat Node::filterBinarisedCol(std::string colName) {
+arma::mat Node::filterBinarisedCol(const std::string &colName) {
   std::vector<std::string> colNames = inputDataTable->ColumnNames();
   const std::map<std::string, std::set<std::string>> map_tmp =
       InputDataTable()->CategoricalValues();
@@ -115,7 +117,7 @@ arma::mat Node::filterBinarisedCol(std::string colName) {
 }
 
 // Making a data table without the column with given column name
-DataTable Node::filter(std::string colName) {
+DataTable Node::filter(const std::string &colName) {
 
   std::vector<std::string> vectorOfNames = inputDataTable->ColumnNames();
 

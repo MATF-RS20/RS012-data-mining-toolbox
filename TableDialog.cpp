@@ -32,7 +32,7 @@ void TableDialog::view(Node *node) {
       std::vector<std::string> vectorOfNames(
           mapOfCategories[dt->TargetColumnName()].size());
       unsigned long vecIndex = 0;
-      for (auto c : mapOfCategories[dt->TargetColumnName()]) {
+      for (const auto &c : mapOfCategories[dt->TargetColumnName()]) {
         vectorOfNames[vecIndex] = c;
         vecIndex++;
       }

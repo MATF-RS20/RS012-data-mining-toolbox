@@ -13,14 +13,14 @@ class SourceNode : public Node {
 
 public:
   // Constructor
-  SourceNode(std::string name);
+  explicit SourceNode(std::string name);
 
   // Copy constructor
   SourceNode(const SourceNode &sn);
 
   // Setter for name of the file from which we read
-  void setFilename(std::string fName);
-  
+  void setFilename(const std::string &fName);
+
   // Getter for name of the file from which we read
   std::string getFileName();
 

@@ -6,7 +6,7 @@
 class LinearSVMNode : public ClassificationNode {
 
 public:
-  LinearSVMNode(std::string name);
+  explicit LinearSVMNode(std::string name);
 
   double Lambda() const;
   double Delta() const;

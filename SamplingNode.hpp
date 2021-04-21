@@ -3,15 +3,15 @@
 
 #include "Node.hpp"
 #include <algorithm>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 // Taking a sample of existing data
 class SamplingNode : public Node {
 
 public:
   // Constructor
-  SamplingNode(std::string name);
+  explicit SamplingNode(std::string name);
 
   // Getter
   double SampleSizeRatio() const;

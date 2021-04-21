@@ -8,7 +8,7 @@
 class ClusteringNode : public Node {
 public:
   // Constructor
-  ClusteringNode(std::string name);
+  explicit ClusteringNode(std::string name);
 
   // Getters
   arma::Row<size_t> Labels();

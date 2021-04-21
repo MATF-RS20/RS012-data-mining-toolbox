@@ -1,6 +1,8 @@
 #include "StatisticsNode.hpp"
 
-StatisticsNode::StatisticsNode(std::string name) : Node(name) {}
+#include <utility>
+
+StatisticsNode::StatisticsNode(std::string name) : Node(std::move(name)) {}
 
 void StatisticsNode::run() {
 

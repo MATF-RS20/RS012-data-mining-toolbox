@@ -1,17 +1,21 @@
 #include "FilterNode.hpp"
 
-FilterNode::FilterNode(std::string name) : Node(name) {}
+#include <utility>
+
+FilterNode::FilterNode(std::string name) : Node(std::move(name)) {}
 
 std::set<std::string> FilterNode::ColumnNames() { return columnNames; }
 
 void FilterNode::SetColumnNames(std::set<std::string> colNames) {
 
-  columnNames = colNames;
+  columnNames = std::move(colNames);
 }
 
-void FilterNode::AddColumn(std::string colName) { columnNames.insert(colName); }
+void FilterNode::AddColumn(const std::string &colName) {
+  columnNames.insert(colName);
+}
 
-void FilterNode::RemoveColName(std::string colName) {
+void FilterNode::RemoveColName(const std::string &colName) {
 
   for (auto iter = columnNames.begin(); iter != columnNames.end(); iter++) {
 
@@ -75,7 +79,7 @@ void FilterNode::run() {
   std::vector<std::string> filteredColNames(colNames.size() -
                                             columnNames.size());
   std::copy_if(colNames.begin(), colNames.end(), filteredColNames.begin(),
-               [this](std::string x) {
+               [this](const std::string &x) {
                  return (columnNames.end() == columnNames.find(x));
                });
 

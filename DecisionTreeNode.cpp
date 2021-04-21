@@ -1,7 +1,9 @@
 #include "DecisionTreeNode.hpp"
 
+#include <utility>
+
 DecisionTreeNode::DecisionTreeNode(std::string name)
-    : ClassificationNode(name) {
+    : ClassificationNode(std::move(name)) {
   maximumDepth = 0;
   minimumLeafSize = 10;
 }

@@ -8,7 +8,7 @@
 class PerceptronNode : public ClassificationNode {
 
 public:
-  PerceptronNode(std::string name);
+  explicit PerceptronNode(std::string name);
 
   void run() override;
 };

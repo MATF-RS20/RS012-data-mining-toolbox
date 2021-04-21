@@ -1,7 +1,9 @@
 #include "SourceNode.hpp"
 
+#include <utility>
+
 // Constructor
-SourceNode::SourceNode(std::string name) : Node(name) {
+SourceNode::SourceNode(std::string name) : Node(std::move(name)) {
   this->setInputDataTable(nullptr);
   isRead = false;
 }
@@ -13,7 +15,7 @@ SourceNode::SourceNode(const SourceNode &sn) : Node(sn.NodeName()) {
 }
 
 // Setter for filename
-void SourceNode::setFilename(std::string fName) {
+void SourceNode::setFilename(const std::string &fName) {
   if (filename != fName) {
     isRead = false;
     filename = fName;
@@ -21,10 +23,10 @@ void SourceNode::setFilename(std::string fName) {
 }
 
 // Getter for filename
-std::string SourceNode::getFileName(){return filename;}
+std::string SourceNode::getFileName() { return filename; }
 
 // A helper function, used in read()
-double helper(std::string value, std::string comparingValue) {
+double helper(const std::string &value, const std::string &comparingValue) {
   if (comparingValue == value) {
     return 1;
   }
@@ -32,7 +34,7 @@ double helper(std::string value, std::string comparingValue) {
 }
 
 // A helper function, used in read()
-bool isDouble(std::string s) {
+bool isDouble(const std::string &s) {
 
   try {
     std::stod(s);
@@ -116,10 +118,11 @@ void SourceNode::read() {
     size_t numOfCategories = categories.size();
     // Vector of indexes we need to change.
     std::vector<unsigned int> keysOfNumerical(numericalColumns.size());
-    std::transform(
-        numericalColumns.begin(), numericalColumns.end(),
-        keysOfNumerical.begin(),
-        [](std::pair<unsigned int, std::vector<double>> x) { return x.first; });
+    std::transform(numericalColumns.begin(), numericalColumns.end(),
+                   keysOfNumerical.begin(),
+                   [](const std::pair<unsigned int, std::vector<double>> &x) {
+                     return x.first;
+                   });
 
     for (long int i = keysOfNumerical.size() - 1; i >= 0; i--) {
 
@@ -141,7 +144,7 @@ void SourceNode::read() {
 
     // For every value in the set of values for current column, we add a new
     // column.
-    for (auto v : categories) {
+    for (const auto &v : categories) {
       std::vector<double> binCol((*numericalColumns.begin()).second.size());
       std::transform(c.second.begin(), c.second.end(), binCol.begin(),
                      std::bind(helper, std::placeholders::_1, v));

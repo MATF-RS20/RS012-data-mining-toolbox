@@ -1,6 +1,9 @@
 #include "PerceptronNode.hpp"
 
-PerceptronNode::PerceptronNode(std::string name) : ClassificationNode(name) {}
+#include <utility>
+
+PerceptronNode::PerceptronNode(std::string name)
+    : ClassificationNode(std::move(name)) {}
 
 void PerceptronNode::run() {
 

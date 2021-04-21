@@ -7,7 +7,7 @@
 class FilterNode : public Node {
 public:
   // Constructor
-  FilterNode(std::string name);
+  explicit FilterNode(std::string name);
 
   // Getter
   std::set<std::string> ColumnNames();
@@ -15,9 +15,9 @@ public:
   void SetColumnNames(std::set<std::string> colNames);
 
   // Method for adding single column name
-  void AddColumn(std::string colName);
+  void AddColumn(const std::string &colName);
   // Method for removing single column name
-  void RemoveColName(std::string colName);
+  void RemoveColName(const std::string &colName);
 
   void run() override;
 

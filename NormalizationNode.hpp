@@ -7,7 +7,7 @@
 class NormalizationNode : public Node {
 
 public:
-  NormalizationNode(std::string name);
+  explicit NormalizationNode(std::string name);
 
   void run() override;
 };

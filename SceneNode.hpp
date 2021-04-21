@@ -18,7 +18,7 @@ public:
   // cvora Oznacen_1 ka cvoru Oznacen_2
   enum Stanje { Neoznacen, Oznacen_1, Oznacen_2 };
 
-  SceneNode(QString ID);
+  explicit SceneNode(QString ID);
 
   QRectF boundingRect() const override;
 

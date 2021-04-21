@@ -3,16 +3,16 @@
 
 #include "Node.hpp"
 #include <algorithm>
+#include <cstring>
 #include <map>
 #include <mlpack/core.hpp>
-#include <string.h>
 
 // Abstract class that every classification will inherit
 class ClassificationNode : public Node {
 
 public:
   // Constructor
-  ClassificationNode(std::string name);
+  explicit ClassificationNode(std::string name);
 
   // Checking if target is selected
   bool IsVariableSelected();
@@ -24,7 +24,7 @@ public:
   // Setters
   void setTarget(std::string targetName);
   void SetNumClasses(const size_t &size);
-  void SetClassPredictions(const arma::Row<size_t> predictions);
+  void SetClassPredictions(const arma::Row<size_t> &predictions);
 
   // Methods that calculate precision and confusion matrix
   void Precision(arma::Row<size_t> values, arma::Row<size_t> predictions);

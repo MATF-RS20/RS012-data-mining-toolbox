@@ -46,7 +46,7 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
 public:
-  MainWindow(QWidget *parent = nullptr);
+  explicit MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
 private Q_SLOTS:
@@ -71,8 +71,8 @@ private Q_SLOTS:
 private:
   void nacrtajCvor(QString nodeID);
   void dodajCvorUTok(QString nodeID);
-  QString generisiID(QString nazivAlgoritma);
-  Node *pronadjiCvor(QString ID);
+  QString generisiID(const QString &nazivAlgoritma);
+  Node *pronadjiCvor(const QString &ID);
 
   void podesiParametre_Ulazni(Node *cvor);
   void podesiParametre_Uzorkovanje(Node *cvor);

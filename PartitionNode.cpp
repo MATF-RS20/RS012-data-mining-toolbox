@@ -1,9 +1,10 @@
 #include "PartitionNode.hpp"
 
 #include <random>
+#include <utility>
 
 // Constructor
-PartitionNode::PartitionNode(std::string name) : Node(name) {
+PartitionNode::PartitionNode(std::string name) : Node(std::move(name)) {
   testSizeRatio = 0.3;
 }
 

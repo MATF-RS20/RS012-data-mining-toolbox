@@ -12,7 +12,7 @@
 
 class csvReader {
 public:
-  csvReader(std::string filename);
+  explicit csvReader(const std::string &filename);
   ~csvReader();
 
   // Are copy constructor and '=' operator necessary?

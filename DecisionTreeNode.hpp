@@ -10,7 +10,7 @@ class DecisionTreeNode : public ClassificationNode {
 
 public:
   // Constructor
-  DecisionTreeNode(std::string name);
+  explicit DecisionTreeNode(std::string name);
 
   // Getters
   int MaximumDepth() const;

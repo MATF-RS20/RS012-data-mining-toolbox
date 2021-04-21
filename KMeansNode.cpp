@@ -1,30 +1,34 @@
 #include "KMeansNode.hpp"
 
+#include <utility>
+
 // Constructors
 KMeansNode::KMeansNode(std::string name)
-    : ClusteringNode(name), numberOfClusters(2),
+    : ClusteringNode(std::move(name)), numberOfClusters(2),
       distance(distances::EuclideanDistance), maxNumberOfIterations(1000) {}
-KMeansNode::KMeansNode(std::string name, size_t numCLus) : KMeansNode(name) {
+KMeansNode::KMeansNode(std::string name, size_t numCLus)
+    : KMeansNode(std::move(name)) {
   numberOfClusters = numCLus;
 }
 
-KMeansNode::KMeansNode(std::string name, distances d) : KMeansNode(name) {
+KMeansNode::KMeansNode(std::string name, distances d)
+    : KMeansNode(std::move(name)) {
   distance = d;
 }
 
 KMeansNode::KMeansNode(std::string name, size_t numCLus, size_t maxNumIter)
-    : KMeansNode(name) {
+    : KMeansNode(std::move(name)) {
   numberOfClusters = numCLus;
   maxNumberOfIterations = maxNumIter;
 }
 KMeansNode::KMeansNode(std::string name, distances d, size_t maxNumIter)
-    : KMeansNode(name) {
+    : KMeansNode(std::move(name)) {
   distance = d;
   maxNumberOfIterations = maxNumIter;
 }
 KMeansNode::KMeansNode(std::string name, size_t numCLus, distances d,
                        size_t maxNumIter)
-    : ClusteringNode(name), numberOfClusters(numCLus), distance(d),
+    : ClusteringNode(std::move(name)), numberOfClusters(numCLus), distance(d),
       maxNumberOfIterations(maxNumIter) {}
 // Getters
 size_t KMeansNode::NumberOfClusters() { return numberOfClusters; }

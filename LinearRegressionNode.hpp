@@ -8,7 +8,7 @@
 class LinearRegressionNode : public Node {
 
 public:
-  LinearRegressionNode(std::string name);
+  explicit LinearRegressionNode(std::string name);
 
   ~LinearRegressionNode() override;
 
@@ -20,7 +20,7 @@ public:
   // Setters
   void setTarget(std::string targetName);
   void SetTargetColumn();
-  void SetTargetPredictions(const arma::Row<double> predictions);
+  void SetTargetPredictions(const arma::Row<double> &predictions);
   void SetRssScore(const double &score);
   void SetParams(const arma::vec &parameters);
 

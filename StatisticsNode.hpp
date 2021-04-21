@@ -2,14 +2,14 @@
 #define STATISTICSNODE_HPP
 
 #include "Node.hpp"
-#include <string.h>
+#include <cstring>
 
 // Statistics of data
 class StatisticsNode : public Node {
 
 public:
   // Constructor
-  StatisticsNode(std::string name);
+  explicit StatisticsNode(std::string name);
 
   // Getter
   std::string GetStatistics() const;

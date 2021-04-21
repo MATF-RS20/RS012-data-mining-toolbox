@@ -1,9 +1,10 @@
 #include "SamplingNode.hpp"
 
 #include <random>
+#include <utility>
 
 // Constructor
-SamplingNode::SamplingNode(std::string name) : Node(name) {
+SamplingNode::SamplingNode(std::string name) : Node(std::move(name)) {
   sampleSizeRatio = 0.3;
 }
 

@@ -1,5 +1,7 @@
 #include "DataTable.hpp"
 
+#include <utility>
+
 // Constructor
 DataTable::DataTable() {
   isPartitioned = false;
@@ -60,5 +62,5 @@ void DataTable::addKey(const std::string &keyName) {
 // categoricalValues
 void DataTable::addCategoricalValues(unsigned columnIndex,
                                      std::set<std::string> setOfValues) {
-  categoricalValues[columnNames[columnIndex]] = setOfValues;
+  categoricalValues[columnNames[columnIndex]] = std::move(setOfValues);
 }

@@ -1,8 +1,11 @@
 #include "DBSCANNode.hpp"
+
+#include <utility>
+
 #include "mlpack/methods/dbscan/dbscan.hpp"
 
 DBSCANNode::DBSCANNode(std::string name, double e, size_t mp)
-    : ClusteringNode(name), eps(e), minPoints(mp) {}
+    : ClusteringNode(std::move(name)), eps(e), minPoints(mp) {}
 
 double DBSCANNode::Eps() { return eps; }
 

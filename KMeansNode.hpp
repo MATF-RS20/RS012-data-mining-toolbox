@@ -16,7 +16,7 @@ public:
   };
 
   // Constructors
-  KMeansNode(std::string name);
+  explicit KMeansNode(std::string name);
   KMeansNode(std::string name, size_t numClus);
   KMeansNode(std::string name, distances d);
   KMeansNode(std::string name, size_t numClus, size_t maxNumIter);

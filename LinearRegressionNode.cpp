@@ -1,6 +1,9 @@
 #include "LinearRegressionNode.hpp"
 
-LinearRegressionNode::LinearRegressionNode(std::string name) : Node(name) {}
+#include <utility>
+
+LinearRegressionNode::LinearRegressionNode(std::string name)
+    : Node(std::move(name)) {}
 
 LinearRegressionNode::~LinearRegressionNode() = default;
 
@@ -20,7 +23,7 @@ double LinearRegressionNode::RssScore() const { return rssScore; }
 
 // Setters
 void LinearRegressionNode::SetTargetPredictions(
-    const arma::Row<double> predictions) {
+    const arma::Row<double> &predictions) {
   targetPredictions = predictions;
 }
 void LinearRegressionNode::SetRssScore(const double &score) {
@@ -32,7 +35,7 @@ void LinearRegressionNode::SetParams(const arma::vec &parameters) {
 }
 
 void LinearRegressionNode::setTarget(std::string targetName) {
-  targetColumnName = targetName;
+  targetColumnName = std::move(targetName);
 }
 
 void LinearRegressionNode::SetTargetColumn() {

@@ -1,9 +1,11 @@
 #include <ClassificationNode.hpp>
 #include <algorithm>
 #include <cstring>
+#include <utility>
 
 // Constructor
-ClassificationNode::ClassificationNode(std::string name) : Node::Node(name) {
+ClassificationNode::ClassificationNode(std::string name)
+    : Node::Node(std::move(name)) {
   targetColumnName = "";
 }
 
@@ -35,7 +37,7 @@ arma::Row<size_t> ClassificationNode::ClassPredictions() const {
 // Setters
 void ClassificationNode::setTarget(std::string targetName) {
   // TODO: check if targetName is in columnNames
-  targetColumnName = targetName;
+  targetColumnName = std::move(targetName);
 }
 
 void ClassificationNode::SetNumClasses(const size_t &size) {
@@ -43,7 +45,7 @@ void ClassificationNode::SetNumClasses(const size_t &size) {
 }
 
 void ClassificationNode::SetClassPredictions(
-    const arma::Row<size_t> predictions) {
+    const arma::Row<size_t> &predictions) {
   classPredictions = predictions;
 }
 
