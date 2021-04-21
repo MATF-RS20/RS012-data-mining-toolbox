@@ -3,25 +3,20 @@
 
 #include "ClassificationNode.hpp"
 
-class LinearSVMNode : public ClassificationNode{
+class LinearSVMNode : public ClassificationNode {
 
 public:
+  LinearSVMNode(std::string name);
 
-    LinearSVMNode(std::string name);
+  double Lambda() const;
+  double Delta() const;
 
-    double Lambda() const;
-    double Delta() const;
-
-    void SetLambda(double lambda);
-    void SetDelta(double delta);
-
+  void SetLambda(double lambda);
+  void SetDelta(double delta);
 
 private:
-
-    double lambda;
-    double delta;
-
-
+  double lambda;
+  double delta;
 };
 
 #endif // LINEARSVMNODE_HPP

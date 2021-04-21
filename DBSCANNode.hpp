@@ -5,17 +5,17 @@
 
 class DBSCANNode : public ClusteringNode {
 public:
-    DBSCANNode(std::string name, double e, size_t mp);
+  DBSCANNode(std::string name, double e, size_t mp);
 
-    double Eps();
-    size_t MinPoints();
-    void SetEps(double e);
-    void SetMinPoints(size_t mp);
-    void run() override;
+  double Eps();
+  size_t MinPoints();
+  void SetEps(double e);
+  void SetMinPoints(size_t mp);
+  void run() override;
 
 private:
-    double eps;
-    size_t minPoints;
+  double eps;
+  size_t minPoints;
 };
 
 #endif // DBSCANNODE_HPP

@@ -5,14 +5,12 @@
 #include <mlpack/methods/perceptron/perceptron.hpp>
 #include <string>
 
-
-class PerceptronNode : public ClassificationNode{
+class PerceptronNode : public ClassificationNode {
 
 public:
+  PerceptronNode(std::string name);
 
-    PerceptronNode(std::string name);
-
-    void run() override;
+  void run() override;
 };
 
 #endif // PERCEPTRONNODE_HPP
